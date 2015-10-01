@@ -1,6 +1,12 @@
 package io.j2ffrey_2.bongsaggun;
 
 import android.app.Activity;
+import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -8,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,134 +22,105 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+import java.util.ArrayList;
+import java.util.List;
 
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
-    private CharSequence mTitle;
+public class MainActivity extends AppCompatActivity {
+
+    public static final String TAG = "MainActivity";
+
+    @Bind(R.id.toolbar) Toolbar mToolbar;
+    @Bind(R.id.toolbar_title) TextView tvTitle;
+    @Bind(R.id.drawer) DrawerLayout mDrawerLayout;
+    @Bind(R.id.nav_view) NavigationView nV;
+    ActionBarDrawerToggle toogle;
+    @Bind(R.id.tabs) TabLayout mTabLayout;
+    @Bind(R.id.viewPager) ViewPager mViewPager;
+    PagerAdapter mPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
+        ButterKnife.bind(this);
 
-        // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
-    }
+        setSupportActionBar(mToolbar);
 
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
-    }
-
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
+        final ActionBar ab = getSupportActionBar();
+        if(ab != null){
+            ab.setHomeAsUpIndicator(R.drawable.ic_drawer);
+//            ab.setDisplayShowTitleEnabled(false);
+            ab.setDisplayShowHomeEnabled(true);
         }
+
+        if(nV != null){
+            setUpDrawerContent(nV);
+        }
+
+        toogle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.app_name, R.string.app_name);
+        toogle.setDrawerIndicatorEnabled(true);
+        mDrawerLayout.setDrawerListener(toogle);
+
+        if(mViewPager != null){
+            setUpViewPager(mViewPager);
+        }
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 
-    public void restoreActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
+    private void setUpDrawerContent(NavigationView navigationView){
+
+    }
+
+    private void setUpViewPager(ViewPager viewPager){
+        mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        mPagerAdapter.addFragment(new HomeFragment(), "홈");
+        mPagerAdapter.addFragment(new CalendarFragment(), "캘린더");
+        mPagerAdapter.addFragment(new ZzimFragment(), "찜");
+        mPagerAdapter.addFragment(new MyPageFragment(), "마이페이지");
+        viewPager.setAdapter(mPagerAdapter);
     }
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.main, menu);
-            restoreActionBar();
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        toogle.syncState();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    static class PagerAdapter extends FragmentPagerAdapter{
+        private final ArrayList<Fragment> mFragments = new ArrayList<>();
+        private final ArrayList<String> mFragmentTitles = new ArrayList<>();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        public PagerAdapter(FragmentManager fm){
+            super(fm);
         }
 
-        return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
+        public void addFragment(Fragment fragment, String title){
+            mFragments.add(fragment);
+            mFragmentTitles.add(title);
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
+        public Fragment getItem(int position) {
+            return mFragments.get(position);
         }
 
         @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
+        public int getCount() {
+            return mFragments.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitles.get(position);
         }
     }
-
 }
