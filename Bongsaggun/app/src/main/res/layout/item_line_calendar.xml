@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:layoutDirection="locale"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/imageView_voluntaryWork_state"
+        android:layout_width="50dp"
+        android:layout_height="15dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/imageView_voluntaryWork_state"
+        android:id="@+id/textView_voluntaryWork_dDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="D-7"/>
+
+    <TextView
+        android:layout_toRightOf="@id/imageView_voluntaryWork_state"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:id="@+id/textView_voluntaryWork_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="분당 사랑의집 요양 봉사활동"/>
+
+    <TextView
+       android:layout_alignBaseline="@id/textView_voluntaryWork_dDay"
+        android:layout_alignLeft="@id/textView_voluntaryWork_title"
+        android:layout_below="@id/textView_voluntaryWork_title"
+        android:textColor="#606060"
+        android:textSize="12sp"
+        android:id="@+id/textView_voluntaryWork_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="성남시 분당구"/>
+
+    <TextView
+        android:layout_alignBottom="@id/textView_voluntaryWork_title"
+        android:layout_alignParentRight="true"
+        android:id="@+id/textView_voluntaryWork_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12시간"/>
+
+    <ImageView
+        android:layout_toLeftOf="@id/textView_voluntaryWork_time"
+        android:id="@+id/imageView_voluntaryWork_time"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher"/>
+
+</RelativeLayout>

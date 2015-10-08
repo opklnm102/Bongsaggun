@@ -9,7 +9,7 @@
 
     <!--Calendar Fragment-->
     <color name="text_calendar">#444444</color>
-    <color name="text_calendar_dayofweek">#999999</color>
+    <color name="text_calendar_dayOfWeek">#999999</color>
     <color name="text_calendar_sunday">#ff5252</color>
 
 
