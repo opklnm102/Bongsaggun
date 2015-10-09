@@ -1,8 +1,10 @@
 package io.j2ffrey_2.bongsaggun;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,12 @@ import java.util.ArrayList;
 /**
  * Created by dong on 2015-10-06.
  */
+
+//Todo: dummy data 넣기
+//Todo: api 연결하기
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
+
+    public static final String TAG = "CalendarAdapter";
 
     private static final int VIEW_TYPE_HEADER = 0x01;
 
@@ -26,7 +33,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     private ArrayList<CalendarLineItem> mCalendarLineItemArrayList;
     private ArrayList<VoluntaryWork> mVoluntaryWorkArrayList;
 
-    private Context context;
+    private Context mContext;
 
     private int mHeaderDisplay;
 
@@ -34,44 +41,44 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
     private int sectionManager;
 
-    public CalendarAdapter(Context context) {
-        this.context = context;
+    public CalendarAdapter(Context context , int headerMode) {
+        this.mContext = context;
         this.mCalendarLineItemArrayList = new ArrayList<>();
+        this.mVoluntaryWorkArrayList = new ArrayList<>();
 
-        mHeaderDisplay = LayoutManager.LayoutParams.HEADER_ALIGN_START;
+        mHeaderDisplay = headerMode;
         mMarginsFixed = true;
         sectionManager = LINEAR;
 
         //dummyData
-        for(int i=1; i<10; i++){
-            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015","10",Integer.toString(i),"월",false,"D-4","봉사닷","서울","24시간"));
-            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015","9",Integer.toString(i),"월",false,"D-2","봉봉","문산","24시간"));
-            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015","10",Integer.toString(i),"월",false,"D-2","봉봉","문산","24시간"));
-            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015","10",Integer.toString(i),"월",false,"D-2","봉봉","문산","24시간"));
-            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015","10",Integer.toString(i),"월",false,"D-2","봉봉","문산","24시간"));
+        for (int i = 1; i < 10; i++) {
+            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "10", Integer.toString(i), "월", false, "D-4", "봉사닷", "서울", "24시간"));
+            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "9", Integer.toString(i), "월", false, "D-2", "봉봉", "문산", "24시간"));
+            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "10", Integer.toString(i), "월", false, "D-2", "봉봉", "문산", "24시간"));
+            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "10", Integer.toString(i), "월", false, "D-2", "봉봉", "문산", "24시간"));
+            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "10", Integer.toString(i), "월", false, "D-2", "봉봉", "문산", "24시간"));
         }
-
-
 
         //insert headers into list of items
         String lastHeader = "";
         int sectionManager = -1;
         int headerCount = 0;
         int sectionFirstPosition = 0;
-        for(int i=0; i<mCalendarLineItemArrayList.size(); i++){
-            String header = mVoluntaryWorkArrayList.get(i).getMonth();
-            if(!TextUtils.equals(lastHeader, header)){
+        for (int i = 0; i < mVoluntaryWorkArrayList.size(); i++) {
+            String header = mVoluntaryWorkArrayList.get(i).getDay();
+            if (!TextUtils.equals(lastHeader, header)) {
                 //insert new header view and update section data.
                 sectionManager = (sectionManager + 1) % 2;
                 sectionFirstPosition = i + headerCount;
                 lastHeader = header;
                 headerCount += 1;
-                mCalendarLineItemArrayList.add(new CalendarLineItem(sectionManager,sectionFirstPosition,true,header));
+//                CalendarHeaderItem headerItem = new CalendarHeaderItem(mVoluntaryWorkArrayList.get(i).getDay(),mVoluntaryWorkArrayList.get(i).getDayOfWeek());
+//                mCalendarLineItemArrayList.add(new CalendarLineItem(headerItem, sectionManager, sectionFirstPosition, true));
+                mCalendarLineItemArrayList.add(new CalendarLineItem(mVoluntaryWorkArrayList.get(i), sectionManager, sectionFirstPosition, true));
+
             }
-            mCalendarLineItemArrayList.add(new CalendarLineItem())
+            mCalendarLineItemArrayList.add(new CalendarLineItem(mVoluntaryWorkArrayList.get(i), sectionManager, sectionFirstPosition, false));
         }
-
-
     }
 
     public void setCalendarData(ArrayList<CalendarLineItem> list) {
@@ -102,9 +109,14 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
     @Override
     public void onBindViewHolder(CalendarViewHolder holder, int position) {
-        CalendarLineItem item = mCalendarLineItemArrayList.get(position);
+        if (mCalendarLineItemArrayList.size() == 0) {
+            return;
+        }
 
+        CalendarLineItem item = mCalendarLineItemArrayList.get(position);
         final View itemView = holder.itemView;
+
+        holder.bindItem(item.voluntaryWork, item.isHeader);
 
         LayoutManager.LayoutParams lp = (LayoutManager.LayoutParams) itemView.getLayoutParams();
 
@@ -115,7 +127,16 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
             lp.headerStartMarginIsAuto = !mMarginsFixed;
         }
 
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(mContext,);
+
+            }
+        });
+
         lp.setSlm(LinearSLM.ID);
+        lp.setFirstPosition(item.sectionFirstPosition);
         itemView.setLayoutParams(lp);
     }
 
@@ -123,6 +144,4 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     public int getItemCount() {
         return mCalendarLineItemArrayList.size();
     }
-
-
 }

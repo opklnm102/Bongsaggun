@@ -9,11 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.tonicartos.superslim.GridSLM;
 import com.tonicartos.superslim.LayoutManager;
-import com.tonicartos.superslim.SectionLayoutManager;
-
-import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,10 +26,6 @@ public class CalendarFragment extends Fragment {
 
     private boolean mAreMarginsFixed;  //필요
 
-    private GridSLM mGridSLM;
-
-    private SectionLayoutManager mSectionLayoutManager;
-
     @Bind(R.id.textView_calendar_title) TextView tvCalendarTitle;
     @Bind(R.id.imageView_calendar_before) ImageView tvCalendarBefore;
     @Bind(R.id.imageView_calendar_after) ImageView tvCalendarAfter;
@@ -46,6 +38,12 @@ public class CalendarFragment extends Fragment {
 
     public CalendarFragment() {
         // Required empty public constructor
+    }
+
+    public void setHeaderSticky(boolean areHeadersSticky){
+        mHeaderDisplay = areHeadersSticky ? mHeaderDisplay
+                | LayoutManager.LayoutParams.HEADER_STICKY
+                : mHeaderDisplay & ~LayoutManager.LayoutParams.HEADER_STICKY;
     }
 
     @Override
@@ -70,20 +68,10 @@ public class CalendarFragment extends Fragment {
 
         mViews = new ViewHolder(view);
         mViews.initViews(new LayoutManager(getActivity()));
-        mCalendarAdapter = new CalendarAdapter(getActivity());
-
-
+        setHeaderSticky(true);
+        mCalendarAdapter = new CalendarAdapter(getActivity(), mHeaderDisplay);
         mViews.setAdapter(mCalendarAdapter);
-
-
-
-
-
     }
-
-
-
-
 
     private static class ViewHolder {
 

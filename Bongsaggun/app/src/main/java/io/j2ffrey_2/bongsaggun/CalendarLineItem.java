@@ -11,12 +11,21 @@ public class CalendarLineItem {
 
     public boolean isHeader;
 
-    public String text;
+    public CalendarHeaderItem headerItem;  //data
 
-    public CalendarLineItem(int sectionManager, int sectionFirstPosition, boolean isHeader, String text) {
+    public VoluntaryWork voluntaryWork;  //data
+
+    public CalendarLineItem(CalendarHeaderItem headerItem, int sectionManager, int sectionFirstPosition, boolean isHeader) {
         this.sectionManager = sectionManager;
         this.sectionFirstPosition = sectionFirstPosition;
         this.isHeader = isHeader;
-        this.text = text;
+        this.headerItem = headerItem;
+    }
+
+    public CalendarLineItem(VoluntaryWork voluntaryWork, int sectionManager, int sectionFirstPosition, boolean isHeader) {
+        this.sectionManager = sectionManager;
+        this.sectionFirstPosition = sectionFirstPosition;
+        this.isHeader = isHeader;
+        this.voluntaryWork = voluntaryWork;
     }
 }
