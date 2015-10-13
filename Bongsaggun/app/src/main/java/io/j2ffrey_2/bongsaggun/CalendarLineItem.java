@@ -11,16 +11,9 @@ public class CalendarLineItem {
 
     public boolean isHeader;
 
-    public CalendarHeaderItem headerItem;  //data
-
     public VoluntaryWork voluntaryWork;  //data
 
-    public CalendarLineItem(CalendarHeaderItem headerItem, int sectionManager, int sectionFirstPosition, boolean isHeader) {
-        this.sectionManager = sectionManager;
-        this.sectionFirstPosition = sectionFirstPosition;
-        this.isHeader = isHeader;
-        this.headerItem = headerItem;
-    }
+
 
     public CalendarLineItem(VoluntaryWork voluntaryWork, int sectionManager, int sectionFirstPosition, boolean isHeader) {
         this.sectionManager = sectionManager;

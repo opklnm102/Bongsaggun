@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * Created by dong on 2015-10-06.
  */
 
-//Todo: dummy data 넣기
+//Todo: 월 필터링 추가
 //Todo: api 연결하기
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
@@ -52,11 +52,11 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
         //dummyData
         for (int i = 1; i < 10; i++) {
-            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "10", Integer.toString(i), "월", false, "D-4", "봉사닷", "서울", "24시간"));
-            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "9", Integer.toString(i), "월", false, "D-2", "봉봉", "문산", "24시간"));
-            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "10", Integer.toString(i), "월", false, "D-2", "봉봉", "문산", "24시간"));
-            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "10", Integer.toString(i), "월", false, "D-2", "봉봉", "문산", "24시간"));
-            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "10", Integer.toString(i), "월", false, "D-2", "봉봉", "문산", "24시간"));
+            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "10", Integer.toString(i), "월", false, "D-4", "봉사닷", "서울", "4시간"));
+            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "9", Integer.toString(i), "월", false, "D-2", "봉봉", "문산", "5시간"));
+            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "10", Integer.toString(i), "월", true, "D-2", "봉황", "진산", "6시간"));
+            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "10", Integer.toString(i), "월", false, "D-2", "황황", "가산", "7시간"));
+            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "10", Integer.toString(i), "월", true, "D-2", "봉황만세세ㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔ", "오산", "8시간"));
         }
 
         //insert headers into list of items
@@ -72,8 +72,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
                 sectionFirstPosition = i + headerCount;
                 lastHeader = header;
                 headerCount += 1;
-//                CalendarHeaderItem headerItem = new CalendarHeaderItem(mVoluntaryWorkArrayList.get(i).getDay(),mVoluntaryWorkArrayList.get(i).getDayOfWeek());
-//                mCalendarLineItemArrayList.add(new CalendarLineItem(headerItem, sectionManager, sectionFirstPosition, true));
+
                 mCalendarLineItemArrayList.add(new CalendarLineItem(mVoluntaryWorkArrayList.get(i), sectionManager, sectionFirstPosition, true));
 
             }
