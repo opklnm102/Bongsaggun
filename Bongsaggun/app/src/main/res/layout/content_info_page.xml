@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:orientation="vertical"
+    tools:context="io.j2ffrey_2.bongsaggun.InfoPageActivity"
+    tools:showIn="@layout/activity_info_page">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="24dp">
+
+        <TextView
+            android:id="@+id/textView_mainInfo_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/cardView_mainInformation_content"
+            android:layout_alignParentTop="true"
+            android:text="@string/mainInfo_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+        <android.support.v7.widget.CardView
+            android:id="@id/cardView_mainInformation_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView_mainInfo_title"
+            android:layout_margin="@dimen/card_margin">
+
+            <LinearLayout
+                style="@style/Widget.CardContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp">
+
+                    <TextView
+                        android:id="@+id/textView_mainInfo_recruitmentPeriod_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/mainInfo_recruitmentPeriod_title" />
+
+                    <TextView
+                        android:id="@+id/textView_mainInfo_recruitmentPeriod_start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView_mainInfo_recruitmentPeriod_title"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginTop="4dp"
+                        android:text="2015-08-22"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView_mainInfo_recruitmentPeriod_mid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/textView_mainInfo_recruitmentPeriod_start"
+                        android:layout_below="@id/textView_mainInfo_recruitmentPeriod_title"
+                        android:layout_marginRight="4dp"
+                        android:layout_toRightOf="@id/textView_mainInfo_recruitmentPeriod_start"
+                        android:text=" ~ "
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView_mainInfo_recruitmentPeriod_end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/textView_mainInfo_recruitmentPeriod_start"
+                        android:layout_below="@id/textView_mainInfo_recruitmentPeriod_title"
+                        android:layout_toRightOf="@id/textView_mainInfo_recruitmentPeriod_mid"
+                        android:text="2015-08-24"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView_mainInfo_voluntary_time_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/mainInfo_voluntary_time_title" />
+
+                        <TextView
+                            android:id="@+id/textView_mainInfo_voluntary_time_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="12시간"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView_mainInfo_voluntary_dDay_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/mainInfo_voluntary_dDay_title" />
+
+                        <TextView
+                            android:id="@+id/textView_mainInfo_voluntary_dDay_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="8"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView_mainInfo_voluntary_location_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="활동지역" />
+
+                        <TextView
+                            android:id="@+id/textView_mainInfo_voluntary_location_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="서울 서초구"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView_mainInfo_voluntary_auth_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="인증서발급" />
+
+                        <TextView
+                            android:id="@+id/textView_mainInfo_voluntary_auth_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="가능"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="24dp">
+
+        <TextView
+            android:id="@+id/textView_detailInfo_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/cardView_detailInfo_content"
+            android:layout_alignParentTop="true"
+            android:text="@string/detailInfo_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView_detailInfo_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView_detailInfo_title"
+            android:layout_margin="@dimen/card_margin">
+
+            <LinearLayout
+                style="@style/Widget.CardContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp">
+
+                    <TextView
+                        android:id="@+id/textView_detailInfo_details_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/detailInfo_details_title" />
+
+                    <TextView
+                        android:id="@+id/textView_detailInfo_details_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView_detailInfo_details_title"
+                        android:text="유기견과 함께 사랑을 나누는 힐링 봉사활동"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp">
+
+                    <TextView
+                        android:id="@+id/textView_detailInfo_voluntaryPeriod_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/detailInfo_voluntaryPeriod_title" />
+
+                    <TextView
+                        android:id="@+id/textView_detailInfo_voluntaryPeriod_start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView_detailInfo_voluntaryPeriod_title"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginTop="4dp"
+                        android:text="2015-10-16"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView_detailInfo_voluntaryPeriod_mid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/textView_detailInfo_voluntaryPeriod_start"
+                        android:layout_below="@id/textView_detailInfo_voluntaryPeriod_title"
+                        android:layout_marginRight="4dp"
+                        android:layout_toRightOf="@id/textView_detailInfo_voluntaryPeriod_start"
+                        android:text=" ~ "
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView_detailInfo_voluntaryPeriod_end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/textView_detailInfo_voluntaryPeriod_start"
+                        android:layout_below="@id/textView_detailInfo_voluntaryPeriod_title"
+                        android:layout_toRightOf="@id/textView_detailInfo_voluntaryPeriod_mid"
+                        android:text="2015-10-18"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp">
+
+                    <TextView
+                        android:id="@+id/textView_detailInfo_supportCondition_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/detailInfo_supportCondition_title" />
+
+                    <TextView
+                        android:id="@+id/textView_detailInfo_supportCondition_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView_detailInfo_supportCondition_title"
+                        android:text="20대, 알러지 없으신 분"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp">
+
+                    <TextView
+                        android:id="@+id/textView_detailInfo_supportGender_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/detailInfo_supportGender_title" />
+
+                    <TextView
+                        android:id="@+id/textView_detailInfo_supportGender_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView_detailInfo_supportGender_title"
+                        android:text="남녀 무관"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp">
+
+                    <TextView
+                        android:id="@+id/textView_detailInfo_contact_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/detailInfo_contact_title" />
+
+                    <TextView
+                        android:id="@+id/textView_detailInfo_contact_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView_detailInfo_contact_title"
+                        android:text="Yookikun@seoul.co.kr"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp">
+
+                    <TextView
+                        android:id="@+id/textView_detailInfo_location_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/detailInfo_location_title" />
+
+                    <TextView
+                        android:id="@+id/textView_detailInfo_location_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView_detailInfo_location_title"
+                        android:text="서울시 서초구 반포3동 234-1"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView_poster_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/cardView_poster_content"
+            android:layout_alignParentTop="true"
+            android:text="@string/poster_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView_poster_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView_poster_title"
+            android:layout_margin="@dimen/card_margin">
+
+            <ImageView
+                android:id="@+id/imageView_poster"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/cheese_2" />
+
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/button_voluntary_application_bottom"
+        android:layout_width="112dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#502ca7"
+        android:text="@string/voluntary_application"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
+
+</LinearLayout>
