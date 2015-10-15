@@ -18,9 +18,6 @@ public class HomeFragment extends Fragment {
 
     public static final String TAG = "HomeFragment";
 
-    @Bind(R.id.fab_add)
-    FloatingActionButton fabAdd;
-
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
         return fragment;
@@ -39,7 +36,6 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        ButterKnife.bind(this, view);
 
         return view;
     }
@@ -47,14 +43,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        fabAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), InfoPageActivity.class);
-                startActivityForResult(intent,1);
-            }
-        });
 
     }
 }

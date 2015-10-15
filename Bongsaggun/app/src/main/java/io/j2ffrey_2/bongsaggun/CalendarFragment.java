@@ -1,12 +1,10 @@
 package io.j2ffrey_2.bongsaggun;
 
-<<<<<<< .merge_file_a04492
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-=======
->>>>>>> .merge_file_a04156
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -35,10 +33,6 @@ public class CalendarFragment extends Fragment {
 
     public static final String TAG = "CalendarFragment";
 
-<<<<<<< .merge_file_a04492
-    @Bind(R.id.fab_add)
-    FloatingActionButton fabAdd;
-=======
     private ViewHolder mViews;
 
     private CalendarAdapter mCalendarAdapter;
@@ -58,7 +52,6 @@ public class CalendarFragment extends Fragment {
     ImageView tvCalendarBefore;
     @Bind(R.id.imageView_calendar_after)
     ImageView tvCalendarAfter;
->>>>>>> .merge_file_a04156
 
     public static CalendarFragment newInstance() {
         CalendarFragment fragment = new CalendarFragment();
@@ -88,23 +81,6 @@ public class CalendarFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         return view;
-<<<<<<< .merge_file_a04492
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        fabAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), InfoPageActivity.class);
-                startActivityForResult(intent,2);
-            }
-        });
-
-    }
-=======
     }
 
     @Override
@@ -178,7 +154,6 @@ public class CalendarFragment extends Fragment {
         public ViewHolder(View view) {
             rvCalendar = (RecyclerView) view.findViewById(R.id.recyclerView_calendar);
         }
->>>>>>> .merge_file_a04156
 
         public void initViews(LayoutManager lm) {
             rvCalendar.setLayoutManager(lm);

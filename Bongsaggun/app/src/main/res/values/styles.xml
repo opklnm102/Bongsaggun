@@ -19,6 +19,7 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <!--TabLayout-->
     <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorColor">?attr/colorAccent</item>
         <item name="tabIndicatorHeight">2dp</item>
@@ -34,6 +35,7 @@
         <item name="textAllCaps">true</item>
     </style>
 
+    <!--infoPage-->
     <style name="MyCustomCollapsingToolbarTextAppearance" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
         <!--<item name="android:textSize">24sp</item>-->
         <item name="android:textStyle">bold</item>

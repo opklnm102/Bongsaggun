@@ -129,8 +129,8 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(mContext,);
-
+                Intent intent = new Intent(mContext, InfoPageActivity.class);
+                mContext.startActivity(intent);
             }
         });
 
