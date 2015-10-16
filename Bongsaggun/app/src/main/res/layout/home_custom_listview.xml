@@ -5,7 +5,7 @@
     android:layout_marginTop="8dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
-    android:background="#09ffff"
+    android:background="#fefefe"
     android:weightSum="1">
     <RelativeLayout
         android:id="@+id/sumnail_image"
