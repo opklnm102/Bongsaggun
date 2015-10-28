@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
 
-
-
     @Bind(R.id.toolbar_main) Toolbar mToolbar;
     @Bind(R.id.toolbar_title) TextView tvTitle;
     @Bind(R.id.drawer) DrawerLayout mDrawerLayout;
