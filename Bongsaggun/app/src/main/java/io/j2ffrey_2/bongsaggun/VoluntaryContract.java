@@ -10,7 +10,7 @@ import android.provider.BaseColumns;
  */
 public class VoluntaryContract {
 
-    public static final String CONTENT_AUTHORITY = "io.j2ffrey_2.bongsaggun.app";
+    public static final String CONTENT_AUTHORITY = "io.j2ffrey_2.bongsaggun";
 
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
@@ -18,7 +18,6 @@ public class VoluntaryContract {
     public static final String PATH_IMAGE = "image";
     public static final String PATH_SCHOOL = "school";
     public static final String PATH_REGION = "region";
-
 
     //학교
     public static final class SchoolEntry implements BaseColumns {
@@ -70,7 +69,8 @@ public class VoluntaryContract {
 
         public static final String COLUMN_IMAGE_ID = "image_id";  //INTEGER  지워도 될거 같은...
 
-        public static final String COLUMN_IMAGE_BLOB = "image_blob";  //BLOB
+        public static final String COLUMN_IMAGE_MAINBLOB = "image_mainBlob";  //BLOB
+        public static final String COLUMN_IMAGE_POSTERBLOB = "image_posterBlob";  //BLOB
 
         public static Uri buildImageUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
@@ -94,9 +94,8 @@ public class VoluntaryContract {
         public static final String COLUMN_VOLUNTARY_DATERECRUITEND = "voluntary_dateRecruitEnd";  //TEXT  모집기간 끝
         public static final String COLUMN_VOLUNTARY_DATESTART = "voluntary_dateStart";  //TEXT  봉사기간 시작
         public static final String COLUMN_VOLUNTARY_DATEEND = "voluntary_dateEnd";  //TEXT  봉사기간 끝
-        public static final String COLUMN_VOLUNTARY_MAINIMAGEID = "voluntary_mainImageId";  //INTEGER  메인 이미지 id -> 이미지 테이블이랑 relationship
+        public static final String COLUMN_VOLUNTARY_IMAGEID = "voluntary_mainImageId";  //INTEGER  이미지 id -> 이미지 테이블이랑 relationship
         public static final String COLUMN_VOLUNTARY_MAINIMAGEURL = "voluntary_mainImageURL";  //TEXT  메인 이미지 url -> 로딩용
-        public static final String COLUMN_VOLUNTARY_POSTERIMAGEID = "voluntary_posterImageId";  //INTEGER  포스터 이미지 id -> 이미지 테이블이랑 relationship
         public static final String COLUMN_VOLUNTARY_POSTERIMAGEURL = "voluntary_posterImageURL";  //TEXT  포스터 이미지 url  -> 로딩용
         public static final String COLUMN_VOLUNTARY_PHONE = "voluntary_phone";  //TEXT  담당자 연락처
         public static final String COLUMN_VOLUNTARY_REGIONID = "voluntary_regioinId";  //INTEGER  활동지역 id
