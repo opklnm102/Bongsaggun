@@ -3,15 +3,18 @@ package io.j2ffrey_2.bongsaggun;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by han on 2015-10-28.
  */
 public class VoluntaryDbHelper extends SQLiteOpenHelper {
 
+    public static String TAG = VoluntaryDbHelper.class.getSimpleName();
+
     private static final int DATABASE_VERSION = 1;
 
-    static final String DATABASE_NAME = "voluntary.db";
+    public static final String DATABASE_NAME = "bongsaggun.db";
 
     public VoluntaryDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -24,25 +27,19 @@ public class VoluntaryDbHelper extends SQLiteOpenHelper {
                 VoluntaryContract.SchoolEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 VoluntaryContract.SchoolEntry.COLUMN_SCHOOL_ID + " INTEGER NOT NULL, " +
                 VoluntaryContract.SchoolEntry.COLUMN_SCHOOL_NAME + " TEXT NOT NULL " +
-                " FOREIGN KEY (" + VoluntaryContract.SchoolEntry.COLUMN_SCHOOL_ID + ") REFERENCES " +
-                VoluntaryContract.VoluntaryEntry.TABLE_NAME + " (" + VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_SCHOOLID + ")" +
                 " );";
 
         final String SQL_CREATE_REGION_TABLE = "CREATE TABLE " + VoluntaryContract.RegionEntry.TABLE_NAME + " (" +
                 VoluntaryContract.RegionEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 VoluntaryContract.RegionEntry.COLUMN_REGION_ID + " INTEGER NOT NULL, " +
                 VoluntaryContract.RegionEntry.COLUMN_REGION_NAME + " TEXT NOT NULL " +
-                " FOREIGN KEY (" + VoluntaryContract.RegionEntry.COLUMN_REGION_ID + ") REFERENCES " +
-                VoluntaryContract.VoluntaryEntry.TABLE_NAME + " (" + VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID + ")" +
                 " );";
 
         final String SQL_CREATE_IMAGE_TABLE = "CREATE TABLE " + VoluntaryContract.ImageEntry.TABLE_NAME + " (" +
                 VoluntaryContract.ImageEntry._ID + " INTEGER PRIMARY KEY AUTONINCREMENT, " +
                 VoluntaryContract.ImageEntry.COLUMN_IMAGE_ID + " INTEGER NOT NULL, " +
-                VoluntaryContract.ImageEntry.COLUMN_IMAGE_MAINBLOB + " BLOB NOT NULL, " +
-                VoluntaryContract.ImageEntry.COLUMN_IMAGE_POSTERBLOB + " BLOB NOT NULL, " +
-                " FOREIGN KEY (" + VoluntaryContract.ImageEntry.COLUMN_IMAGE_ID + ") REFERENCES " +
-                VoluntaryContract.VoluntaryEntry.TABLE_NAME + " (" + VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_IMAGEID + ")" +
+                VoluntaryContract.ImageEntry.COLUMN_IMAGE_MAINBLOB + " BLOB," +
+                VoluntaryContract.ImageEntry.COLUMN_IMAGE_POSTERBLOB + " BLOB" +
                 " );";
 
         //봉사정보
@@ -62,15 +59,27 @@ public class VoluntaryDbHelper extends SQLiteOpenHelper {
                 VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_PHONE + "TEXT NOT NULL, " +  //담당자 연락처
                 VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_REQUIRE + "TEXT NOT NULL, " +  //지원가능 조건
                 VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_REQUIRESEX + "TEXT NOT NULL, " +  //지원가능 성별
-                VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID + "TEXT NOT NULL, " +  //활동지역 id
-                VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_SCHOOLID + "TEXT NOT NULL, " +  //학교 id
+                VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID + "INTEGER NOT NULL, " +  //활동지역 id
+                VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_SCHOOLID + "INTEGER NOT NULL, " +  //학교 id
                 VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_UPDATEAT + "TEXT NOT NULL, " +  //DB업데이트 판별
+                " FOREIGN KEY (" + VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_SCHOOLID + ") REFERENCES " +
+                VoluntaryContract.SchoolEntry.TABLE_NAME + " (" + VoluntaryContract.SchoolEntry.COLUMN_SCHOOL_ID + ")," +
+                " FOREIGN KEY (" + VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID + ") REFERENCES " +
+                VoluntaryContract.RegionEntry.TABLE_NAME + " (" + VoluntaryContract.RegionEntry.COLUMN_REGION_ID + ")," +
+                " FOREIGN KEY (" + VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_IMAGEID + ") REFERENCES " +
+                VoluntaryContract.ImageEntry.TABLE_NAME + " (" + VoluntaryContract.ImageEntry.COLUMN_IMAGE_ID + ")" +
                 " );";
 
         db.execSQL(SQL_CREATE_IMAGE_TABLE);
         db.execSQL(SQL_CREATE_REGION_TABLE);
         db.execSQL(SQL_CREATE_SCHOOL_TABLE);
         db.execSQL(SQL_CREATE_VOLUNTARY_TABLE);
+    }
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        Log.i(TAG,"db open");
     }
 
     @Override
