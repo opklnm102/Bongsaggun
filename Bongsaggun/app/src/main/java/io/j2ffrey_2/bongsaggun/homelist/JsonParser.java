@@ -128,7 +128,9 @@ public class JsonParser {
 
     public String[][] jsonParserList() throws IOException {
         String str="";
-        String pRecvServerPage =getJSONFromUrl(urlst);
+        NetWorkActivity n2 =new NetWorkActivity();
+        String pRecvServerPage = n2.getResult();
+       //=getJSONFromUrl(urlst);
 
         Log.i("서버에서 받은 전체 내용 :", pRecvServerPage);
         try {
@@ -150,8 +152,6 @@ public class JsonParser {
                                     "admin_add","admin_mod", "act_time","created_at", "updated_at"};
 
             String[][] parseredData = new String[jArr.length()][jsonName.length];
-
-             // String[][] parseredData = new String[jArr.length()][jsonName.length];
 
             for (int i = 0; i < jArr.length(); i++) {
                 json = jArr.getJSONObject(i); // ??  이거 뭐지

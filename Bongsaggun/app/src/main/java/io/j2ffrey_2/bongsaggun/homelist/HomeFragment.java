@@ -1,6 +1,5 @@
 package io.j2ffrey_2.bongsaggun.homelist;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
@@ -24,6 +23,7 @@ public class HomeFragment extends Fragment {
     public static final String TAG = "HomeFragment";
     private RecyclerView recyclerView;
     private HomeListAdapter adapter;
+
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -50,27 +50,30 @@ public class HomeFragment extends Fragment {
             Home_list_contents current = new Home_list_contents();
             current.title = titles[i];
 
-            //lala
-            //String[][] st = current.getparsedata();
-            //current.title = current.getparsedata()[0][3];
-            //Log.i("st_ 배열 확인하기 " , st[0][3]);
+
             current.IconId = R.mipmap.ic_launcher;
             data.add(current);
             current.IconId = R.mipmap.ic_launcher;
             //current.titleSet = getparsedata()[1][3];
 
-
+/*
             try {
-                JsonParser parser = new JsonParser();
-                String[][] st;
-                st = parser.jsonParserList();
+                //JsonParser parser = new JsonParser();
+                //String[][] st;
+                //st = parser.jsonParserList();
                 //current.titleSet = JsonParser.jsonParserList()[1][2];
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
+*/
             data.add(current);
         }
+
+        //이거 받기 전에 일련의
+        NetWorkActivity connector = new NetWorkActivity();
+
+        connector.LoadAPI(); //thread호출
 
         return data;
     }
@@ -78,7 +81,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        /*
         if(android.os.Build.VERSION.SDK_INT > 9) {
 
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -86,6 +89,7 @@ public class HomeFragment extends Fragment {
             StrictMode.setThreadPolicy(policy);
 
         }
+        */
     }
 
     @Override
