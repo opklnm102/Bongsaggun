@@ -10,7 +10,7 @@ import android.provider.BaseColumns;
  */
 public class VoluntaryContract {
 
-    public static final String CONTENT_AUTHORITY = "io.j2ffrey_2.bongsaggun";
+    public static final String CONTENT_AUTHORITY = "io.j2ffrey_2.bongsaggun.app";
 
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 

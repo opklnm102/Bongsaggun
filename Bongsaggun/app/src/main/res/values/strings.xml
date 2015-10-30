@@ -34,4 +34,8 @@
     <!-- NavigationView-->
     <string name="navigation_view_logout">로그아웃</string>
 
+    <!-- SyncAdapter related -->
+    <string name="sync_account_type">bongsaggun.j2ffrey_2.io</string>
+    <string name="content_authority">io.j2ffrey_2.bongsaggun.app</string>
+
 </resources>

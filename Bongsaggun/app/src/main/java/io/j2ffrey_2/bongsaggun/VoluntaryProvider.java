@@ -48,7 +48,6 @@ public class VoluntaryProvider extends ContentProvider {
 //        private static final String Selection =
 
 
-
 //    private Cursor getVoluntaryInformation(Uri uri, String[] projection, String sortOrder) {
 //        String locationSetting = WeatherContract.WeatherEntry.getLocationSettingFromUri(uri);
 //        long startDate = WeatherContract.WeatherEntry.getStartDateFromUri(uri);
@@ -88,7 +87,7 @@ public class VoluntaryProvider extends ContentProvider {
 
         final int match = sUriMatcher.match(uri);
 
-        switch (match){
+        switch (match) {
             case SCHOOL:
                 return VoluntaryContract.SchoolEntry.CONTENT_TYPE;
             case REGION:
@@ -105,10 +104,10 @@ public class VoluntaryProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+
+
         return null;
     }
-
-
 
     @Nullable
     @Override
@@ -117,7 +116,7 @@ public class VoluntaryProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         Uri returnUri;
 
-        switch (match){
+        switch (match) {
             case SCHOOL: {
                 long _id = db.insert(VoluntaryContract.SchoolEntry.TABLE_NAME, null, values);
                 if (_id > 0)
@@ -128,7 +127,7 @@ public class VoluntaryProvider extends ContentProvider {
             }
             case REGION: {
                 long _id = db.insert(VoluntaryContract.RegionEntry.TABLE_NAME, null, values);
-                if(_id > 0)
+                if (_id > 0)
                     returnUri = VoluntaryContract.RegionEntry.buildRegionUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
@@ -136,7 +135,7 @@ public class VoluntaryProvider extends ContentProvider {
             }
             case IMAGE: {
                 long _id = db.insert(VoluntaryContract.ImageEntry.TABLE_NAME, null, values);
-                if(_id > 0)
+                if (_id > 0)
                     returnUri = VoluntaryContract.ImageEntry.buildImageUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
@@ -144,7 +143,7 @@ public class VoluntaryProvider extends ContentProvider {
             }
             case VOLUNTARY: {
                 long _id = db.insert(VoluntaryContract.VoluntaryEntry.TABLE_NAME, null, values);
-                if(_id > 0)
+                if (_id > 0)
                     returnUri = VoluntaryContract.VoluntaryEntry.buildVoluntaryUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
@@ -163,8 +162,8 @@ public class VoluntaryProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         int rowsDeleted;
 
-        if(null == selection) selection = "1";
-        switch (match){
+        if (null == selection) selection = "1";
+        switch (match) {
             case SCHOOL:
                 rowsDeleted = db.delete(
                         VoluntaryContract.SchoolEntry.TABLE_NAME, selection, selectionArgs);
@@ -185,7 +184,7 @@ public class VoluntaryProvider extends ContentProvider {
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
 
-        if(rowsDeleted != 0){
+        if (rowsDeleted != 0) {
             getContext().getContentResolver().notifyChange(uri, null);
         }
         return rowsDeleted;
@@ -197,7 +196,7 @@ public class VoluntaryProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         int rowsUpdated;
 
-        switch (match){
+        switch (match) {
             case SCHOOL:
                 rowsUpdated = db.update(
                         VoluntaryContract.SchoolEntry.TABLE_NAME, values, selection, selectionArgs);
@@ -217,7 +216,7 @@ public class VoluntaryProvider extends ContentProvider {
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
-        if(rowsUpdated != 0){
+        if (rowsUpdated != 0) {
             getContext().getContentResolver().notifyChange(uri, null);
         }
         return rowsUpdated;
@@ -238,12 +237,75 @@ public class VoluntaryProvider extends ContentProvider {
         return matcher;
     }
 
-    //해야함
-//    @Override
-//    public int bulkInsert(Uri uri, ContentValues[] values) {
-//        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-//        final int match = sUriMatcher.match(uri);
-//
-//        return super.bulkInsert(uri, values);
-//    }
+    @Override
+    public int bulkInsert(Uri uri, ContentValues[] values) {
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+        final int match = sUriMatcher.match(uri);
+        int returnCount = 0;
+
+        switch (match) {
+            case SCHOOL:
+                db.beginTransaction();
+                try {
+                    for (ContentValues value : values) {
+                        long _id = db.insert(VoluntaryContract.SchoolEntry.TABLE_NAME, null, value);
+                        if (_id != -1) {
+                            returnCount++;
+                        }
+                    }
+                    db.setTransactionSuccessful();
+                } finally {
+                    db.endTransaction();
+                }
+             break;
+            case REGION:
+                db.beginTransaction();
+                try {
+                    for (ContentValues value : values) {
+                        long _id = db.insert(VoluntaryContract.RegionEntry.TABLE_NAME, null, value);
+                        if (_id != -1) {
+                            returnCount++;
+                        }
+                    }
+                    db.setTransactionSuccessful();
+                } finally {
+                    db.endTransaction();
+                }
+              break;
+            case IMAGE:
+                db.beginTransaction();
+                try {
+                    for (ContentValues value : values) {
+                        long _id = db.insert(VoluntaryContract.ImageEntry.TABLE_NAME, null, value);
+                        if (_id != -1) {
+                            returnCount++;
+                        }
+                    }
+                    db.setTransactionSuccessful();
+                } finally {
+                    db.endTransaction();
+                }
+            break;
+            case VOLUNTARY:
+                db.beginTransaction();
+                try {
+                    for (ContentValues value : values) {
+                        long _id = db.insert(VoluntaryContract.VoluntaryEntry.TABLE_NAME, null, value);
+                        if (_id != -1) {
+                            returnCount++;
+                        }
+                    }
+                    db.setTransactionSuccessful();
+                } finally {
+                    db.endTransaction();
+                }
+                break;
+            default:
+                return super.bulkInsert(uri, values);
+        }
+        if (returnCount != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return returnCount;
+    }
 }
