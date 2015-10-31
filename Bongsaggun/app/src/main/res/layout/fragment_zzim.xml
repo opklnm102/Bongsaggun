@@ -1,13 +1,105 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
+              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context="io.j2ffrey_2.bongsaggun.ZzimFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:layout_height="match_parent">
 
+        <!--찜한 봉사 신청 부분-->
+
+    <LinearLayout
+        android:id="@+id/zzim_header"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginBottom="12dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical">
+
+        <!-- 찜한 봉사 신청 부분 중 텍스트-->
+        <LinearLayout
+            android:id="@+id/zzim_total_text_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="5"
+            android:gravity="center|left"
+            android:layout_marginLeft="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="찜한 봉사활동"
+                android:id="@+id/zzim_total_text"
+                android:textColor="#757575"
+                android:textSize="14sp"/>
+
+            <!--색 다시말씀드려보기-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:id="@+id/zzim_total_num"
+                android:text="3"
+                android:textColor="#ed1e79"
+                android:layout_marginLeft="4dp"
+                android:textSize="24sp"/>
+
+        </LinearLayout>
+
+        <!--찜한 봉사 신청 버튼-->
+        <Button
+            android:id="@+id/zzim_button"
+            android:textSize="14dp"
+            android:text="신청하기"
+            android:background="#ed1e79"
+            android:layout_width="112dp"
+            android:layout_height="36dp"
+            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:textColor="#ffffff"/>
+
+    </LinearLayout>
+
+        <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp">
+
+        <CheckBox
+            android:id="@+id/zzim_check_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dp"/>
+        <TextView
+            android:id="@+id/zzim_check_all_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전체선택"
+            android:textColor="#757575"
+            android:textSize="16dp"/>
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/zzim_list_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/zzim_drawer_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+    </LinearLayout>
 </FrameLayout>
+
