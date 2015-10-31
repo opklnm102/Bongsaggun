@@ -33,19 +33,6 @@ public class HomeFragment extends Fragment {
 
     }
 
-    public String[][] getparsedata() throws IOException {
-        JsonParser parser = new JsonParser();
-        String[][] st;
-        st = parser.jsonParserList();
-
-        //String title =  st[1][3];
-        //titleSet =st[1][5];
-
-
-
-        return st;
-    }
-
     //getdata
     public List<Home_list_contents> getData(){
         List<Home_list_contents> data = new ArrayList<>();
@@ -56,7 +43,10 @@ public class HomeFragment extends Fragment {
                 , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2"
                 , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" };
 
-
+        //네트워크 연결
+        NetWorkActivity connector = new NetWorkActivity();
+        connector.LoadAPI("https://dosomething-j2ffrey-2.c9.io/json/filter"); //주소 넣어서 받을 수 있게 바꾸기
+        String s[][] = connector.getResult();
 
         for (int i=0; i<titles.length; i++){
             Home_list_contents current = new Home_list_contents();
@@ -67,23 +57,12 @@ public class HomeFragment extends Fragment {
             data.add(current);
             current.IconId = R.mipmap.ic_launcher;
 
-
-            //String st[][] = getparsedata();
-            try {
-                current.titleSet = getparsedata()[1][5];
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
+            //current.titleSet = s[1][5];
 
             data.add(current);
         }
 
 
-        //네트워크 연결
-        NetWorkActivity connector = new NetWorkActivity();
-        connector.LoadAPI("https://dosomething-j2ffrey-2.c9.io/json/filter"); //주소 넣어서 받을 수 있게 바꾸기
 
         return data;
     }

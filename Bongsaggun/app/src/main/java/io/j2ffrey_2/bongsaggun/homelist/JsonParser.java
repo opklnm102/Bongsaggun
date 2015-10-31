@@ -22,9 +22,8 @@ public class JsonParser {
     static String json = "";
     static final String urlst = "https://dosomething-j2ffrey-2.c9.io/json/filter";
 
-    public static  String id="";
+    public static  String id[];
     public static  String img_main="";
-    public static final String url="";
     public static final String img_poster="";
 
     public static final String name="";
@@ -64,37 +63,35 @@ public class JsonParser {
 
 
 
-    public String[][] jsonParserList(){
+    public String[][] jsonParserList(String pRecvServerPage){
         String str="";
-        // String pRecvServerPage =getJSONFromUrl(urlst);
-        NetWorkActivity con =new NetWorkActivity();
-        //.NetworkConnector.
-        String pRecvServerPage = con.getResult();
-        //=getJSONFromUrl(urlst);
 
 
-        //null 버그
-        Log.i("서버에서 받은 전체 내용 :", con.getResult()+"la");
+       // Log.i("서버에서 받은 전체 내용 :", con.getResult()+"la");
         try {
+
             JSONObject json = new JSONObject(pRecvServerPage);
+
             JSONArray jArr = json.getJSONArray("Bongsa"); // json object 넣는 배열
-            //어디까지 넣은거니?
-
-
 
             // 받아온거 정리
             String[] jsonName = {"id", "img_name", "img_poster", "name", "content","is_edu","status", "organization_id","clerk_name", "clerk_call",
-                                 "is_regular", "date_recruit_start", "date_recruit_end", "time_daily_start","time_daily_end", "time_expect_total",
+                                 "is_regular", "date_recruit_start", "date_recruit_end","date_real_start", "date_real_end", "time_daily_start","time_daily_end", "time_expect_total",
                                     "vltr_num", "vltr_age_id", "vltr_sex", "vltr_req", "region_id", "school_id", "btime_id", "category_id",
                                     "admin_add","admin_mod", "act_time","created_at", "updated_at"};
 
             String[][] parseredData = new String[jArr.length()][jsonName.length];
 
             for (int i = 0; i < jArr.length(); i++) {
-                json = jArr.getJSONObject(i); // ??  이거 뭐지
+                json = jArr.getJSONObject(i); //i =0 이면 첫번째 item
 
                 for(int j = 0; j < jsonName.length; j++) {
                     parseredData[i][j] = json.getString(jsonName[j]);
+
+                    //parseredData[0][0]  = 첫번째 아이템의 id
+
+                    //아니면 배열로 받나?
+
                 }
             }
             // 데이터 확인

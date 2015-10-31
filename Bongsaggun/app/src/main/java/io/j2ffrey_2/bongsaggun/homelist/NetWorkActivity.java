@@ -24,19 +24,17 @@ public class NetWorkActivity {
     String sum = null;
     String s = null;
     NetworkConnector connector;
+    String [][] parseddata;
     // 할것 : 연결안된거 예외처리 만들어주기
     public void LoadAPI (String urls)
     {
         urlst = urls;
         connector = new NetworkConnector();
-        s =connector.getResult();
         connector.execute();
-
-
     }
-    public String getResult() {
+    public String[][] getResult() {
         //String s =connector.getResult();
-        return s;
+        return parseddata;
     }
     public class NetworkConnector extends AsyncTask<String, Void, String>
     {
@@ -67,11 +65,15 @@ public class NetWorkActivity {
                     builder.append(data);
                 }
                 sum = builder.toString();
+
+                Log.i("sum",sum);
+                //받아온 데이터를 파서로 보내서 파싱해준다
+                JsonParser parser = new JsonParser();
+                parseddata = parser.jsonParserList(sum);
             }
             catch (IOException e)
             {
             }
-
             Log.i("NetworkConnector", sum);
 
             return sum;
