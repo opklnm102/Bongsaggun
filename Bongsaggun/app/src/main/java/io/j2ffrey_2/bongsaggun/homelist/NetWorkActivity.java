@@ -1,9 +1,7 @@
 package io.j2ffrey_2.bongsaggun.homelist;
 
-
 import android.os.AsyncTask;
 import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,34 +11,50 @@ import java.net.URL;
 /**
  * Created by vantovan on 2015. 10. 31..
  */
+
+// 엑티비티는 라이프 사이클에 걸려있는거니까
+    //죽었어 --> 네트워크를 가지고 오지 못하니까
+    //android asynchTask는 이제 쓰레드를 만들었음
+
+
+    //여기에 파서를 넣읍시다.
 public class NetWorkActivity {
-    static final String urlst = "https://dosomething-j2ffrey-2.c9.io/json/filter";
-    static String results = null;
-
+    private String urlst = "https://dosomething-j2ffrey-2.c9.io/json/filter";
+    private String results = null;
+    String sum = null;
+    String s = null;
+    NetworkConnector connector;
     // 할것 : 연결안된거 예외처리 만들어주기
-
-    public void LoadAPI ()
+    public void LoadAPI (String urls)
     {
-        NetworkConnector connector = new NetworkConnector();
-
+        urlst = urls;
+        connector = new NetworkConnector();
+        s =connector.getResult();
         connector.execute();
-    }
 
+
+    }
     public String getResult() {
-        return results;
+        //String s =connector.getResult();
+        return s;
     }
-
-
     public class NetworkConnector extends AsyncTask<String, Void, String>
     {
+        public NetworkConnector(){
+
+        }
 
         @Override
         protected String doInBackground(String... params) {
-            String sum = "";
+            sum = "";
             try {
                 URL url = new URL(urlst);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
+
+                //추가설정
+                conn.setUseCaches(false);
+                conn.setDoInput(true);
 
                 InputStreamReader streamReader = new InputStreamReader(conn.getInputStream(), "UTF-8");
                 BufferedReader rd = new BufferedReader(streamReader);
@@ -52,25 +66,25 @@ public class NetWorkActivity {
                 {
                     builder.append(data);
                 }
-
                 sum = builder.toString();
             }
             catch (IOException e)
             {
-
             }
 
             Log.i("NetworkConnector", sum);
 
             return sum;
         }
-
+        public String getResult() {
+            return sum;
+        }
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             if(result != null){
                 Log.d("ASYNC", "result = " + result);
-                results = result;
+                sum = result;
             }
         }
 
@@ -81,6 +95,7 @@ public class NetWorkActivity {
             super.onCancelled();
         }
     }
+
 }
 
 

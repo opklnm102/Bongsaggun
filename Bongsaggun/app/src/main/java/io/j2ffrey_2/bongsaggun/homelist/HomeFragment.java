@@ -33,9 +33,21 @@ public class HomeFragment extends Fragment {
 
     }
 
+    public String[][] getparsedata() throws IOException {
+        JsonParser parser = new JsonParser();
+        String[][] st;
+        st = parser.jsonParserList();
+
+        //String title =  st[1][3];
+        //titleSet =st[1][5];
+
+
+
+        return st;
+    }
 
     //getdata
-    public static List<Home_list_contents> getData(){
+    public List<Home_list_contents> getData(){
         List<Home_list_contents> data = new ArrayList<>();
         Log.i("MyActivity", "MyClass.getView() — get item number ");
         String[] titles = {"유기견 봉사활동" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2"
@@ -54,26 +66,24 @@ public class HomeFragment extends Fragment {
             current.IconId = R.mipmap.ic_launcher;
             data.add(current);
             current.IconId = R.mipmap.ic_launcher;
-            //current.titleSet = getparsedata()[1][3];
 
-/*
+
+            //String st[][] = getparsedata();
             try {
-                //JsonParser parser = new JsonParser();
-                //String[][] st;
-                //st = parser.jsonParserList();
-                //current.titleSet = JsonParser.jsonParserList()[1][2];
+                current.titleSet = getparsedata()[1][5];
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-*/
+
+
             data.add(current);
         }
 
-        //이거 받기 전에 일련의
-        NetWorkActivity connector = new NetWorkActivity();
 
-        connector.LoadAPI(); //thread호출
+        //네트워크 연결
+        NetWorkActivity connector = new NetWorkActivity();
+        connector.LoadAPI("https://dosomething-j2ffrey-2.c9.io/json/filter"); //주소 넣어서 받을 수 있게 바꾸기
 
         return data;
     }
@@ -81,15 +91,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*
-        if(android.os.Build.VERSION.SDK_INT > 9) {
 
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-
-            StrictMode.setThreadPolicy(policy);
-
-        }
-        */
     }
 
     @Override
@@ -99,7 +101,7 @@ public class HomeFragment extends Fragment {
                 R.layout.fragment_home, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.drawer_list);
 
-        adapter = new HomeListAdapter(getActivity(), getData()); //수정한부분 코드 다시보기 //ECEPTION
+        adapter = new HomeListAdapter(getActivity(), getData());
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -56,7 +56,7 @@ public class HomeListAdapter extends RecyclerView.Adapter <HomeListAdapter.MyVie
         Home_list_contents current = mDataset.get(position);  //get current item
         holder.title.setText(current.title);
         holder.icon.setImageResource(current.IconId);
-        //holder.area.setText(current.titleSet);
+        holder.area.setText(current.titleSet);
         //Log.i("lala", current.titleSet);
         //Log.e("lala" ,current.title);
     }

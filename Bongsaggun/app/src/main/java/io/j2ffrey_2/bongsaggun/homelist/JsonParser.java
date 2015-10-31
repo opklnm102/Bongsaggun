@@ -64,90 +64,27 @@ public class JsonParser {
 
 
 
-    public static String getJSONFromUrl(String urlParameters) throws IOException {
-        //constants_1
-        URL url = new URL(urlst);
-        String message = new JSONObject().toString();
-        //HttpURLConnection connection = null;
-        HttpURLConnection urlConnection = null;
-
-        try {
-
-            //Create connection
-            //url = new URL(targetURL);
-
-            urlConnection = (HttpURLConnection)url.openConnection();
-            urlConnection.setRequestMethod("GET"); // post get put crud
-            urlConnection.setUseCaches(false);
-            urlConnection.setDoInput(true);
-            // urlConnection.setDoOutput(true);// OutputStream으로 POST 데이터를 넘겨주겠다는 옵션.
-            // urlConnection.setFixedLengthStreamingMode(message.getBytes().length); // length
-            // urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-
-            //make some http header nicety
-            urlConnection.setRequestProperty("Content-Type", "application/json;charset=utf-8\"");
-            Log.i("타기는 타는거니??1", urlst);
-            //open
-            //urlConnection.connect();
-            Log.i("타기는 타는거니??2", "ddd");
-            //urlConnection.getInputStream();
-
-            InputStream is = urlConnection.getInputStream();
-
-
-            Log.i("타기는 타는거니??3", "ddd");
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-
-            String line="";
-
-
-            StringBuffer response = new StringBuffer();
-
-
-            while((line = rd.readLine()) != null) {
-                response.append(line);
-                response.append('\r');
-            }
-
-            rd.close();
-            Log.e("JSON Parser","string data" + response.toString());
-
-            return response.toString();
-        }
-        catch (Exception e) {
-            Log.e("JSON Parser", "Error parsing data " + e.toString());
-            e.printStackTrace();
-            return null;
-
-        }
-        finally {
-            urlConnection.disconnect();
-        }
-    }
-
-
-    public String[][] jsonParserList() throws IOException {
+    public String[][] jsonParserList(){
         String str="";
-        NetWorkActivity n2 =new NetWorkActivity();
-        String pRecvServerPage = n2.getResult();
-       //=getJSONFromUrl(urlst);
+        // String pRecvServerPage =getJSONFromUrl(urlst);
+        NetWorkActivity con =new NetWorkActivity();
+        //.NetworkConnector.
+        String pRecvServerPage = con.getResult();
+        //=getJSONFromUrl(urlst);
 
-        Log.i("서버에서 받은 전체 내용 :", pRecvServerPage);
+
+        //null 버그
+        Log.i("서버에서 받은 전체 내용 :", con.getResult()+"la");
         try {
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("Bongsa"); // json object 넣는 배열
             //어디까지 넣은거니?
 
-            try {
-                str = getJSONFromUrl(urlst);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
 
             // 받아온거 정리
-
             String[] jsonName = {"id", "img_name", "img_poster", "name", "content","is_edu","status", "organization_id","clerk_name", "clerk_call",
-                                    "is_regular", "date_recruit_start", "date_recruit_end", "time_daily_start","time_daily_end", "time_expect_total",
+                                 "is_regular", "date_recruit_start", "date_recruit_end", "time_daily_start","time_daily_end", "time_expect_total",
                                     "vltr_num", "vltr_age_id", "vltr_sex", "vltr_req", "region_id", "school_id", "btime_id", "category_id",
                                     "admin_add","admin_mod", "act_time","created_at", "updated_at"};
 
@@ -155,17 +92,14 @@ public class JsonParser {
 
             for (int i = 0; i < jArr.length(); i++) {
                 json = jArr.getJSONObject(i); // ??  이거 뭐지
-                //id = json.getString("id");
-                //img_main = json.getString("img_main");
 
                 for(int j = 0; j < jsonName.length; j++) {
                     parseredData[i][j] = json.getString(jsonName[j]);
                 }
-
             }
             // 데이터 확인
 
-             Log.i("datacheck 1 : img_main", img_main);
+            //Log.i("datacheck 1 : img_main", img_main);
             Log.i("언제 뜨나요 이거" , parseredData[1][2]);
 
             return parseredData;
