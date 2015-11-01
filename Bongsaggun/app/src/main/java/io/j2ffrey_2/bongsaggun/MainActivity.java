@@ -31,15 +31,11 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
 
+    @Bind(R.id.toolbar_main) Toolbar mToolbar;
+    @Bind(R.id.toolbar_title) TextView tvTitle;
+    @Bind(R.id.drawer) DrawerLayout mDrawerLayout;
+    @Bind(R.id.nav_view) NavigationView nV;
 
-    @Bind(R.id.toolbar_main)
-    Toolbar mToolbar;
-    @Bind(R.id.toolbar_title)
-    TextView tvTitle;
-    @Bind(R.id.drawer)
-    DrawerLayout mDrawerLayout;
-    @Bind(R.id.nav_view)
-    NavigationView nV;
     ActionBarDrawerToggle toogle;
     @Bind(R.id.tabs)
     TabLayout mTabLayout;
