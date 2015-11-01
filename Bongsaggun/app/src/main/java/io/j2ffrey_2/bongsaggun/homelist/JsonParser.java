@@ -20,103 +20,100 @@ public class JsonParser {
 
     public static final String TAG = JsonParser.class.getSimpleName();
 
-    static JSONObject object = null;
-    static String json = "";
-    static final String urlst = "https://dosomething-j2ffrey-2.c9.io/json/filter";
+    public static void jsonVoluntaryListParser(String strJson) throws JSONException {
 
-    public static String id[];
-    public static String img_main = "";
-    public static final String img_poster = "";
+        JSONObject jsonObject = new JSONObject(strJson);
+        Log.d(TAG, "jsonObject " + jsonObject);
 
-    public static final String name = "";
-    public static final String content = "";
-    public static final String is_edu = "";
+        JSONArray jsonArray = jsonObject.getJSONArray("Bongsa");
+        Log.d(TAG, "jsonObject " + -100);
 
-    public static final String status = "";
-    public static final String organization_id = "";
-    public static final String clerk_name = "";
-    public static final String clerk_call = "";
+        String[] jsonName = {"id", "is_approval", "address", "img_main", "img_poster", "name",
+                "content", "is_edu", "status", "organization_id", "clerk_name", "clerk_call", "clerk_email", "is_regular",
+                "date_recruit_start", "date_recruit_end", "date_real_start", "date_real_end", "time_daily_start", "time_daily_end",
+                "time_expect_total", "vltr_num", "vltr_age_id", "vltr_sex", "vltr_req", "region_id", "school_id", "btime_id",
+                "category_id", "admin_add", "admin_mod", "act_time", "created_at", "updated_at"};
 
-    public static final String is_regular = "";
-    public static final String date_recruit_start = "";
-    public static final String date_recruit_end = "";
-    public static final String date_real_start = "";
-    public static final String date_real_end = "";
+        for(int i=0, j=0; i<jsonArray.length(); i++, j=0){
+            JSONObject json = jsonArray.getJSONObject(i);
 
-    public static final String time_daily_start = "";
-    public static final String time_daily_end = "";
-    public static final String time_expect_total = "";
-    public static final String vltr_num = "";
-    public static final String vltr_age_id = "";
+            Integer id = json.getInt(jsonName[j++]);
+            Boolean isApproval = json.optBoolean(jsonName[j++], false);
+            String address = json.optString(jsonName[j++], "");
+            JSONObject joMainImage = json.getJSONObject(jsonName[j++]);
+            String urlMainImage = joMainImage.optString("url", "");
+            JSONObject joPosterImage = json.getJSONObject(jsonName[j++]);
+            String urlPosterImage = joPosterImage.optString("url", "");
+            String name = json.optString(jsonName[j++], "");
+            String content = json.optString(jsonName[j++], "");
+            Boolean isEdu = json.optBoolean(jsonName[j++], false);
+            Integer status = json.optInt(jsonName[j++], -1);
+            Integer origanizationId = json.optInt(jsonName[j++], -1);
+            String clerkName = json.optString(jsonName[j++], "");
+            String clerkCall = json.optString(jsonName[j++], "");
+            String clerkEmail = json.optString(jsonName[j++], "");
+            Boolean isRegular = json.optBoolean(jsonName[j++], false);
+            String dateRecruitStart = json.optString(jsonName[j++], "");
+            String dateRecruitEnd = json.optString(jsonName[j++], "");
+            String dateRealStart = json.optString(jsonName[j++], "");
+            String dateRealEnd = json.optString(jsonName[j++], "");
+            String timeDailyStart = json.optString(jsonName[j++], "");
+            String timeDailyEnd = json.optString(jsonName[j++], "");
+            Integer timeExpectTotal = json.optInt(jsonName[j++], -1);
+            Integer vltrNum = json.optInt(jsonName[j++], -1);
+            Integer vltrAgeId = json.optInt(jsonName[j++], -1);
+            Integer vltrSex = json.optInt(jsonName[j++], -1);
+            String vltrReq = json.optString(jsonName[j++], "");
+            Integer regionId = json.optInt(jsonName[j++], -1);
+            Integer schoolId = json.optInt(jsonName[j++], -1);
+            Integer bTimeId = json.optInt(jsonName[j++], -1);
+            Integer categoryId = json.optInt(jsonName[j++], -1);
+            String adminAdd = json.optString(jsonName[j++], "");
+            String admin_mod = json.optString(jsonName[j++], "");
+            Integer actTime = json.optInt(jsonName[j++], -1);
+            String createdAt = json.getString(jsonName[j++]);
+            String updatedAt = json.getString(jsonName[j++]);
 
-    public static final String vltr_sex = "";
-    public static final String vltr_req = "";
-    public static final String region_id = "";
-    public static final String school_id = "";
-    public static final String btime_id = "";
-
-
-    public static final String category_id = "";
-    public static final String admin_add = "";
-    public static final String admin_mod = "";
-    public static final String act_time = "";
-    public static final String created_at = "";
-    public static final String updated_at = "";
-
-
-    public String[][] jsonParserList(String pRecvServerPage) {
-        String str = "";
-
-
-        // Log.i("서버에서 받은 전체 내용 :", con.getResult()+"la");
-        try {
-
-            JSONObject json = new JSONObject(pRecvServerPage);
-
-            JSONArray jArr = json.getJSONArray("Bongsa"); // json object 넣는 배열
-
-            // 받아온거 정리
-            String[] jsonName = {"id", "img_name", "img_poster", "name", "content", "is_edu", "status", "organization_id", "clerk_name", "clerk_call",
-                    "is_regular", "date_recruit_start", "date_recruit_end", "date_real_start", "date_real_end", "time_daily_start", "time_daily_end", "time_expect_total",
-                    "vltr_num", "vltr_age_id", "vltr_sex", "vltr_req", "region_id", "school_id", "btime_id", "category_id",
-                    "admin_add", "admin_mod", "act_time", "created_at", "updated_at"};
-
-            String[][] parseredData = new String[jArr.length()][jsonName.length];
-
-            for (int i = 0; i < jArr.length(); i++) {
-                json = jArr.getJSONObject(i); //i =0 이면 첫번째 item
-
-                for (int j = 0; j < jsonName.length; j++) {
-                    parseredData[i][j] = json.getString(jsonName[j]);
-
-                    //parseredData[0][0]  = 첫번째 아이템의 id
-
-                    //아니면 배열로 받나?
-
-                }
-            }
-            // 데이터 확인
-
-            //Log.i("datacheck 1 : img_main", img_main);
-            Log.i("언제 뜨나요 이거", parseredData[1][2]);
-
-            return parseredData;
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
+            Log.d(TAG, "parseredData " + id + " " + isApproval + " " + address + " " + urlMainImage + " " + urlPosterImage + " " + name + " " + content + " " + isEdu + " " + status + " " + origanizationId
+                    + " " + clerkName + " " + clerkCall + " " + clerkEmail + " " + isRegular + " " + dateRecruitStart + " " + dateRecruitEnd + " " + dateRealStart + " " + dateRealEnd + " " + timeDailyStart
+                    + " " + timeDailyEnd + " " + timeExpectTotal + " " + vltrNum + " " + vltrAgeId + " " + vltrSex + " " + vltrReq + " " + regionId + " " + schoolId + " " + bTimeId + " " + categoryId
+                    + " " + adminAdd + " " + admin_mod + " " + actTime + " " + createdAt + " " + updatedAt);
+            //파싱 끝 어딘가에 저장하기
         }
     }
 
     public static void jsonSchoolListParser(String strJson) throws JSONException {
 
         JSONObject jsonObject = new JSONObject(strJson);
-
         Log.d(TAG, "jsonObject " + jsonObject);
+
         JSONArray jsonArray = jsonObject.getJSONArray("School");
 
         String[] jsonName = {"id", "name", "created_at", "updated_at"};
 
         for (int i = 0, j = 0; i < jsonArray.length(); i++, j = 0) {
+            JSONObject json = jsonArray.getJSONObject(i);
+
+            Integer id = json.getInt(jsonName[j++]);
+            String name = json.getString(jsonName[j++]);
+            String createdAt = json.getString(jsonName[j++]);
+            String updatedAt = json.getString(jsonName[j++]);
+
+            Log.d(TAG, "parseredData " + id + " " + name + " " + createdAt + " " + updatedAt);
+            //파싱 끝 어딘가에 저장하기
+        }
+    }
+
+    public static void jsonRegionListParser(String strJson) throws JSONException {
+
+        JSONObject jsonObject = new JSONObject(strJson);
+        Log.d(TAG, "jsonObject " + jsonObject);
+
+        JSONArray jsonArray = jsonObject.getJSONArray("Region");
+
+        String[] jsonName = {"id", "name", "created_at", "updated_at"};
+
+        for(int i=0, j=0; i<jsonArray.length(); i++, j=0) {
             JSONObject json = jsonArray.getJSONObject(i);
 
             Integer id = json.getInt(jsonName[j++]);

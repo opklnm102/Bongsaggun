@@ -69,7 +69,7 @@ public class NetWorkActivity {
                 Log.i("sum",sum);
                 //받아온 데이터를 파서로 보내서 파싱해준다
                 JsonParser parser = new JsonParser();
-                parseddata = parser.jsonParserList(sum);
+//                parseddata = parser.jsonParserList(sum);
             }
             catch (IOException e)
             {

@@ -71,13 +71,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        try {
-            NetworkManager.getInstance().getSchoolList();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     @Override

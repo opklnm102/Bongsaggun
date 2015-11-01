@@ -113,7 +113,7 @@ public class NetworkManager {
                     Log.d(TAG, "school json " + strJson);
 
                     try {
-                        JsonParser.jsonSchoolListParser(strJson);
+                        JsonParser.jsonSchoolListParser(strJson);  //파싱한거 넘기기
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -143,7 +143,14 @@ public class NetworkManager {
                 if (!response.isSuccessful()) {
                     throw new IOException("Unexpected code " + response);
                 } else {
-                    Log.d(TAG, "region json " + response.body().string());
+                    String strJson = response.body().string();
+                    Log.d(TAG, "region json " + strJson);
+
+                    try {
+                        JsonParser.jsonRegionListParser(strJson);  //파싱한거 넘기기
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -170,7 +177,14 @@ public class NetworkManager {
                 if (!response.isSuccessful()) {
                     throw new IOException("Unexpected code " + response);
                 } else {
-                    Log.d(TAG, "voluntary json " + response.body().string());
+                    String strJson = response.body().string();
+                    Log.d(TAG, "allVoluntary json " + strJson);
+
+                    try {
+                        JsonParser.jsonVoluntaryListParser(strJson);  //파싱한거 넘기기
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -179,7 +193,7 @@ public class NetworkManager {
     //봉사 리스트
     //GET
     //몇번 인덱스(offset)부터 몇개까지(limit)
-    public void getVoluntaryList(int offset, int limit) {
+    public void getVoluntaryList(int offset, int limit) throws IOException {
         String url = endPoint + "/" + format + "/" + apiVoluntary + "?offset=" + offset + "&limit=" + limit;
         Log.d(TAG, " " + url);
 
@@ -198,7 +212,14 @@ public class NetworkManager {
                 if (!response.isSuccessful()) {
                     throw new IOException("Unexpected code " + response);
                 } else {
-                    Log.d(TAG, "voluntary json " + response.body().string());
+                    String strJson = response.body().string();
+                    Log.d(TAG, "voluntary json " + strJson);
+
+                    try {
+                        JsonParser.jsonVoluntaryListParser(strJson);  //파싱한거 넘기기
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
