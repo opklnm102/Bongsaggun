@@ -27,20 +27,24 @@ import butterknife.ButterKnife;
 import io.j2ffrey_2.bongsaggun.homelist.HomeFragment;
 
 
-
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
 
 
-
-    @Bind(R.id.toolbar_main) Toolbar mToolbar;
-    @Bind(R.id.toolbar_title) TextView tvTitle;
-    @Bind(R.id.drawer) DrawerLayout mDrawerLayout;
-    @Bind(R.id.nav_view) NavigationView nV;
+    @Bind(R.id.toolbar_main)
+    Toolbar mToolbar;
+    @Bind(R.id.toolbar_title)
+    TextView tvTitle;
+    @Bind(R.id.drawer)
+    DrawerLayout mDrawerLayout;
+    @Bind(R.id.nav_view)
+    NavigationView nV;
     ActionBarDrawerToggle toogle;
-    @Bind(R.id.tabs) TabLayout mTabLayout;
-    @Bind(R.id.viewPager) ViewPager mViewPager;
+    @Bind(R.id.tabs)
+    TabLayout mTabLayout;
+    @Bind(R.id.viewPager)
+    ViewPager mViewPager;
     PagerAdapter mPagerAdapter;
 
     @Override
@@ -53,13 +57,13 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
 
         final ActionBar ab = getSupportActionBar();
-        if(ab != null){
+        if (ab != null) {
             ab.setHomeAsUpIndicator(R.drawable.ic_menu);
 //            ab.setDisplayShowTitleEnabled(false);
             ab.setDisplayShowHomeEnabled(true);
         }
 
-        if(nV != null){
+        if (nV != null) {
             setUpDrawerContent(nV);
         }
 
@@ -67,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         toogle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(toogle);
 
-        if(mViewPager != null){
+        if (mViewPager != null) {
             setUpViewPager(mViewPager);
         }
         mTabLayout.setupWithViewPager(mViewPager);
@@ -91,11 +95,11 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, " onResume");
     }
 
-    private void setUpDrawerContent(NavigationView navigationView){
+    private void setUpDrawerContent(NavigationView navigationView) {
 
     }
 
-    private void setUpViewPager(ViewPager viewPager){
+    private void setUpViewPager(ViewPager viewPager) {
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
         mPagerAdapter.addFragment(new HomeFragment(), "홈");
         mPagerAdapter.addFragment(new CalendarFragment(), "캘린더");
@@ -110,15 +114,15 @@ public class MainActivity extends AppCompatActivity {
         toogle.syncState();
     }
 
-    static class PagerAdapter extends FragmentPagerAdapter{
+    static class PagerAdapter extends FragmentPagerAdapter {
         private final ArrayList<Fragment> mFragments = new ArrayList<>();
         private final ArrayList<String> mFragmentTitles = new ArrayList<>();
 
-        public PagerAdapter(FragmentManager fm){
+        public PagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
-        public void addFragment(Fragment fragment, String title){
+        public void addFragment(Fragment fragment, String title) {
             mFragments.add(fragment);
             mFragmentTitles.add(title);
         }

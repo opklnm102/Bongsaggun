@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.j2ffrey_2.bongsaggun.MainActivity;
+import io.j2ffrey_2.bongsaggun.NetworkManager;
 import io.j2ffrey_2.bongsaggun.R;
 
 public class HomeFragment extends Fragment {
@@ -70,6 +71,12 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        try {
+            NetworkManager.getInstance().getSchoolList();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

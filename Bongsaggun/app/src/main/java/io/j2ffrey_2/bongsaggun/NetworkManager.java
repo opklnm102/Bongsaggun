@@ -10,10 +10,14 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONException;
+
 import java.io.IOException;
 
+import io.j2ffrey_2.bongsaggun.homelist.JsonParser;
+
 /**
- * Created by han on 2015-10-31.
+ * Created by dong on 2015-10-31.
  */
 public class NetworkManager {
 
@@ -53,7 +57,7 @@ public class NetworkManager {
 
     //로그인
     //POST
-    public void login(String email, String password) throws IOException{
+    public void login(String email, String password) throws IOException {
         String url = endPoint + "/" + format + "/" + apiLogin;
         Log.d(TAG, " " + url);
 
@@ -105,7 +109,14 @@ public class NetworkManager {
                 if (!response.isSuccessful()) {
                     throw new IOException("Unexpected code " + response);
                 } else {
-                    Log.d(TAG, "school json " + response.body().string());
+                    String strJson = response.body().string();
+                    Log.d(TAG, "school json " + strJson);
+
+                    try {
+                        JsonParser.jsonSchoolListParser(strJson);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
