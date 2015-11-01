@@ -2,6 +2,7 @@ package io.j2ffrey_2.bongsaggun.homelist;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 
 import android.view.View;
@@ -55,7 +56,9 @@ public class HomeListAdapter extends RecyclerView.Adapter <HomeListAdapter.MyVie
         Home_list_contents current = mDataset.get(position);  //get current item
         holder.title.setText(current.title);
         holder.icon.setImageResource(current.IconId);
-
+        holder.area.setText(current.titleSet);
+        //Log.i("lala", current.titleSet);
+        //Log.e("lala" ,current.title);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -68,12 +71,14 @@ public class HomeListAdapter extends RecyclerView.Adapter <HomeListAdapter.MyVie
         public final TextView title;
         public final ImageView icon;
         public final View mView;
+        public final TextView area;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
             title = (TextView) itemView.findViewById(R.id.title);
             icon = (ImageView)itemView.findViewById(R.id.icon);
+            area = (TextView)itemView.findViewById(R.id.area);
         }
 
 

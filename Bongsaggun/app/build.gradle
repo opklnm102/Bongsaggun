@@ -34,6 +34,7 @@ dependencies {
     compile 'com.tonicartos:superslim:0.4.13'
     compile 'com.github.bumptech.glide:glide:3.6.1'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
+    
     compile 'com.google.android.gms:play-services-analytics:8.1.0'
     compile 'com.android.support:multidex:1.0.0'
 }

@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -118,18 +120,18 @@ public class InfoPageActivity extends AppCompatActivity {
         loadBackdrop(); //인텐트로 받은 객체 넘기기
         loadData();  //인텐트로 받은 객체 넘기기
 
-         btnVoluntaryApplicationTop.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 //Todo: 신청하기
-             }
-         });
-         btnVoluntaryApplicationBottom.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 //Todo: 신청하기
-             }
-         });
+        btnVoluntaryApplicationTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Todo: 신청하기
+            }
+        });
+        btnVoluntaryApplicationBottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Todo: 신청하기
+            }
+        });
     }
 
     private void loadBackdrop() {
@@ -138,25 +140,24 @@ public class InfoPageActivity extends AppCompatActivity {
     }
 
     //Todo: DB에서 Data load
-    private void loadData(){
-         tvMainInfoRecruitmentPeriodStart.setText("2015-08-22");
-         tvMainInfoRecruitmentPeriodEnd.setText("2015-08-24");
-         tvMainInfoVoluntaryTime.setText("12시간");
+    private void loadData() {
+        tvMainInfoRecruitmentPeriodStart.setText("2015-08-22");
+        tvMainInfoRecruitmentPeriodEnd.setText("2015-08-24");
+        tvMainInfoVoluntaryTime.setText("12시간");
         tvMainInfoVoluntaryDday.setText("8");
-         tvMainInfoVoluntaryLocation.setText("서울 서초구");
-         tvMainInfoVoluntaryAuth.setText("가능");
-         tvDetailInfoDetails.setText("유기견과 함께 사랑을 나누는 힐링 봉사활동");
-         tvDetailInfoVoluntaryPeriodStart.setText("2015-10-16");
-         tvDetailInfoVoluntaryPeriodEnd.setText("2015-10-18");
-         tvDetailInfoSupportCondition.setText("20대, 알러지 없으신 분");
-         tvDetailInfoSupportGender.setText("남녀무관");
-         tvDetailInfoContact.setText("Yoofdkffdfdsf@seoul.go.kr");
-         tvDetailInfoLocation.setText("서울시 서초구 반포3동 324-1");
+        tvMainInfoVoluntaryLocation.setText("서울 서초구");
+        tvMainInfoVoluntaryAuth.setText("가능");
+        tvDetailInfoDetails.setText("유기견과 함께 사랑을 나누는 힐링 봉사활동");
+        tvDetailInfoVoluntaryPeriodStart.setText("2015-10-16");
+        tvDetailInfoVoluntaryPeriodEnd.setText("2015-10-18");
+        tvDetailInfoSupportCondition.setText("20대, 알러지 없으신 분");
+        tvDetailInfoSupportGender.setText("남녀무관");
+        tvDetailInfoContact.setText("Yoofdkffdfdsf@seoul.go.kr");
+        tvDetailInfoLocation.setText("서울시 서초구 반포3동 324-1");
 
-         ivPoster.setImageResource(R.drawable.cheese_2);
+        ivPoster.setImageResource(R.drawable.cheese_2);
 //        Glide.with(this).load(Cheeses.getRandomCheeseDrawable()).centerCrop().into(ivPoster);
     }
-
 
 
     @Override
