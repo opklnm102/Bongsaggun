@@ -1,20 +1,41 @@
 <resources>
     <string name="app_name">봉사꾼</string>
 
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
 
+    <string name="title_activity_info_page">InfoPageActivity</string>
+
+    <!--infoPage-->
+    <string name="voluntary_application">신청하기</string>
+    <string name="voluntary_cancel">신청취소</string>
+
+    <string name="mainInfo_title">주요 정보</string>
+    <string name="mainInfo_recruitmentPeriod_title">모집 기간</string>
+    <string name="mainInfo_voluntary_time_title">봉사 시간</string>
+    <string name="mainInfo_voluntary_dDay_title">D-DAY</string>
+    <string name="mainInfo_voluntary_location_title">활동지역</string>
+    <string name="mainInfo_voluntary_auth_title">인증서발급</string>
+
+    <string name="detailInfo_title">세부 내용</string>
+    <string name="detailInfo_details_title">상세내용</string>
+    <string name="detailInfo_voluntaryPeriod_title">봉사 기간</string>
+    <string name="detailInfo_supportCondition_title">지원 가능 조건</string>
+    <string name="detailInfo_supportGender_title">지원 가능 성별</string>
+    <string name="detailInfo_contact_title">담장자 연락처</string>
+    <string name="detailInfo_location_title">지역</string>
+
+    <string name="poster_title">포스터</string>
+
+
+    <!-- NavigationView-->
     <string name="navigation_view_logout">로그아웃</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <!-- SyncAdapter related -->
+    <string name="sync_account_type">bongsaggun.j2ffrey_2.io</string>
+    <string name="content_authority">io.j2ffrey_2.bongsaggun.app</string>
 
 </resources>

@@ -19,6 +19,7 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <!--TabLayout-->
     <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorColor">?attr/colorAccent</item>
         <item name="tabIndicatorHeight">2dp</item>
@@ -32,6 +33,25 @@
         <!--<item name="android:textColor">?android:textColorSecondary</item>-->
         <item name="android:textColor">@color/tab_text_color</item>
         <item name="textAllCaps">true</item>
+    </style>
+
+    <!--infoPage-->
+    <style name="MyCustomCollapsingToolbarTextAppearance" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
+        <!--<item name="android:textSize">24sp</item>-->
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Widget.CardContent" parent="android:Widget">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:orientation">vertical</item>
     </style>
 
 </resources>
