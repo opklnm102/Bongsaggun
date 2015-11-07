@@ -1,5 +1,8 @@
 package io.j2ffrey_2.bongsaggun;
 
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -19,22 +22,28 @@ import android.util.Log;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 import io.j2ffrey_2.bongsaggun.homelist.HomeFragment;
+import io.j2ffrey_2.bongsaggun.homelist.JsonParser;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String TAG = "MainActivity";
+    public static final String TAG = MainActivity.class.getSimpleName();
 
-    @Bind(R.id.toolbar_main) Toolbar mToolbar;
-    @Bind(R.id.toolbar_title) TextView tvTitle;
-    @Bind(R.id.drawer) DrawerLayout mDrawerLayout;
-    @Bind(R.id.nav_view) NavigationView nV;
+    @Bind(R.id.toolbar_main)
+    Toolbar mToolbar;
+    @Bind(R.id.toolbar_title)
+    TextView tvTitle;
+    @Bind(R.id.drawer)
+    DrawerLayout mDrawerLayout;
+    @Bind(R.id.nav_view)
+    NavigationView nV;
 
     ActionBarDrawerToggle toogle;
     @Bind(R.id.tabs)
@@ -89,6 +98,59 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.e(TAG, " onResume");
+
+        try {
+            NetworkManager.getInstance().getSchoolList();
+            NetworkManager.getInstance().getRegionList();
+            NetworkManager.getInstance().getAllVoluntaryList();
+
+            printLogContactData(getContactCursor());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Cursor getContactCursor() {
+
+        //연락처 프로바이더에 접근하는 URI
+        Uri contactUri = ContactsContract.Contacts.CONTENT_URI;
+
+        String[] projection = new String[]{
+                ContactsContract.Contacts._ID,
+                ContactsContract.Contacts.DISPLAY_NAME
+        };
+
+        Cursor contactCursor = getContentResolver().query(contactUri, projection, null, null, ContactsContract.Contacts.DISPLAY_NAME + " asc");
+
+        if (contactCursor == null) {
+            Log.e(TAG, "연결 실패");
+            return null;
+        }
+        return contactCursor;
+
+    }
+
+    void printLogContactData(Cursor contactData) {
+        int idIdx;
+        int displayNameIdx;
+
+        if (contactData == null) {
+            Log.e(TAG, "연결 실페");
+            return;
+        } else if (contactData.getCount() < 1) {
+            Log.e(TAG, "매치되는 Provider 없음");
+        } else {
+            //idIdx와 displayNameIdx의 값을 구한다.
+            idIdx = contactData.getColumnIndex(ContactsContract.Contacts._ID);
+            displayNameIdx = contactData.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
+
+            //로그에 결과 출력
+            while (contactData.moveToNext()) {
+                Log.i(TAG, "ID: " + contactData.getLong(idIdx) +
+                        contactData.getString(displayNameIdx));
+            }
+        }
     }
 
     private void setUpDrawerContent(NavigationView navigationView) {

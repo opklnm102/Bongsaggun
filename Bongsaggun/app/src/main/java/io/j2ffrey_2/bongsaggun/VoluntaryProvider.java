@@ -9,19 +9,23 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 /**
  * Created by han on 2015-10-29.
  */
 public class VoluntaryProvider extends ContentProvider {
 
+    public static final String TAG = VoluntaryProvider.class.getSimpleName();
+
     private static final UriMatcher sUriMatcher = buildUriMatcher();
     private VoluntaryDbHelper mOpenHelper;
 
-    static final int SCHOOL = 100;
-    static final int REGION = 200;
-    static final int IMAGE = 300;
-    static final int VOLUNTARY = 400;
+    //URI Matcher를 위한 상수
+    private static final int SCHOOL = 100;
+    private static final int REGION = 200;
+    private static final int IMAGE = 300;
+    private static final int VOLUNTARY = 400;
 
     private static final SQLiteQueryBuilder sVoluntarySettingQueryBuilder;
 
@@ -44,9 +48,12 @@ public class VoluntaryProvider extends ContentProvider {
         );
     }
 
-    //query문 작성
-//        private static final String Selection =
+    //query문 작성(where절, 앞에 부분)
 
+    //image update할 때 사용
+    //voluntary.voluntary_mainImageId = ?
+    private static final String imageSelection =
+            VoluntaryContract.VoluntaryEntry.TABLE_NAME + "." + VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_IMAGEID + "= ?";
 
 //    private Cursor getVoluntaryInformation(Uri uri, String[] projection, String sortOrder) {
 //        String locationSetting = WeatherContract.WeatherEntry.getLocationSettingFromUri(uri);
@@ -105,8 +112,75 @@ public class VoluntaryProvider extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 
+        Cursor retCursor;
 
-        return null;
+        //uri객체를 통해 원하는 요청이 무엇인지 검사
+        switch (sUriMatcher.match(uri)) {
+            // "school"
+            case SCHOOL: {
+                if(TextUtils.isEmpty(sortOrder)){  //정렬값이 없다면 id를 기준으로 정렬
+                    sortOrder = VoluntaryContract.SchoolEntry.SORT_ORDER_DEFAULT;
+                }
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        VoluntaryContract.SchoolEntry.TABLE_NAME,  //테이블 이름
+                        projection,                                //조회할 컬럼이름
+                        selection,                                 //WHERE 절
+                        selectionArgs,                             //WHERE 절 인자
+                        null,                                      //GROUP BY 절
+                        null,                                      //HAVING 절
+                        sortOrder                                  //ORDER BY 절
+                );
+                break;
+            }
+            // "region"
+            case REGION: {
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        VoluntaryContract.RegionEntry.TABLE_NAME,  //테이블 이름
+                        projection,                                //조회할 컬럼이름
+                        selection,                                 //WHERE 절
+                        selectionArgs,                             //WHERE 절 인자
+                        null,                                      //GROUP BY 절
+                        null,                                      //HAVING 절
+                        sortOrder                                  //ORDER BY 절
+                );
+                break;
+            }
+            // "image"
+            case IMAGE: {
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        VoluntaryContract.ImageEntry.TABLE_NAME,  //테이블 이름
+                        projection,                                //조회할 컬럼이름
+                        selection,                                 //WHERE 절
+                        selectionArgs,                             //WHERE 절 인자
+                        null,                                      //GROUP BY 절
+                        null,                                      //HAVING 절
+                        sortOrder                                  //ORDER BY 절
+                );
+                break;
+            }
+            // "voluntary"
+            case VOLUNTARY: {
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        VoluntaryContract.VoluntaryEntry.TABLE_NAME,  //테이블 이름
+                        projection,                                //조회할 컬럼이름
+                        selection,                                 //WHERE 절
+                        selectionArgs,                             //WHERE 절 인자
+                        null,                                      //GROUP BY 절
+                        null,                                      //HAVING 절
+                        sortOrder                                  //ORDER BY 절
+                );
+                break;
+            }
+            // "voluntary/*/*"
+//            case VOLUNTARY: {
+//                retCursor = getfdf(uri, projection, sortOrder);
+//                break;
+//            }
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+        return retCursor;
     }
 
     @Nullable
@@ -222,6 +296,7 @@ public class VoluntaryProvider extends ContentProvider {
         return rowsUpdated;
     }
 
+    //Uri Matcher를 준비
     static UriMatcher buildUriMatcher() {
 
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -257,7 +332,7 @@ public class VoluntaryProvider extends ContentProvider {
                 } finally {
                     db.endTransaction();
                 }
-             break;
+                break;
             case REGION:
                 db.beginTransaction();
                 try {
@@ -271,7 +346,7 @@ public class VoluntaryProvider extends ContentProvider {
                 } finally {
                     db.endTransaction();
                 }
-              break;
+                break;
             case IMAGE:
                 db.beginTransaction();
                 try {
@@ -285,7 +360,7 @@ public class VoluntaryProvider extends ContentProvider {
                 } finally {
                     db.endTransaction();
                 }
-            break;
+                break;
             case VOLUNTARY:
                 db.beginTransaction();
                 try {
