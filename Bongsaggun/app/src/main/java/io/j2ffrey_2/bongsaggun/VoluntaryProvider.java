@@ -3,6 +3,7 @@ package io.j2ffrey_2.bongsaggun;
 import android.annotation.TargetApi;
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +11,9 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
+
+import java.util.Arrays;
 
 /**
  * Created by han on 2015-10-29.
@@ -19,6 +23,7 @@ public class VoluntaryProvider extends ContentProvider {
     public static final String TAG = VoluntaryProvider.class.getSimpleName();
 
     private static final UriMatcher sUriMatcher = buildUriMatcher();
+
     private VoluntaryDbHelper mOpenHelper;
 
     //URI Matcher를 위한 상수
@@ -88,6 +93,13 @@ public class VoluntaryProvider extends ContentProvider {
         return true;
     }
 
+    private void deleteDatabase(){
+        mOpenHelper.close();
+        Context context = getContext();
+        VoluntaryDbHelper.deleteDatabase(context);
+        mOpenHelper = new VoluntaryDbHelper(getContext());
+    }
+
     @Nullable
     @Override
     public String getType(Uri uri) {
@@ -113,6 +125,11 @@ public class VoluntaryProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 
         Cursor retCursor;
+        final SQLiteDatabase db = mOpenHelper.getReadableDatabase();
+
+        Log.d(TAG, "uri=" + uri + " code=" + sUriMatcher.match(uri) + " proj=" +
+                Arrays.toString(projection) + " selection=" + selection + " args="
+                + Arrays.toString(selectionArgs) + ")");
 
         //uri객체를 통해 원하는 요청이 무엇인지 검사
         switch (sUriMatcher.match(uri)) {
@@ -121,7 +138,7 @@ public class VoluntaryProvider extends ContentProvider {
                 if(TextUtils.isEmpty(sortOrder)){  //정렬값이 없다면 id를 기준으로 정렬
                     sortOrder = VoluntaryContract.SchoolEntry.SORT_ORDER_DEFAULT;
                 }
-                retCursor = mOpenHelper.getReadableDatabase().query(
+                retCursor = db.query(
                         VoluntaryContract.SchoolEntry.TABLE_NAME,  //테이블 이름
                         projection,                                //조회할 컬럼이름
                         selection,                                 //WHERE 절
@@ -134,7 +151,7 @@ public class VoluntaryProvider extends ContentProvider {
             }
             // "region"
             case REGION: {
-                retCursor = mOpenHelper.getReadableDatabase().query(
+                retCursor = db.query(
                         VoluntaryContract.RegionEntry.TABLE_NAME,  //테이블 이름
                         projection,                                //조회할 컬럼이름
                         selection,                                 //WHERE 절
@@ -147,7 +164,7 @@ public class VoluntaryProvider extends ContentProvider {
             }
             // "image"
             case IMAGE: {
-                retCursor = mOpenHelper.getReadableDatabase().query(
+                retCursor = db.query(
                         VoluntaryContract.ImageEntry.TABLE_NAME,  //테이블 이름
                         projection,                                //조회할 컬럼이름
                         selection,                                 //WHERE 절
@@ -160,7 +177,7 @@ public class VoluntaryProvider extends ContentProvider {
             }
             // "voluntary"
             case VOLUNTARY: {
-                retCursor = mOpenHelper.getReadableDatabase().query(
+                retCursor = db.query(
                         VoluntaryContract.VoluntaryEntry.TABLE_NAME,  //테이블 이름
                         projection,                                //조회할 컬럼이름
                         selection,                                 //WHERE 절

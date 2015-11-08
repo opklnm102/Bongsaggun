@@ -1,5 +1,7 @@
 package io.j2ffrey_2.bongsaggun.homelist;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -15,6 +17,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Vector;
+
+import io.j2ffrey_2.bongsaggun.VoluntaryContract;
 
 public class JsonParser {
 
@@ -34,7 +40,7 @@ public class JsonParser {
                 "time_expect_total", "vltr_num", "vltr_age_id", "vltr_sex", "vltr_req", "region_id", "school_id", "btime_id",
                 "category_id", "admin_add", "admin_mod", "act_time", "created_at", "updated_at"};
 
-        for(int i=0, j=0; i<jsonArray.length(); i++, j=0){
+        for (int i = 0, j = 0; i < jsonArray.length(); i++, j = 0) {
             JSONObject json = jsonArray.getJSONObject(i);
 
             Integer id = json.getInt(jsonName[j++]);
@@ -82,25 +88,42 @@ public class JsonParser {
         }
     }
 
-    public static void jsonSchoolListParser(String strJson) throws JSONException {
+    public static Vector<ContentValues> jsonSchoolListParser(String strJson) {
 
-        JSONObject jsonObject = new JSONObject(strJson);
-        Log.d(TAG, "jsonObject " + jsonObject);
+        try {
+            JSONObject jsonObject = new JSONObject(strJson);
+            Log.d(TAG, "jsonObject " + jsonObject);
 
-        JSONArray jsonArray = jsonObject.getJSONArray("School");
+            JSONArray jsonArray = jsonObject.getJSONArray("School");
 
-        String[] jsonName = {"id", "name", "created_at", "updated_at"};
+            String[] jsonName = {"id", "name", "created_at", "updated_at"};
 
-        for (int i = 0, j = 0; i < jsonArray.length(); i++, j = 0) {
-            JSONObject json = jsonArray.getJSONObject(i);
+            Vector<ContentValues> cVVector = new Vector<>(jsonArray.length());
 
-            Integer id = json.getInt(jsonName[j++]);
-            String name = json.getString(jsonName[j++]);
-            String createdAt = json.getString(jsonName[j++]);
-            String updatedAt = json.getString(jsonName[j++]);
+            for (int i = 0, j = 0; i < jsonArray.length(); i++, j = 0) {
+                JSONObject json = jsonArray.getJSONObject(i);
 
-            Log.d(TAG, "parseredData " + id + " " + name + " " + createdAt + " " + updatedAt);
-            //파싱 끝 어딘가에 저장하기
+                Integer id = json.getInt(jsonName[j++]);
+                String name = json.getString(jsonName[j++]);
+                String createdAt = json.getString(jsonName[j++]);
+                String updatedAt = json.getString(jsonName[j++]);
+
+                //파싱 끝 저장
+                Log.d(TAG, "parseredData " + id + " " + name + " " + createdAt + " " + updatedAt);
+
+                ContentValues schoolValues = new ContentValues();
+                schoolValues.put(VoluntaryContract.SchoolEntry.COLUMN_SCHOOL_ID, id);
+                schoolValues.put(VoluntaryContract.SchoolEntry.COLUMN_SCHOOL_NAME, name);
+                schoolValues.put(VoluntaryContract.SchoolEntry.COLUMN_SCHOOL_CREATEAT, createdAt);
+                schoolValues.put(VoluntaryContract.SchoolEntry.COLUMN_SCHOOL_UPDATEAT, updatedAt);
+
+                cVVector.add(schoolValues);
+            }
+
+            return cVVector;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -113,7 +136,7 @@ public class JsonParser {
 
         String[] jsonName = {"id", "name", "created_at", "updated_at"};
 
-        for(int i=0, j=0; i<jsonArray.length(); i++, j=0) {
+        for (int i = 0, j = 0; i < jsonArray.length(); i++, j = 0) {
             JSONObject json = jsonArray.getJSONObject(i);
 
             Integer id = json.getInt(jsonName[j++]);

@@ -17,7 +17,7 @@ public class VoluntaryContract {
     VoluntaryProvider의 AUTHORITY
     다른 프로바이더와의 충돌을 피하기 위해 "Android 패키지이름 + 앱이름"을 추천
     */
-    public static final String CONTENT_AUTHORITY = "io.j2ffrey_2.bongsaggun.provider";
+    public static final String CONTENT_AUTHORITY = "io.j2ffrey_2.bongsaggun.app";
 
     /*
     최상위 아이템의 AUTHORITY를 위한 CONTENT URI(provider안의 데이터를 식별하는 URI)
@@ -49,6 +49,8 @@ public class VoluntaryContract {
         //컬럼속성
         public static final String COLUMN_SCHOOL_ID = "school_id";  //INTEGER
         public static final String COLUMN_SCHOOL_NAME = "school_name";  //TEXT
+        public static final String COLUMN_SCHOOL_CREATEAT = "createdAt";  //TEXT
+        public static final String COLUMN_SCHOOL_UPDATEAT = "updateAt";  //TEXT
 
         public static final String[] PROJECTION_ALL = { COLUMN_SCHOOL_ID, COLUMN_SCHOOL_NAME };
 
@@ -73,6 +75,8 @@ public class VoluntaryContract {
         public static final String TABLE_NAME = "region";
         public static final String COLUMN_REGION_ID = "region_id";  //INTEGER
         public static final String COLUMN_REGION_NAME = "region_name";  //TEXT
+        public static final String COLUMN_REGION_CREATEAT = "createdAt";  //TEXT
+        public static final String COLUMN_REGION_UPDATEAT = "updateAt";  //TEXT
 
         public static Uri buildRegionUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
