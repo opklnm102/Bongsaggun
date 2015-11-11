@@ -17,6 +17,8 @@
 
     <!--InfoPage Activity-->
     <color name="button_application">#502ca7</color>
+    <color name="fab_zzim_application">#1f92a0</color>
+    <color name="fab_zzim_cancel">#ffffff</color>
 
 
 

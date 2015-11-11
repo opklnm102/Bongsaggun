@@ -72,28 +72,17 @@
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_application_zzim"
+        android:id="@+id/fab_zzim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         android:src="@drawable/ic_check_white_24dp"
-        android:background="#1f92a0"
+        app:elevation="6dp"
+        app:backgroundTint="#1f92a0"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|right|end"
        />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_cancel_zzim"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:clickable="true"
-        android:src="@drawable/ic_check_teal_24dp"
-        app:layout_anchor="@id/appbar"
-        app:layout_anchorGravity="bottom|right|end"
-       android:visibility="gone"
-        />
 
     <!--app:rippleColor="@android:color/white"-->
     <!--app:backgroundTint="#FF0000"-->
