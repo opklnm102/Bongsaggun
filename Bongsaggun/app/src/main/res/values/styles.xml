@@ -31,7 +31,7 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
         <!--<item name="android:textColor">?android:textColorSecondary</item>-->
-        <item name="android:textColor">@color/tab_text_color</item>
+        <item name="android:textColor">@color/tab_text</item>
         <item name="textAllCaps">true</item>
     </style>
 

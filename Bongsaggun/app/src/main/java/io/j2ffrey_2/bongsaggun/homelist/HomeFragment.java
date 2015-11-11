@@ -31,8 +31,8 @@ public class HomeFragment extends Fragment {
     }
 
     //getdata
-    public List<Home_list_contents> getData() {
-        List<Home_list_contents> data = new ArrayList<>();
+    public List<HomeListItem> getData() {
+        List<HomeListItem> data = new ArrayList<>();
         Log.i("MyActivity", "MyClass.getView() — get item number ");
         String[] titles = {"유기견 봉사활동", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2"
                 , "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2"
@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
                 , "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2"};
 
         for (int i = 0; i < titles.length; i++) {
-            Home_list_contents current = new Home_list_contents();
+            HomeListItem current = new HomeListItem();
 
             current.setTitle(titles[i]);
             current.setImgSumnail(R.mipmap.ic_launcher);

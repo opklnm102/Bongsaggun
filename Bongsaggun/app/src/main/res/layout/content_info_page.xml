@@ -389,7 +389,7 @@
         android:layout_width="112dp"
         android:layout_height="36dp"
         android:layout_gravity="center_horizontal"
-        android:background="@color/button_application"
+        android:background="@color/InfoPage_button_application"
         android:text="@string/voluntary_application"
         android:textColor="@android:color/white"
         android:textSize="14sp" />
@@ -401,7 +401,7 @@
         android:layout_gravity="center_horizontal"
         android:background="@android:color/white"
         android:text="@string/voluntary_cancel"
-        android:textColor="@color/button_application"
+        android:textColor="@color/InfoPage_button_application"
         android:textSize="14sp"
         android:visibility="gone"/>
 

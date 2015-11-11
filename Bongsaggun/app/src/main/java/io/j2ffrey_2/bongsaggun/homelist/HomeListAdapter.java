@@ -1,7 +1,6 @@
 package io.j2ffrey_2.bongsaggun.homelist;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 
@@ -28,9 +27,9 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeLi
     private List items;
 
     // 뿌려주는 값 받음
-    List<Home_list_contents> mDataset = Collections.emptyList();
+    List<HomeListItem> mDataset = Collections.emptyList();
 
-    public HomeListAdapter(Context context, List<Home_list_contents> data) {
+    public HomeListAdapter(Context context, List<HomeListItem> data) {
         mContext = context;
         inflater = LayoutInflater.from(context);
         mDataset = data;
@@ -51,7 +50,8 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeLi
     public void onBindViewHolder(HomeListViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        Home_list_contents current = mDataset.get(position);  //get current item
+        HomeListItem current = mDataset.get(position);  //get current item
+
         holder.tvTitle.setText(current.getTitle());
         holder.ivSumnail.setImageResource(current.getImgSumnail());
         holder.tvDday.setText("D-" + current.getdDay());

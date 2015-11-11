@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     private static final int LINEAR = 0;
 
     private ArrayList<CalendarLineItem> mCalendarLineItemArrayList;
-    private ArrayList<VoluntaryWork> mVoluntaryWorkArrayList;
+    private ArrayList<CalendarItem> mCalendarItemArrayList;
 
     private Context mContext;
 
@@ -44,7 +43,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     public CalendarAdapter(Context context , int headerMode) {
         this.mContext = context;
         this.mCalendarLineItemArrayList = new ArrayList<>();
-        this.mVoluntaryWorkArrayList = new ArrayList<>();
+        this.mCalendarItemArrayList = new ArrayList<>();
 
         mHeaderDisplay = headerMode;
         mMarginsFixed = true;
@@ -52,11 +51,11 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
         //dummyData
         for (int i = 1; i < 10; i++) {
-            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "10", Integer.toString(i), "월", false, "D-4", "봉사닷", "서울", "4시간"));
-            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "9", Integer.toString(i), "월", false, "D-2", "봉봉", "문산", "5시간"));
-            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "10", Integer.toString(i), "월", true, "D-2", "봉황", "진산", "6시간"));
-            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "10", Integer.toString(i), "월", false, "D-2", "황황", "가산", "7시간"));
-            mVoluntaryWorkArrayList.add(new VoluntaryWork("2015", "10", Integer.toString(i), "월", true, "D-2", "봉황만세세ㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔ", "오산", "8시간"));
+            mCalendarItemArrayList.add(new CalendarItem("2015", "10", Integer.toString(i), "월", false, "D-4", "봉사닷", "서울", "4시간"));
+            mCalendarItemArrayList.add(new CalendarItem("2015", "9", Integer.toString(i), "월", false, "D-2", "봉봉", "문산", "5시간"));
+            mCalendarItemArrayList.add(new CalendarItem("2015", "10", Integer.toString(i), "월", true, "D-2", "봉황", "진산", "6시간"));
+            mCalendarItemArrayList.add(new CalendarItem("2015", "10", Integer.toString(i), "월", false, "D-2", "황황", "가산", "7시간"));
+            mCalendarItemArrayList.add(new CalendarItem("2015", "10", Integer.toString(i), "월", true, "D-2", "봉황만세세ㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔ", "오산", "8시간"));
         }
 
         //insert headers into list of items
@@ -64,8 +63,8 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         int sectionManager = -1;
         int headerCount = 0;
         int sectionFirstPosition = 0;
-        for (int i = 0; i < mVoluntaryWorkArrayList.size(); i++) {
-            String header = mVoluntaryWorkArrayList.get(i).getDay();
+        for (int i = 0; i < mCalendarItemArrayList.size(); i++) {
+            String header = mCalendarItemArrayList.get(i).getDay();
             if (!TextUtils.equals(lastHeader, header)) {
                 //insert new header view and update section data.
                 sectionManager = (sectionManager + 1) % 2;
@@ -73,10 +72,10 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
                 lastHeader = header;
                 headerCount += 1;
 
-                mCalendarLineItemArrayList.add(new CalendarLineItem(mVoluntaryWorkArrayList.get(i), sectionManager, sectionFirstPosition, true));
+                mCalendarLineItemArrayList.add(new CalendarLineItem(mCalendarItemArrayList.get(i), sectionManager, sectionFirstPosition, true));
 
             }
-            mCalendarLineItemArrayList.add(new CalendarLineItem(mVoluntaryWorkArrayList.get(i), sectionManager, sectionFirstPosition, false));
+            mCalendarLineItemArrayList.add(new CalendarLineItem(mCalendarItemArrayList.get(i), sectionManager, sectionFirstPosition, false));
         }
     }
 
@@ -115,7 +114,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         CalendarLineItem item = mCalendarLineItemArrayList.get(position);
         final View itemView = holder.itemView;
 
-        holder.bindItem(item.voluntaryWork, item.isHeader);
+        holder.bindItem(item.mCalendarItem, item.isHeader);
 
         LayoutManager.LayoutParams lp = (LayoutManager.LayoutParams) itemView.getLayoutParams();
 

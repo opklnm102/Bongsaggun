@@ -127,18 +127,18 @@ public class InfoPageActivity extends AppCompatActivity {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (zzimFlag) {  //찜 신청
-                        fabZzim.setBackgroundTintList(res.getColorStateList(R.color.fab_zzim_cancel, null));
+                        fabZzim.setBackgroundTintList(res.getColorStateList(R.color.InfoPage_fab_zzim_cancel, null));
                         fabZzim.setImageDrawable(res.getDrawable(R.drawable.ic_check_teal_24dp, null));
                     } else {  //찜 취소
-                        fabZzim.setBackgroundTintList(res.getColorStateList(R.color.fab_zzim_application, null));
+                        fabZzim.setBackgroundTintList(res.getColorStateList(R.color.InfoPage_fab_zzim_application, null));
                         fabZzim.setImageDrawable(res.getDrawable(R.drawable.ic_check_white_24dp, null));
                     }
                 } else {
                     if (zzimFlag) {  //찜 신청
-                        fabZzim.setBackgroundTintList(res.getColorStateList(R.color.fab_zzim_cancel));
+                        fabZzim.setBackgroundTintList(res.getColorStateList(R.color.InfoPage_fab_zzim_cancel));
                         fabZzim.setImageDrawable(res.getDrawable(R.drawable.ic_check_teal_24dp));
                     } else {  //찜 취소
-                        fabZzim.setBackgroundTintList(res.getColorStateList(R.color.fab_zzim_application));
+                        fabZzim.setBackgroundTintList(res.getColorStateList(R.color.InfoPage_fab_zzim_application));
                         fabZzim.setImageDrawable(res.getDrawable(R.drawable.ic_check_white_24dp));
                     }
                 }

@@ -17,7 +17,7 @@
     <TextView
         android:id="@+id/textView_calendar_day"
         android:text="10"
-        android:textColor="@color/text_calendar"
+        android:textColor="@color/calendar_text"
         android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -27,7 +27,7 @@
         android:layout_below="@id/textView_calendar_day"
         android:id="@+id/text_calendar_dayOfWeek"
         android:text="토"
-        android:textColor="@color/text_calendar_dayOfWeek"
+        android:textColor="@color/calendar_text_dayOfWeek"
         android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

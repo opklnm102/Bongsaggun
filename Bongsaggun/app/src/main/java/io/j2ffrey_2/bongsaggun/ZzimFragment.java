@@ -39,15 +39,14 @@ public class ZzimFragment extends Fragment {
     }
 
     //getdata
-    public static List<Zzim_list_contents> getData(){
-        List<Zzim_list_contents> data = new ArrayList<>();
+    public static List<ZzimListItem> getData(){
+        List<ZzimListItem> data = new ArrayList<>();
         Log.i("MyActivity", "MyClass.getView() — get item number ");
-        String[] titles = {"봉사꾼1" , "봉사꾼2" };
-        //  String[] iconid = {"봉사꾼1" , "봉사꾼2" };
-        for (int i=0; i<titles.length; i++){
-            Zzim_list_contents current = new Zzim_list_contents();
-            current.title = titles[i];
-            current.IconId = R.mipmap.ic_launcher;
+
+        for (int i=0; i<20; i++){
+            ZzimListItem current = new ZzimListItem();
+            current.title = "봉사꾼";
+
             data.add(current);
         }
 

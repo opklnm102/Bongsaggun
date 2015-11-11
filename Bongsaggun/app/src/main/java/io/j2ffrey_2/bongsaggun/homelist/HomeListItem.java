@@ -3,7 +3,7 @@ package io.j2ffrey_2.bongsaggun.homelist;
 /**
  * Created by vantovan on 2015. 10. 14..
  */
-public class Home_list_contents {
+public class HomeListItem {
 
     Integer imgSumnail;
     String title;
@@ -13,7 +13,7 @@ public class Home_list_contents {
     String voluntaryLocation;
     Integer voluntaryTime;
 
-    public Home_list_contents() {
+    public HomeListItem() {
         this.imgSumnail = null;
         this.title = "";
         this.dDay = 0;
@@ -23,7 +23,7 @@ public class Home_list_contents {
         this.voluntaryTime = 0;
     }
 
-    public Home_list_contents(Integer imgSumnail, String title, Integer dDay, String voluntaryPeriodStart, String voluntaryPeriodEnd, String voluntaryLocation, Integer voluntaryTime) {
+    public HomeListItem(Integer imgSumnail, String title, Integer dDay, String voluntaryPeriodStart, String voluntaryPeriodEnd, String voluntaryLocation, Integer voluntaryTime) {
         this.imgSumnail = imgSumnail;
         this.title = title;
         this.dDay = dDay;

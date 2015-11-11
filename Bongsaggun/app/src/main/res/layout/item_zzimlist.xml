@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:id="@+id/cardView_item_zzimlist"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="136dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="4dp"
+    android:background="#fefefe">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView_sumnail"
+            android:layout_width="88dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="4dp"
+            android:layout_toRightOf="@id/imageView_sumnail">
+
+            <TextView
+                android:id="@+id/textVIew_title"
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:singleLine="true"
+                android:text="유기견센터 봉사"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textColor="@color/home_listitem_text"
+                android:textSize="18sp"/>
+
+            <LinearLayout
+                android:id="@+id/layout_voluntaryPeriod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textVIew_title"
+                android:layout_marginTop="12dp">
+
+                <ImageView
+                    android:id="@+id/cal_icon"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="6dp"
+                    android:src="@drawable/ic_event_black_18dp"/>
+
+                <TextView
+                    android:id="@+id/textView_voluntaryPeriod_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="2015.04.07"
+                    android:textColor="@color/home_listitem_text"
+                    />
+
+                <TextView
+                    android:id="@+id/textView_voluntaryPeriod_mid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text=" ~ "
+                    android:textColor="@color/zzim_listitem_text"
+                    />
+
+                <TextView
+                    android:id="@+id/textView_voluntaryPeriod_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="2015.04.10"
+                    android:textColor="@color/zzim_listitem_text"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_voluntaryPeriod"
+                android:layout_marginTop="4dp"
+                android:text="서울 서초구 "
+                android:textColor="@color/zzim_listitem_text"
+                android:textSize="14sp"
+                />
+
+            <TextView
+                android:id="@+id/textView_organization"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView_location"
+                android:layout_marginTop="4dp"
+                android:text="한국동물보호협회"
+                android:textColor="@color/zzim_listitem_text"
+                android:textSize="14sp"
+                />
+
+            <TextView
+                android:id="@+id/textView_time"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_alignBottom="@id/layout_voluntaryPeriod"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dp"
+                android:text="12시간"
+                android:textColor="@color/zzim_listitem_text"
+                />
+
+            <ImageView
+                android:id="@+id/clock_icon"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_alignBottom="@id/textView_time"
+                android:layout_marginRight="2dp"
+                android:layout_toLeftOf="@id/textView_time"
+                android:src="@drawable/ic_access_time_black_18dp"/>
+
+            <ImageView
+                android:id="@+id/imageView_cancel_zzim"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@id/textVIew_title"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_launcher"/>/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginRight="8dp">
+
+                <ImageView
+                    android:id="@+id/imageView_check"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_check_white_24dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/imageView_check"
+                    android:layout_toLeftOf="@id/imageView_check"
+                    android:text="@string/zzim_checkout"/>
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+
+

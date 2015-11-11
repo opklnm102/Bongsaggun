@@ -30,6 +30,9 @@
 
     <string name="poster_title">포스터</string>
 
+    <!-- ZzimFragment-->
+    <string name="zzim_checkin">선택됨</string>
+    <string name="zzim_checkout">선택 안함</string>
 
     <!-- NavigationView-->
     <string name="navigation_view_logout">로그아웃</string>
