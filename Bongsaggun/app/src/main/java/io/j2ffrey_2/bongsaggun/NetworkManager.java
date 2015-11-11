@@ -33,7 +33,7 @@ public class NetworkManager {
     /**
      * Restful api
      **/
-    private String endPoint = "https://dosomething-j2ffrey-2.c9.io";
+    private String endPoint = "https://bongsaggun-spb829.c9users.io";
     private String format = "json";
     private String apiVoluntary = "filter";
     private String apiSchool = "school";

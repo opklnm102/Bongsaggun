@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             NetworkManager.getInstance().getRegionList();
             NetworkManager.getInstance().getAllVoluntaryList();
 
-            printLogContactData(getContactCursor());
+//            printLogContactData(getContactCursor());
 
         } catch (IOException e) {
             e.printStackTrace();
