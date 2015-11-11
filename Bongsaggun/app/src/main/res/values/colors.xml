@@ -12,6 +12,12 @@
     <color name="text_calendar_dayOfWeek">#999999</color>
     <color name="text_calendar_sunday">#ff5252</color>
 
+    <!--HomeList Fragment-->
+    <color name="text_homelist">#999999</color>
+
+    <!--InfoPage Activity-->
+    <color name="button_application">#502ca7</color>
+
 
 
 

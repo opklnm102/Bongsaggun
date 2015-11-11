@@ -28,8 +28,11 @@ public class InfoPageActivity extends AppCompatActivity {
     Toolbar mToolbar;
     @Bind(R.id.toolbar_title)
     TextView tvTitle;
-    @Bind(R.id.fab_zzim)
-    FloatingActionButton fabZzim;
+    @Bind(R.id.fab_application_zzim)
+    FloatingActionButton fabApplicationZzim;
+    @Bind(R.id.fab_cancel_zzim)
+    FloatingActionButton fabCancelZzim;
+
     @Bind(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
     @Bind(R.id.imageView_backdrop)
@@ -83,6 +86,14 @@ public class InfoPageActivity extends AppCompatActivity {
     @Bind(R.id.button_voluntary_application_bottom)
     Button btnVoluntaryApplicationBottom;
 
+    @Bind(R.id.button_voluntary_cancel_top)
+    Button btnVoluntaryCancelTop;
+
+    @Bind(R.id.button_voluntary_cancel_bottom)
+    Button btnVoluntaryCancelBottom;
+
+
+
     private String voluntaryTitle;
 
     @Override
@@ -107,7 +118,7 @@ public class InfoPageActivity extends AppCompatActivity {
         collapsingToolbar.setTitle(voluntaryTitle);
         collapsingToolbar.setExpandedTitleTextAppearance(R.style.MyCustomCollapsingToolbarTextAppearance);
 
-        fabZzim.setOnClickListener(new View.OnClickListener() {
+        fabApplicationZzim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Todo: 찜하기 api 연결
@@ -130,6 +141,20 @@ public class InfoPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Todo: 신청하기
+            }
+        });
+
+        btnVoluntaryCancelTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Todo: 신청취소
+            }
+        });
+
+        btnVoluntaryCancelBottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Todo: 신청취소
             }
         });
     }

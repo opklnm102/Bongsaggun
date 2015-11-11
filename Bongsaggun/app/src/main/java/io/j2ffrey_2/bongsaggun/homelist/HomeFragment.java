@@ -1,25 +1,20 @@
 package io.j2ffrey_2.bongsaggun.homelist;
 
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v7.widget.RecyclerView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.j2ffrey_2.bongsaggun.MainActivity;
-import io.j2ffrey_2.bongsaggun.NetworkManager;
 import io.j2ffrey_2.bongsaggun.R;
 
 public class HomeFragment extends Fragment {
-
 
     public static final String TAG = "HomeFragment";
     private RecyclerView recyclerView;
@@ -30,40 +25,34 @@ public class HomeFragment extends Fragment {
         HomeFragment fragment = new HomeFragment();
         return fragment;
     }
+
     public HomeFragment() {
 
     }
 
     //getdata
-    public List<Home_list_contents> getData(){
+    public List<Home_list_contents> getData() {
         List<Home_list_contents> data = new ArrayList<>();
         Log.i("MyActivity", "MyClass.getView() — get item number ");
-        String[] titles = {"유기견 봉사활동" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2"
-                , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2"
-                , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2"
-                , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2"
-                , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" , "봉사꾼2" };
+        String[] titles = {"유기견 봉사활동", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2"
+                , "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2"
+                , "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2"
+                , "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2"
+                , "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2"};
 
-        //네트워크 연결
-        NetWorkActivity connector = new NetWorkActivity();
-        connector.LoadAPI("https://dosomething-j2ffrey-2.c9.io/json/filter"); //주소 넣어서 받을 수 있게 바꾸기
-        String s[][] = connector.getResult();
-
-        for (int i=0; i<titles.length; i++){
+        for (int i = 0; i < titles.length; i++) {
             Home_list_contents current = new Home_list_contents();
-            current.title = titles[i];
 
-
-            current.IconId = R.mipmap.ic_launcher;
-            data.add(current);
-            current.IconId = R.mipmap.ic_launcher;
-
-            //current.titleSet = s[1][5];
+            current.setTitle(titles[i]);
+            current.setImgSumnail(R.mipmap.ic_launcher);
+            current.setdDay(0);
+            current.setVoluntaryPeriodStart("2015.3.13");
+            current.setVoluntaryPeriodEnd("2015.3.20");
+            current.setVoluntaryLocation("서울 서초구");
+            current.setVoluntaryTime(13);
 
             data.add(current);
         }
-
-
 
         return data;
     }

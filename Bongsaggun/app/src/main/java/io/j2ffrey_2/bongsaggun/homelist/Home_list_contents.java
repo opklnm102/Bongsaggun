@@ -1,67 +1,91 @@
 package io.j2ffrey_2.bongsaggun.homelist;
 
-import java.io.IOException;
-
 /**
  * Created by vantovan on 2015. 10. 14..
  */
 public class Home_list_contents {
-    int IconId ;
+
+    Integer imgSumnail;
     String title;
-    String titleSet;
+    Integer dDay;
+    String voluntaryPeriodStart;
+    String voluntaryPeriodEnd;
+    String voluntaryLocation;
+    Integer voluntaryTime;
 
-    public static  String[][] id;
-    public static final String is_approval="";
-    public static  String img_main="";
-    public static final String img_poster="";
-
-    public static String[][] name;
-    public static final String content="";
-    public static final String is_edu="";
-
-    public static final String status="";
-    public static final String organization_id="";
-    public static final String clerk_name="";
-    public static final String clerk_call="";
-
-    public static final String is_regular="";
-    public static final String date_recruit_start="";
-    public static final String date_recruit_end="";
-    public static final String date_real_start="";
-    public static final String date_real_end="";
-
-    public static final String time_daily_start="";
-    public static final String time_daily_end="";
-    public static final String time_expect_total="";
-    public static final String vltr_num="";
-    public static final String vltr_age_id="";
-
-    public static final String vltr_sex="";
-    public static final String vltr_req="";
-    public static final String region_id="";
-    public static final String school_id="";
-    public static final String btime_id="";
-
-
-    public static final String category_id="";
-    public static final String admin_add="";
-    public static final String admin_mod="";
-    public static final String act_time="";
-    public static final String created_at="";
-    public static final String updated_at="";
-
-
-
-/*
-    public String[][] getparsedata() throws IOException {
-        JsonParser parser = new JsonParser();
-        String[][] st;
-        st = parser.jsonParserList();
-        //String title =  st[1][3];
-         titleSet =st[1][5];
-        return st;
+    public Home_list_contents() {
+        this.imgSumnail = null;
+        this.title = "";
+        this.dDay = 0;
+        this.voluntaryPeriodStart = "";
+        this.voluntaryPeriodEnd = "";
+        this.voluntaryLocation = "";
+        this.voluntaryTime = 0;
     }
 
-    */
+    public Home_list_contents(Integer imgSumnail, String title, Integer dDay, String voluntaryPeriodStart, String voluntaryPeriodEnd, String voluntaryLocation, Integer voluntaryTime) {
+        this.imgSumnail = imgSumnail;
+        this.title = title;
+        this.dDay = dDay;
+        this.voluntaryPeriodStart = voluntaryPeriodStart;
+        this.voluntaryPeriodEnd = voluntaryPeriodEnd;
+        this.voluntaryLocation = voluntaryLocation;
+        this.voluntaryTime = voluntaryTime;
+    }
 
+    public Integer getImgSumnail() {
+        return imgSumnail;
+    }
+
+    public void setImgSumnail(Integer imgSumnail) {
+        this.imgSumnail = imgSumnail;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Integer getdDay() {
+        return dDay;
+    }
+
+    public void setdDay(Integer dDay) {
+        this.dDay = dDay;
+    }
+
+    public String getVoluntaryPeriodStart() {
+        return voluntaryPeriodStart;
+    }
+
+    public void setVoluntaryPeriodStart(String voluntaryPeriodStart) {
+        this.voluntaryPeriodStart = voluntaryPeriodStart;
+    }
+
+    public String getVoluntaryPeriodEnd() {
+        return voluntaryPeriodEnd;
+    }
+
+    public void setVoluntaryPeriodEnd(String voluntaryPeriodEnd) {
+        this.voluntaryPeriodEnd = voluntaryPeriodEnd;
+    }
+
+    public String getVoluntaryLocation() {
+        return voluntaryLocation;
+    }
+
+    public void setVoluntaryLocation(String voluntaryLocation) {
+        this.voluntaryLocation = voluntaryLocation;
+    }
+
+    public Integer getVoluntaryTime() {
+        return voluntaryTime;
+    }
+
+    public void setVoluntaryTime(Integer voluntaryTime) {
+        this.voluntaryTime = voluntaryTime;
+    }
 }

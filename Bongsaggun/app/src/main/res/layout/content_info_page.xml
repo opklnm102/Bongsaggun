@@ -389,9 +389,20 @@
         android:layout_width="112dp"
         android:layout_height="36dp"
         android:layout_gravity="center_horizontal"
-        android:background="#502ca7"
+        android:background="@color/button_application"
         android:text="@string/voluntary_application"
         android:textColor="@android:color/white"
         android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/button_voluntary_cancel_bottom"
+        android:layout_width="112dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/white"
+        android:text="@string/voluntary_cancel"
+        android:textColor="@color/button_application"
+        android:textSize="14sp"
+        android:visibility="gone"/>
 
 </LinearLayout>
