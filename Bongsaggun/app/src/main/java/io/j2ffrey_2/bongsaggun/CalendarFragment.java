@@ -1,13 +1,6 @@
 package io.j2ffrey_2.bongsaggun;
 
-import android.app.Activity;
-import android.content.Context;
-
-import android.content.Intent;
-import android.net.Uri;
-
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,7 +14,6 @@ import com.tonicartos.superslim.LayoutManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 
 import butterknife.Bind;
@@ -40,8 +32,8 @@ public class CalendarFragment extends Fragment {
 
     private boolean mAreMarginsFixed;  //필요
 
-    private HashMap<String, VoluntaryWork> voluntaryWorkHashMap;
-    private ArrayList<VoluntaryWork> mVoluntaryWorkArrayList;
+    private HashMap<String, CalendarItem> voluntaryWorkHashMap;
+    private ArrayList<CalendarItem> mCalendarItemArrayList;
     private Integer currYear;  //현재 년도
     private Integer currMonth;  //현재 월
 
@@ -87,7 +79,7 @@ public class CalendarFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         voluntaryWorkHashMap = new HashMap<>();
-        mVoluntaryWorkArrayList = new ArrayList<>();
+        mCalendarItemArrayList = new ArrayList<>();
         currYear = getCurrentYear();
         currMonth = getCurrentMonth();
 

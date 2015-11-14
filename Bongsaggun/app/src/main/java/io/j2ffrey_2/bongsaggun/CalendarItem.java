@@ -3,7 +3,7 @@ package io.j2ffrey_2.bongsaggun;
 /**
  * Created by dong on 2015-10-06.
  */
-public class VoluntaryWork {
+public class CalendarItem {
 
     private String year;
     private String month;
@@ -15,7 +15,7 @@ public class VoluntaryWork {
     private String location;
     private String time;
 
-    public VoluntaryWork() {
+    public CalendarItem() {
         this.year = "";
         this.month = "";
         this.day = "";
@@ -27,7 +27,7 @@ public class VoluntaryWork {
         this.time = "";
     }
 
-    public VoluntaryWork(String year, String month, String day, String dayOfWeek, boolean state, String dDay, String title, String location, String time) {
+    public CalendarItem(String year, String month, String day, String dayOfWeek, boolean state, String dDay, String title, String location, String time) {
         this.year = year;
         this.month = month;
         this.day = day;

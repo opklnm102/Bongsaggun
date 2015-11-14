@@ -1,5 +1,7 @@
 package io.j2ffrey_2.bongsaggun;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.util.Log;
 
 import com.squareup.okhttp.Callback;
@@ -13,6 +15,7 @@ import com.squareup.okhttp.Response;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.Vector;
 
 import io.j2ffrey_2.bongsaggun.homelist.JsonParser;
 
@@ -30,7 +33,7 @@ public class NetworkManager {
     /**
      * Restful api
      **/
-    private String endPoint = "https://dosomething-j2ffrey-2.c9.io";
+    private String endPoint = "https://bongsaggun-spb829.c9users.io";
     private String format = "json";
     private String apiVoluntary = "filter";
     private String apiSchool = "school";
@@ -112,11 +115,10 @@ public class NetworkManager {
                     String strJson = response.body().string();
                     Log.d(TAG, "school json " + strJson);
 
-                    try {
-                        JsonParser.jsonSchoolListParser(strJson);  //파싱한거 넘기기
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    Vector<ContentValues> cVVector = JsonParser.jsonSchoolListParser(strJson);  //파싱한거 넘기기
+
+
+
                 }
             }
         });
@@ -331,4 +333,7 @@ public class NetworkManager {
 //    } catch (IOException e) {
 //        e.printStackTrace();
 //    }
+
+
+
 }

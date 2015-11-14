@@ -1,6 +1,8 @@
 package io.j2ffrey_2.bongsaggun;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -14,14 +16,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.IOException;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class InfoPageActivity extends AppCompatActivity {
 
-    public static final String TAG = "InfoPageActivity";
+    public static final String TAG = InfoPageActivity.class.getSimpleName();
     public static final String TITLE = "voluntaryTitle";
 
     @Bind(R.id.toolbar_infopage)
@@ -30,6 +30,7 @@ public class InfoPageActivity extends AppCompatActivity {
     TextView tvTitle;
     @Bind(R.id.fab_zzim)
     FloatingActionButton fabZzim;
+
     @Bind(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
     @Bind(R.id.imageView_backdrop)
@@ -80,9 +81,17 @@ public class InfoPageActivity extends AppCompatActivity {
     @Bind(R.id.button_voluntary_application_top)
     Button btnVoluntaryApplicationTop;
 
+    @Bind(R.id.button_voluntary_cancel_top)
+    Button btnVoluntaryCancelTop;
+
     @Bind(R.id.button_voluntary_application_bottom)
     Button btnVoluntaryApplicationBottom;
 
+    @Bind(R.id.button_voluntary_cancel_bottom)
+    Button btnVoluntaryCancelBottom;
+
+    private boolean zzimFlag;
+    private boolean applicationFlag;
     private String voluntaryTitle;
 
     @Override
@@ -112,6 +121,28 @@ public class InfoPageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Todo: 찜하기 api 연결
                 //Todo: 클릭시 버튼 바꾸기
+                zzimFlag = !zzimFlag;
+
+                Resources res = getResources();
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (zzimFlag) {  //찜 신청
+                        fabZzim.setBackgroundTintList(res.getColorStateList(R.color.InfoPage_fab_zzim_cancel, null));
+                        fabZzim.setImageDrawable(res.getDrawable(R.drawable.ic_check_teal_24dp, null));
+                    } else {  //찜 취소
+                        fabZzim.setBackgroundTintList(res.getColorStateList(R.color.InfoPage_fab_zzim_application, null));
+                        fabZzim.setImageDrawable(res.getDrawable(R.drawable.ic_check_white_24dp, null));
+                    }
+                } else {
+                    if (zzimFlag) {  //찜 신청
+                        fabZzim.setBackgroundTintList(res.getColorStateList(R.color.InfoPage_fab_zzim_cancel));
+                        fabZzim.setImageDrawable(res.getDrawable(R.drawable.ic_check_teal_24dp));
+                    } else {  //찜 취소
+                        fabZzim.setBackgroundTintList(res.getColorStateList(R.color.InfoPage_fab_zzim_application));
+                        fabZzim.setImageDrawable(res.getDrawable(R.drawable.ic_check_white_24dp));
+                    }
+                }
+
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -119,19 +150,7 @@ public class InfoPageActivity extends AppCompatActivity {
 
         loadBackdrop(); //인텐트로 받은 객체 넘기기
         loadData();  //인텐트로 받은 객체 넘기기
-
-        btnVoluntaryApplicationTop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Todo: 신청하기
-            }
-        });
-        btnVoluntaryApplicationBottom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Todo: 신청하기
-            }
-        });
+        init();
     }
 
     private void loadBackdrop() {
@@ -159,22 +178,44 @@ public class InfoPageActivity extends AppCompatActivity {
 //        Glide.with(this).load(Cheeses.getRandomCheeseDrawable()).centerCrop().into(ivPoster);
     }
 
+    private void init() {
+        zzimFlag = false;
+        applicationFlag = false;
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.e(TAG, " onDestroy");
+        VoluntaryButtonListener voluntaryButtonListener = new VoluntaryButtonListener();
+
+        btnVoluntaryApplicationTop.setOnClickListener(voluntaryButtonListener);
+        btnVoluntaryCancelTop.setOnClickListener(voluntaryButtonListener);
+        btnVoluntaryApplicationBottom.setOnClickListener(voluntaryButtonListener);
+        btnVoluntaryCancelBottom.setOnClickListener(voluntaryButtonListener);
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.e(TAG, " onRestart");
-    }
+    class VoluntaryButtonListener implements View.OnClickListener{
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.e(TAG, " onResume");
+        @Override
+        public void onClick(View view) {
+            applicationFlag = !applicationFlag;
+
+            switch (view.getId()){
+                case R.id.button_voluntary_application_top:  //Todo: 신청하기
+                case R.id.button_voluntary_application_bottom:
+
+                    btnVoluntaryApplicationTop.setVisibility(View.GONE);
+                    btnVoluntaryCancelTop.setVisibility(View.VISIBLE);
+                    btnVoluntaryApplicationBottom.setVisibility(View.GONE);
+                    btnVoluntaryCancelBottom.setVisibility(View.VISIBLE);
+
+                    break;
+                case R.id.button_voluntary_cancel_top:   //Todo: 신청취소
+                case R.id.button_voluntary_cancel_bottom:
+
+                    btnVoluntaryApplicationTop.setVisibility(View.VISIBLE);
+                    btnVoluntaryCancelTop.setVisibility(View.GONE);
+                    btnVoluntaryApplicationBottom.setVisibility(View.VISIBLE);
+                    btnVoluntaryCancelBottom.setVisibility(View.GONE);
+                    break;
+            }
+            Log.i(TAG, " " + applicationFlag);
+        }
     }
 }

@@ -4,15 +4,25 @@
     <color name="app_theme">#60c0c8</color>
 
     <!-- MainActivity-->
-    <color name="tab_text_color">#757575</color>
+    <color name="tab_text">#757575</color>
     <color name="tab_background">#ffffff</color>
 
     <!--Calendar Fragment-->
-    <color name="text_calendar">#444444</color>
-    <color name="text_calendar_dayOfWeek">#999999</color>
-    <color name="text_calendar_sunday">#ff5252</color>
+    <color name="calendar_text">#444444</color>
+    <color name="calendar_text_dayOfWeek">#999999</color>
+    <color name="calendar_text_sunday">#ff5252</color>
 
+    <!--HomeList Fragment-->
+    <color name="home_listitem_text">#999999</color>
 
+    <!--Zzim Fragment-->
+    <color name="zzim">#ed1e79</color>
+    <color name="zzim_listitem_text">#999999</color>
+    <color name="zzim_listitem_check">#1f92a0</color>
 
+    <!--InfoPage Activity-->
+    <color name="InfoPage_button_application">#502ca7</color>
+    <color name="InfoPage_fab_zzim_application">#1f92a0</color>
+    <color name="InfoPage_fab_zzim_cancel">#ffffff</color>
 
 </resources>

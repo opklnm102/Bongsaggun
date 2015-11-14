@@ -12,12 +12,14 @@ public class VoluntaryDbHelper extends SQLiteOpenHelper {
 
     public static String TAG = VoluntaryDbHelper.class.getSimpleName();
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int VER_RELEASE_A = 1;  //app version 1.0.0
+    private static final int CUR_DATABASE_VERSION = VER_RELEASE_A;
 
-    public static final String DATABASE_NAME = "bongsaggun.db";
+    private static final String DATABASE_NAME = "bongsaggun.db";
+
 
     public VoluntaryDbHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, CUR_DATABASE_VERSION);
     }
 
     @Override
@@ -79,15 +81,29 @@ public class VoluntaryDbHelper extends SQLiteOpenHelper {
     @Override
     public void onOpen(SQLiteDatabase db) {
         super.onOpen(db);
-        Log.i(TAG,"db open");
+        Log.i(TAG, "db open");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + VoluntaryContract.ImageEntry.TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + VoluntaryContract.RegionEntry.TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + VoluntaryContract.SchoolEntry.TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + VoluntaryContract.VoluntaryEntry.TABLE_NAME);
-        onCreate(db);
+        Log.d(TAG, " onUpgrade() from " + oldVersion + "to " + newVersion);
+
+        int version = oldVersion;
+
+        if(version != CUR_DATABASE_VERSION){
+            Log.d(TAG, "Upgrade unsuccessful -- destroying old data during upgrade");
+
+            db.execSQL("DROP TABLE IF EXISTS " + VoluntaryContract.ImageEntry.TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + VoluntaryContract.RegionEntry.TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + VoluntaryContract.SchoolEntry.TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + VoluntaryContract.VoluntaryEntry.TABLE_NAME);
+
+            onCreate(db);
+            version = CUR_DATABASE_VERSION;
+        }
+    }
+
+    public static void deleteDatabase(Context context){
+        context.deleteDatabase(DATABASE_NAME);
     }
 }

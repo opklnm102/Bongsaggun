@@ -52,23 +52,23 @@ public class CalendarViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, view);
     }
 
-    public void bindItem(VoluntaryWork voluntaryWork, boolean isHeader) {
+    public void bindItem(CalendarItem calendarItem, boolean isHeader) {
 
         if (isHeader) {
             //header
-            tvCalendarDay.setText(voluntaryWork.getDay());
-            tvCalendarDayOfWeek.setText(voluntaryWork.getDayOfWeek());
+            tvCalendarDay.setText(calendarItem.getDay());
+            tvCalendarDayOfWeek.setText(calendarItem.getDayOfWeek());
         } else {
             //line
-            if (voluntaryWork.isState()) {
+            if (calendarItem.isState()) {
                 ivVoluntaryWorkState.setImageResource(R.mipmap.ic_logo);
             } else {
                 ivVoluntaryWorkState.setImageResource(R.mipmap.ic_launcher);
             }
-            tvVoluntaryWorkDday.setText(voluntaryWork.getdDay());
-            tvVoluntaryWorkTitle.setText(voluntaryWork.getTitle());
-            tvVoluntaryWorkLocation.setText(voluntaryWork.getLocation());
-            tvVoluntaryWorkTime.setText(voluntaryWork.getTime());
+            tvVoluntaryWorkDday.setText(calendarItem.getdDay());
+            tvVoluntaryWorkTitle.setText(calendarItem.getTitle());
+            tvVoluntaryWorkLocation.setText(calendarItem.getLocation());
+            tvVoluntaryWorkTime.setText(calendarItem.getTime());
         }
     }
 }
