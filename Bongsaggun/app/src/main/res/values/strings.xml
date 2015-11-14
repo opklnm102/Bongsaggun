@@ -37,5 +37,7 @@
     <!-- SyncAdapter related -->
     <string name="sync_account_type">bongsaggun.j2ffrey_2.io</string>
     <string name="content_authority">io.j2ffrey_2.bongsaggun.app</string>
-
+    
+    <!-- Facebook permission -->
+    <string name="app_id">1484278291882057</string>
 </resources>

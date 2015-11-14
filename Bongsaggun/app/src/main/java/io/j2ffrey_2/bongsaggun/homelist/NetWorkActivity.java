@@ -19,7 +19,8 @@ import java.net.URL;
 
     //여기에 파서를 넣읍시다.
 public class NetWorkActivity {
-    private String urlst = "https://dosomething-j2ffrey-2.c9.io/json/filter";
+    private String urlst ="bongsaggun-spb829.c9users.io/json/filter";
+            //"https://dosomething-j2ffrey-2.c9.io/json/filter";
     private String results = null;
     String sum = null;
     String s = null;

@@ -112,6 +112,7 @@ public class JsonParser {
                 Log.d(TAG, "parseredData " + id + " " + name + " " + createdAt + " " + updatedAt);
 
                 ContentValues schoolValues = new ContentValues();
+
                 schoolValues.put(VoluntaryContract.SchoolEntry.COLUMN_SCHOOL_ID, id);
                 schoolValues.put(VoluntaryContract.SchoolEntry.COLUMN_SCHOOL_NAME, name);
                 schoolValues.put(VoluntaryContract.SchoolEntry.COLUMN_SCHOOL_CREATEAT, createdAt);

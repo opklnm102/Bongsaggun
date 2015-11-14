@@ -31,6 +31,8 @@ import butterknife.ButterKnife;
 import io.j2ffrey_2.bongsaggun.homelist.HomeFragment;
 import io.j2ffrey_2.bongsaggun.homelist.JsonParser;
 
+import com.facebook.FacebookSdk;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -163,6 +165,8 @@ public class MainActivity extends AppCompatActivity {
         mPagerAdapter.addFragment(new CalendarFragment(), "캘린더");
         mPagerAdapter.addFragment(new ZzimFragment(), "찜");
         mPagerAdapter.addFragment(new MyPageFragment(), "마이페이지");
+
+
         viewPager.setAdapter(mPagerAdapter);
     }
 

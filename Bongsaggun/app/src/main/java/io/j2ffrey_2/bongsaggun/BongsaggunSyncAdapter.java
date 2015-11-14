@@ -56,10 +56,11 @@ public class BongsaggunSyncAdapter extends AbstractThreadedSyncAdapter {
 
             //delete old data so we don't build up an endless history
             //updateAt이 이전꺼는 지운다.
-            String updateAt = getContext().getContentResolver().query()
+            //String updateAt = getContext().getContentResolver().query(VoluntaryContract.SchoolEntry.CONTENT_URI);
 
-            getContext().getContentResolver().delete(VoluntaryContract.SchoolEntry.CONTENT_URI, VoluntaryContract.SchoolEntry.COLUMN_SCHOOL_UPDATEAT + " < ?",
-                    new String[] { updateAt });
+
+            //getContext().getContentResolver().delete(VoluntaryContract.SchoolEntry.CONTENT_URI, VoluntaryContract.SchoolEntry.COLUMN_SCHOOL_UPDATEAT + " < ?",
+             //       new String[] { updateAt });
 
             notifySchool();
         }
