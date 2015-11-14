@@ -80,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
             setUpViewPager(mViewPager);
         }
         mTabLayout.setupWithViewPager(mViewPager);
+
+        //네트워크 연결상태 확인 메소드
+        NetworkManager.getInstance().checkNetworkConnection(this);
     }
 
     @Override

@@ -1,7 +1,11 @@
 package io.j2ffrey_2.bongsaggun;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.squareup.okhttp.Callback;
@@ -22,7 +26,7 @@ import io.j2ffrey_2.bongsaggun.homelist.JsonParser;
 /**
  * Created by dong on 2015-10-31.
  */
-public class NetworkManager {
+public class   NetworkManager {
 
     public static final String TAG = NetworkManager.class.getSimpleName();
 
@@ -50,6 +54,34 @@ public class NetworkManager {
 
     private NetworkManager() {
         client = new OkHttpClient();
+    }
+
+    //네트워크 연결상태 확인
+    public void checkNetworkConnection(Context context){
+
+
+        ConnectivityManager manager =
+                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mobile = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        NetworkInfo wifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+
+        if (mobile.isConnected() || wifi.isConnected()){
+
+
+            return;
+
+        }else{
+            new AlertDialog.Builder(context)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("네트워크 연결 오류").setMessage("네트워크 연결 상태 확인 후 다시 시도해 주십시요.")
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();                            }
+                    }).show();
+        }
+        return;
     }
 
     //Todo: 회원가입
@@ -337,3 +369,8 @@ public class NetworkManager {
 
 
 }
+
+
+
+
+
