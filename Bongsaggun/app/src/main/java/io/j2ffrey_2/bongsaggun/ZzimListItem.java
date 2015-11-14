@@ -5,44 +5,42 @@ package io.j2ffrey_2.bongsaggun;
  */
 public class ZzimListItem {
 
-    Integer imgSumnail;
+    int imgSumnail;
     String title;
-    Integer dDay;
     String voluntaryPeriodStart;
     String voluntaryPeriodEnd;
     String voluntaryLocation;
     String voluntaryOragination;
-    Integer voluntaryTime;
+    int voluntaryTime;
+    boolean selected;
 
     public ZzimListItem() {
         this.imgSumnail = 0;
         this.title = "";
-        this.dDay = 0;
         this.voluntaryPeriodStart = "";
         this.voluntaryPeriodEnd = "";
         this.voluntaryLocation = "";
         this.voluntaryOragination = "";
         this.voluntaryTime = 0;
+        this.selected = false;
     }
 
-    public ZzimListItem(Integer imgSumnail, String title, Integer dDay, String voluntaryPeriodStart, String voluntaryPeriodEnd, String voluntaryLocation, String voluntaryOragination, Integer voluntaryTime) {
+    public ZzimListItem(int imgSumnail, String title, String voluntaryPeriodStart, String voluntaryPeriodEnd, String voluntaryLocation, String voluntaryOragination, int voluntaryTime, boolean selected) {
         this.imgSumnail = imgSumnail;
         this.title = title;
-        this.dDay = dDay;
         this.voluntaryPeriodStart = voluntaryPeriodStart;
         this.voluntaryPeriodEnd = voluntaryPeriodEnd;
         this.voluntaryLocation = voluntaryLocation;
         this.voluntaryOragination = voluntaryOragination;
         this.voluntaryTime = voluntaryTime;
+        this.selected = selected;
     }
 
-
-
-    public Integer getImgSumnail() {
+    public int getImgSumnail() {
         return imgSumnail;
     }
 
-    public void setImgSumnail(Integer imgSumnail) {
+    public void setImgSumnail(int imgSumnail) {
         this.imgSumnail = imgSumnail;
     }
 
@@ -52,14 +50,6 @@ public class ZzimListItem {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Integer getdDay() {
-        return dDay;
-    }
-
-    public void setdDay(Integer dDay) {
-        this.dDay = dDay;
     }
 
     public String getVoluntaryPeriodStart() {
@@ -94,13 +84,19 @@ public class ZzimListItem {
         this.voluntaryOragination = voluntaryOragination;
     }
 
-    public Integer getVoluntaryTime() {
+    public int getVoluntaryTime() {
         return voluntaryTime;
     }
 
-    public void setVoluntaryTime(Integer voluntaryTime) {
+    public void setVoluntaryTime(int voluntaryTime) {
         this.voluntaryTime = voluntaryTime;
     }
 
+    public boolean isSelected() {
+        return selected;
+    }
 
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 }

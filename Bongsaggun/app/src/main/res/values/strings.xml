@@ -6,6 +6,7 @@
 
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
 
     <string name="title_activity_info_page">InfoPageActivity</string>
 
@@ -33,6 +34,8 @@
     <!-- ZzimFragment-->
     <string name="zzim_checkin">선택됨</string>
     <string name="zzim_checkout">선택 안함</string>
+    <string name="zzim_voluntary">찜한 봉사활동</string>
+    <string name="zzim_check_all">전체선택</string>
 
     <!-- NavigationView-->
     <string name="navigation_view_logout">로그아웃</string>
@@ -40,5 +43,6 @@
     <!-- SyncAdapter related -->
     <string name="sync_account_type">bongsaggun.j2ffrey_2.io</string>
     <string name="content_authority">io.j2ffrey_2.bongsaggun.app</string>
+    <string name="title_activity_main2">Main2Activity</string>
 
 </resources>

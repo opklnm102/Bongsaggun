@@ -22,14 +22,14 @@
             <ImageView
                 android:layout_toLeftOf="@id/textView_calendar_title"
                 android:id="@+id/imageView_calendar_before"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/ic_calendar_previous"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
 
             <ImageView
                 android:layout_toRightOf="@id/textView_calendar_title"
                 android:id="@+id/imageView_calendar_after"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/ic_calendar_next"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
         </RelativeLayout>

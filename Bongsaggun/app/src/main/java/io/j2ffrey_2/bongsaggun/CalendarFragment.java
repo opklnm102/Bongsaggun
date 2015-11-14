@@ -95,6 +95,8 @@ public class CalendarFragment extends Fragment {
         mCalendarAdapter = new CalendarAdapter(getActivity(), mHeaderDisplay);
         mViews.setAdapter(mCalendarAdapter);
 
+        tvCalendarTitle.setText(currYear.toString() + "년 " + currMonth.toString() + "월");
+
         tvCalendarBefore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
