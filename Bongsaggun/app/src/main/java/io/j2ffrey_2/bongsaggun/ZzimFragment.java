@@ -1,7 +1,6 @@
 package io.j2ffrey_2.bongsaggun;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,7 +18,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ZzimFragment extends Fragment implements ZzimListAdapter.selectedAllCallback {
+public class ZzimFragment extends android.support.v4.app.Fragment implements ZzimListAdapter.ListItemSelectedAllCallback, ZzimListAdapter.ListItemDeletedCallback {
 
     public static final String TAG = "ZzimFragment";
 
@@ -34,12 +33,9 @@ public class ZzimFragment extends Fragment implements ZzimListAdapter.selectedAl
 
     ZzimListAdapter adapter;
 
-
-
     public static ZzimFragment newInstance() {
-        ZzimFragment fragment = new ZzimFragment();
-
-        return fragment;
+        ZzimFragment newFragment = new ZzimFragment();
+        return newFragment;
     }
 
     public ZzimFragment() {
@@ -51,7 +47,7 @@ public class ZzimFragment extends Fragment implements ZzimListAdapter.selectedAl
         List<ZzimListItem> data = new ArrayList<>();
         Log.i("MyActivity", "MyClass.getView() — get item number ");
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 20; i++) {
             ZzimListItem current = new ZzimListItem();
             current.setTitle("유기견보호센터 봉사");
             current.setSelected(false);
@@ -63,7 +59,6 @@ public class ZzimFragment extends Fragment implements ZzimListAdapter.selectedAl
 
             data.add(current);
         }
-
         return data;
     }
 
@@ -78,7 +73,12 @@ public class ZzimFragment extends Fragment implements ZzimListAdapter.selectedAl
         View view = inflater.inflate(R.layout.fragment_zzim, container, false);
 
         ButterKnife.bind(this, view);
+        return view;
+    }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         adapter = new ZzimListAdapter(getActivity(), this, getData());
         rvZzim.setAdapter(adapter);
@@ -101,17 +101,16 @@ public class ZzimFragment extends Fragment implements ZzimListAdapter.selectedAl
             }
         });
 
-        return view;
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-    @Override
-    public void onSelectedAll(boolean selected) {
-        Log.e(TAG, " onSelectedAll" + selected);
+    public void onListItemSelectedAll(boolean selected) {
+        Log.d(TAG, " onListItemSelectedAll" + selected);
         cbZzimAll.setChecked(selected);
+    }
+
+    @Override
+    public void onListItemDeleted() {
+        tvZzimTotalNum.setText(String.valueOf(adapter.getItemCount()));
     }
 }

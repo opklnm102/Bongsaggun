@@ -38,7 +38,7 @@
                 android:textSize="18sp"/>
 
             <LinearLayout
-                android:id="@+id/layout_voluntaryPeriod"
+                android:id="@+id/container_voluntaryPeriod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textVIew_title"
@@ -80,7 +80,7 @@
                 android:id="@+id/textView_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/layout_voluntaryPeriod"
+                android:layout_below="@id/container_voluntaryPeriod"
                 android:layout_marginTop="4dp"
                 android:text="서울 서초구 "
                 android:textColor="@color/zzim_listitem_text"
@@ -102,7 +102,7 @@
                 android:id="@+id/textView_time"
                 android:layout_width="50dp"
                 android:layout_height="20dp"
-                android:layout_alignBottom="@id/layout_voluntaryPeriod"
+                android:layout_alignBottom="@id/container_voluntaryPeriod"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="8dp"
                 android:text="12시간"
@@ -120,17 +120,17 @@
 
             <ImageView
                 android:id="@+id/imageView_cancel_zzim"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_alignBottom="@id/textVIew_title"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="8dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_clear_white_48dp"/>
+                android:src="@drawable/ic_clear_gray_24dp"/>
 
             <RelativeLayout
-                android:id="@+id/layout_check"
-                android:layout_width="wrap_content"
+                android:id="@+id/container_check"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
@@ -139,12 +139,11 @@
 
                 <ImageView
                     android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
                     android:id="@+id/imageView_check"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_check_teal_24dp"/>
+                    android:src="@drawable/ic_check_gray_24dp"/>
 
                 <TextView
                     android:id="@+id/textView_check"

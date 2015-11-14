@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -31,7 +30,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 import io.j2ffrey_2.bongsaggun.homelist.HomeFragment;
-import io.j2ffrey_2.bongsaggun.homelist.JsonParser;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -175,20 +173,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     static class PagerAdapter extends FragmentPagerAdapter {
-        private final ArrayList<Fragment> mFragments = new ArrayList<>();
+        private final ArrayList<android.support.v4.app.Fragment> mFragments = new ArrayList<>();
         private final ArrayList<String> mFragmentTitles = new ArrayList<>();
 
         public PagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
-        public void addFragment(Fragment fragment, String title) {
+        public void addFragment(android.support.v4.app.Fragment fragment, String title) {
             mFragments.add(fragment);
             mFragmentTitles.add(title);
         }
 
         @Override
-        public Fragment getItem(int position) {
+        public android.support.v4.app.Fragment getItem(int position) {
             return mFragments.get(position);
         }
 

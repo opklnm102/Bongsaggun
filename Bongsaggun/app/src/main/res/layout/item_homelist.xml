@@ -6,7 +6,7 @@
     android:layout_height="98dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
-    android:layout_marginTop="4dp"
+    android:layout_marginTop="8dp"
     android:background="#fefefe">
 
     <RelativeLayout
@@ -38,7 +38,7 @@
 
         <!-- 텍스트 설명 부 -->
         <LinearLayout
-            android:id="@+id/layout_text"
+            android:id="@+id/container_text"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="4dp"
@@ -58,7 +58,7 @@
                 android:textSize="18sp"/>
 
             <LinearLayout
-                android:id="@+id/layout_voluntaryPeriod"
+                android:id="@+id/container_voluntaryPeriod"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -109,10 +109,10 @@
 
         <!-- 시간보여준는 부분 -->
         <LinearLayout
-            android:id="@+id/layout_time"
+            android:id="@+id/container_time"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@id/layout_text"
+            android:layout_toRightOf="@id/container_text"
             android:gravity="center"
             android:orientation="horizontal">
 

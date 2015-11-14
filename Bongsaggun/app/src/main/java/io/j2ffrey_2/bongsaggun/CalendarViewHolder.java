@@ -61,9 +61,9 @@ public class CalendarViewHolder extends RecyclerView.ViewHolder {
         } else {
             //line
             if (calendarItem.isState()) {
-                ivVoluntaryWorkState.setImageResource(R.mipmap.ic_logo);
+                ivVoluntaryWorkState.setImageResource(R.drawable.img_recruit_start);
             } else {
-                ivVoluntaryWorkState.setImageResource(R.mipmap.ic_launcher);
+                ivVoluntaryWorkState.setImageResource(R.drawable.img_recruit_finish);
             }
             tvVoluntaryWorkDday.setText(calendarItem.getdDay());
             tvVoluntaryWorkTitle.setText(calendarItem.getTitle());

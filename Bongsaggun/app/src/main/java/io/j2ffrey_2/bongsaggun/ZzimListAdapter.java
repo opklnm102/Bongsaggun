@@ -25,8 +25,12 @@ public class ZzimListAdapter extends RecyclerView.Adapter<ZzimListAdapter.ZzimLi
 
     public static final String TAG = ZzimListAdapter.class.getSimpleName();
 
-    public interface selectedAllCallback {
-        void onSelectedAll(boolean selected);
+    public interface ListItemSelectedAllCallback {
+        void onListItemSelectedAll(boolean selected);
+    }
+
+    public interface ListItemDeletedCallback {
+        void onListItemDeleted();
     }
 
     private Context mContext;
@@ -35,12 +39,14 @@ public class ZzimListAdapter extends RecyclerView.Adapter<ZzimListAdapter.ZzimLi
 
     List<ZzimListItem> mDataset = Collections.emptyList();
 
-    private selectedAllCallback mSelectedAllCallback;
+    private ListItemSelectedAllCallback mListItemSelectedAllCallback;
+    private ListItemDeletedCallback mListItemDeletedCallback;
 
     public ZzimListAdapter(Context context, Fragment fragment, List<ZzimListItem> data) {
         mContext = context;
         mDataset = data;
-        mSelectedAllCallback = (selectedAllCallback)fragment;
+        mListItemSelectedAllCallback = (ListItemSelectedAllCallback)fragment;
+        mListItemDeletedCallback = (ListItemDeletedCallback)fragment;
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -74,7 +80,7 @@ public class ZzimListAdapter extends RecyclerView.Adapter<ZzimListAdapter.ZzimLi
             holder.ivZzimSelected.setImageResource(R.drawable.ic_check_teal_24dp);
             holder.tvZzimSelected.setText(R.string.zzim_checkin);
         } else {
-            holder.ivZzimSelected.setImageResource(R.drawable.ic_check_white_24dp);
+            holder.ivZzimSelected.setImageResource(R.drawable.ic_check_gray_24dp);
             holder.tvZzimSelected.setText(R.string.zzim_checkout);
         }
         holder.ivZzimCancel.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +89,7 @@ public class ZzimListAdapter extends RecyclerView.Adapter<ZzimListAdapter.ZzimLi
                 //Todo: Zzim remove api 연결
 
                 mDataset.remove(position);
+                mListItemDeletedCallback.onListItemDeleted();
                 notifyDataSetChanged();
             }
         });
@@ -90,10 +97,11 @@ public class ZzimListAdapter extends RecyclerView.Adapter<ZzimListAdapter.ZzimLi
         holder.layoutZzimSelected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Todo: 하나라도 체크 해제되면 Fragment에 콜백으로 check box 해제시키기
+                //Todo: 하나라도 체크 해제되면 Fragment에 콜백으로 check box 해제시키기 -> 연쇄끊기
+
                 current.setSelected(!current.isSelected());
-                Log.e(TAG, " layoutZzimSelected" + isAllSelected());
-                mSelectedAllCallback.onSelectedAll(isAllSelected());
+                Log.d(TAG, " layoutZzimSelected" + isAllSelected());
+                mListItemSelectedAllCallback.onListItemSelectedAll(isAllSelected());
 
                 notifyDataSetChanged();
             }
@@ -133,7 +141,7 @@ public class ZzimListAdapter extends RecyclerView.Adapter<ZzimListAdapter.ZzimLi
         TextView tvVoluntaryWorkTime;
         @Bind(R.id.imageView_cancel_zzim)
         ImageView ivZzimCancel;
-        @Bind(R.id.layout_check)
+        @Bind(R.id.container_check)
         RelativeLayout layoutZzimSelected;
         @Bind(R.id.textView_check)
         TextView tvZzimSelected;
