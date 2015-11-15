@@ -224,8 +224,6 @@
                 android:layout_centerVertical="true"
                 android:src="@drawable/ic_expand_24dp"/>
         </RelativeLayout>
-
-
     </LinearLayout>
 
 

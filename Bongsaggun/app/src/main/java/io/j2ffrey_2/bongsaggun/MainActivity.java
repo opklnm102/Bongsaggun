@@ -1,5 +1,6 @@
 package io.j2ffrey_2.bongsaggun;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
@@ -219,6 +220,9 @@ public class MainActivity extends AppCompatActivity {
 
         if(id == R.id.action_search){
             Log.e(TAG, " search");
+
+            Intent intent = new Intent(MainActivity.this, SearchMainActivity.class);
+            startActivity(intent);
 
             return true;
         }

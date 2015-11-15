@@ -23,10 +23,13 @@
     <!--MyPage Fragment-->
     <color name="myPage">#ed1e79</color>
 
-
     <!--InfoPage Activity-->
     <color name="InfoPage_button_application">#502ca7</color>
     <color name="InfoPage_fab_zzim_application">#1f92a0</color>
     <color name="InfoPage_fab_zzim_cancel">#ffffff</color>
+
+    <!--SearchCategory Activity-->
+    <color name="search_start">#1f92a0</color>
+    <color name="search_category_init">#ed1e79</color>
 
 </resources>

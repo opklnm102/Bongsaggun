@@ -8,8 +8,9 @@
 
     <ImageView
         android:id="@+id/imageView_voluntaryWork_state"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="24dp"
+        android:scaleType="fitXY"
         android:src="@drawable/img_recruit_start"/>
 
     <TextView

@@ -59,7 +59,6 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeLi
         holder.tvVoluntaryPeriodEnd.setText(current.getVoluntaryPeriodEnd());
         holder.tvVoluntaryWorkLocation.setText(current.getVoluntaryLocation());
         holder.tvVoluntaryWorkTime.setText(current.getVoluntaryTime() + "시간");
-
     }
 
     // Return the size of your dataset (invoked by the layout manager)

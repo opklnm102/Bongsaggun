@@ -12,13 +12,18 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import io.j2ffrey_2.bongsaggun.R;
 
 public class HomeFragment extends Fragment {
 
     public static final String TAG = "HomeFragment";
-    private RecyclerView recyclerView;
-    private HomeListAdapter adapter;
+
+    @Bind(R.id.recyclerView_home)
+    RecyclerView rvHomeList;
+
+    HomeListAdapter adapter;
 
 
     public static HomeFragment newInstance() {
@@ -26,9 +31,7 @@ public class HomeFragment extends Fragment {
         return fragment;
     }
 
-    public HomeFragment() {
-
-    }
+    public HomeFragment() {}
 
     //getdata
     public List<HomeListItem> getData() {
@@ -65,16 +68,18 @@ public class HomeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View view = inflater.inflate(
-                R.layout.fragment_home, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.drawer_list);
-
-        adapter = new HomeListAdapter(getActivity(), getData());
-
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        ButterKnife.bind(this, view);
         return view;
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        adapter = new HomeListAdapter(getActivity(), getData());
+
+        rvHomeList.setAdapter(adapter);
+        rvHomeList.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
 }

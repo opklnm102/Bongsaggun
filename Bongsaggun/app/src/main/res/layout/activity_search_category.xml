@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:gravity="center_horizontal"
+    tools:context="io.j2ffrey_2.bongsaggun.SearchCategoryActivity">
+
+  <include layout="@layout/toolbar_search"/>
+
+    <LinearLayout
+        android:id="@+id/container_search_category_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:showDividers="middle|end">
+
+        <RelativeLayout
+            android:id="@+id/container_location"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/search_category_location"/>
+
+            <ImageView
+                android:id="@+id/imageView_location"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_expand_24dp"/>
+
+            <TextView
+                android:id="@+id/textView_category_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@id/imageView_location"
+                android:text="전체"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/container_school"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/search_category_school"/>
+
+            <ImageView
+                android:id="@+id/imageView_school"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_expand_24dp"/>
+
+            <TextView
+                android:id="@+id/textView_category_school"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@id/imageView_school"
+                android:text="전체"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/container_time"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/search_category_time"/>
+
+            <ImageView
+                android:id="@+id/imageView_time"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_expand_24dp"/>
+
+            <TextView
+                android:id="@+id/textView_category_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@id/imageView_time"
+                android:text="4~6시간"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_search_start"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@android:color/white"
+        android:background="@color/search_start"
+        android:text="@string/search_start"/>
+
+    <Button
+        android:id="@+id/button_search_category_init"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:textColor="@android:color/white"
+        android:background="@color/search_category_init"
+        android:text="@string/search_category_init"/>
+
+</LinearLayout>

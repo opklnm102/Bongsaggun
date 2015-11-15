@@ -7,6 +7,8 @@
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
     <string name="action_search">Search</string>
+    <string name="action_category">Search Category</string>
+    <string name="action_category_undo">Search Category Undo</string>
 
     <string name="title_activity_info_page">InfoPageActivity</string>
 
@@ -47,6 +49,15 @@
     <string name="myPage_login">로그인</string>
     <string name="myPage_logout">로그아웃</string>
 
+    <!-- SearchCategoryActivity-->
+    <string name="search_category_location">지역</string>
+    <string name="search_category_school">학교</string>
+    <string name="search_category_time">시간</string>
+    <string name="search_start">검색 시작</string>
+    <string name="search_category_init">조건 초기화</string>
+
+    <string name="search_hint">검색어를 입력하세요</string>
+
     <!-- NavigationView-->
     <string name="navigation_view_logout">로그아웃</string>
 
@@ -55,5 +66,7 @@
     <string name="content_authority">io.j2ffrey_2.bongsaggun.app</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_search_main">SearchMainActivity</string>
+    <string name="title_activity_search_category">SearchCategoryActivity</string>
 
 </resources>
