@@ -73,7 +73,7 @@
         </activity>
 
         <provider
-            android:name=".VoluntaryProvider"
+            android:name=".BongsaggunProvider"
             android:authorities="@string/content_authority"
             android:exported="false"
             android:syncable="true" />

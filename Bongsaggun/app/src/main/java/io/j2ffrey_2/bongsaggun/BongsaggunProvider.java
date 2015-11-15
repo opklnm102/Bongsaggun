@@ -1,6 +1,5 @@
 package io.j2ffrey_2.bongsaggun;
 
-import android.annotation.TargetApi;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.Context;
@@ -18,13 +17,13 @@ import java.util.Arrays;
 /**
  * Created by han on 2015-10-29.
  */
-public class VoluntaryProvider extends ContentProvider {
+public class BongsaggunProvider extends ContentProvider {
 
-    public static final String TAG = VoluntaryProvider.class.getSimpleName();
+    public static final String TAG = BongsaggunProvider.class.getSimpleName();
 
     private static final UriMatcher sUriMatcher = buildUriMatcher();
 
-    private VoluntaryDbHelper mOpenHelper;
+    private BongsaggunDbHelper mOpenHelper;
 
     //URI Matcher를 위한 상수
     private static final int SCHOOL = 100;
@@ -40,16 +39,16 @@ public class VoluntaryProvider extends ContentProvider {
         //Voluntary LEFT OUTER JOIN Region ON Region.id=Voluntary.regioinId
         //LEFT OUTER JOIN School ON School.id=Voluntary.schoolId
         //LEFT OUTER JOIN Image ON Image .id=Voluntary.ImageId
-        sVoluntarySettingQueryBuilder.setTables(VoluntaryContract.VoluntaryEntry.TABLE_NAME +
-                        " LEFT OUTER JOIN " + VoluntaryContract.RegionEntry.TABLE_NAME +
-                        "ON " + VoluntaryContract.RegionEntry.TABLE_NAME + "." + VoluntaryContract.RegionEntry.COLUMN_REGION_ID +
-                        "=" + VoluntaryContract.VoluntaryEntry.TABLE_NAME + "." + VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID +
-                        " LEFT OUTER JOIN " + VoluntaryContract.SchoolEntry.TABLE_NAME +
-                        "ON " + VoluntaryContract.SchoolEntry.TABLE_NAME + "." + VoluntaryContract.SchoolEntry.COLUMN_SCHOOL_ID +
-                        "=" + VoluntaryContract.VoluntaryEntry.TABLE_NAME + "." + VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_SCHOOLID +
-                        " LEFT OUTER JOIN " + VoluntaryContract.ImageEntry.TABLE_NAME +
-                        "ON " + VoluntaryContract.ImageEntry.TABLE_NAME + "." + VoluntaryContract.ImageEntry.COLUMN_IMAGE_ID +
-                        "=" + VoluntaryContract.VoluntaryEntry.TABLE_NAME + "." + VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_IMAGEID
+        sVoluntarySettingQueryBuilder.setTables(BongsaggunContract.VoluntaryEntry.TABLE_NAME +
+                        " LEFT OUTER JOIN " + BongsaggunContract.RegionEntry.TABLE_NAME +
+                        "ON " + BongsaggunContract.RegionEntry.TABLE_NAME + "." + BongsaggunContract.RegionEntry.COLUMN_REGION_ID +
+                        "=" + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID +
+                        " LEFT OUTER JOIN " + BongsaggunContract.SchoolEntry.TABLE_NAME +
+                        "ON " + BongsaggunContract.SchoolEntry.TABLE_NAME + "." + BongsaggunContract.SchoolEntry.COLUMN_SCHOOL_ID +
+                        "=" + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_SCHOOLID +
+                        " LEFT OUTER JOIN " + BongsaggunContract.ImageEntry.TABLE_NAME +
+                        "ON " + BongsaggunContract.ImageEntry.TABLE_NAME + "." + BongsaggunContract.ImageEntry.COLUMN_IMAGE_ID +
+                        "=" + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_IMAGEID
         );
     }
 
@@ -58,7 +57,7 @@ public class VoluntaryProvider extends ContentProvider {
     //image update할 때 사용
     //voluntary.voluntary_mainImageId = ?
     private static final String imageSelection =
-            VoluntaryContract.VoluntaryEntry.TABLE_NAME + "." + VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_IMAGEID + "= ?";
+            BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_IMAGEID + "= ?";
 
 //    private Cursor getVoluntaryInformation(Uri uri, String[] projection, String sortOrder) {
 //        String locationSetting = WeatherContract.WeatherEntry.getLocationSettingFromUri(uri);
@@ -89,15 +88,15 @@ public class VoluntaryProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        mOpenHelper = new VoluntaryDbHelper(getContext());
+        mOpenHelper = new BongsaggunDbHelper(getContext());
         return true;
     }
 
     private void deleteDatabase(){
         mOpenHelper.close();
         Context context = getContext();
-        VoluntaryDbHelper.deleteDatabase(context);
-        mOpenHelper = new VoluntaryDbHelper(getContext());
+        BongsaggunDbHelper.deleteDatabase(context);
+        mOpenHelper = new BongsaggunDbHelper(getContext());
     }
 
     @Nullable
@@ -108,13 +107,13 @@ public class VoluntaryProvider extends ContentProvider {
 
         switch (match) {
             case SCHOOL:
-                return VoluntaryContract.SchoolEntry.CONTENT_TYPE;
+                return BongsaggunContract.SchoolEntry.CONTENT_TYPE;
             case REGION:
-                return VoluntaryContract.RegionEntry.CONTENT_TYPE;
+                return BongsaggunContract.RegionEntry.CONTENT_TYPE;
             case IMAGE:
-                return VoluntaryContract.ImageEntry.CONTENT_TYPE;
+                return BongsaggunContract.ImageEntry.CONTENT_TYPE;
             case VOLUNTARY:
-                return VoluntaryContract.VoluntaryEntry.CONTENT_TYPE;
+                return BongsaggunContract.VoluntaryEntry.CONTENT_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -136,10 +135,10 @@ public class VoluntaryProvider extends ContentProvider {
             // "school"
             case SCHOOL: {
                 if(TextUtils.isEmpty(sortOrder)){  //정렬값이 없다면 id를 기준으로 정렬
-                    sortOrder = VoluntaryContract.SchoolEntry.SORT_ORDER_DEFAULT;
+                    sortOrder = BongsaggunContract.SchoolEntry.SORT_ORDER_DEFAULT;
                 }
                 retCursor = db.query(
-                        VoluntaryContract.SchoolEntry.TABLE_NAME,  //테이블 이름
+                        BongsaggunContract.SchoolEntry.TABLE_NAME,  //테이블 이름
                         projection,                                //조회할 컬럼이름
                         selection,                                 //WHERE 절
                         selectionArgs,                             //WHERE 절 인자
@@ -152,7 +151,7 @@ public class VoluntaryProvider extends ContentProvider {
             // "region"
             case REGION: {
                 retCursor = db.query(
-                        VoluntaryContract.RegionEntry.TABLE_NAME,  //테이블 이름
+                        BongsaggunContract.RegionEntry.TABLE_NAME,  //테이블 이름
                         projection,                                //조회할 컬럼이름
                         selection,                                 //WHERE 절
                         selectionArgs,                             //WHERE 절 인자
@@ -165,7 +164,7 @@ public class VoluntaryProvider extends ContentProvider {
             // "image"
             case IMAGE: {
                 retCursor = db.query(
-                        VoluntaryContract.ImageEntry.TABLE_NAME,  //테이블 이름
+                        BongsaggunContract.ImageEntry.TABLE_NAME,  //테이블 이름
                         projection,                                //조회할 컬럼이름
                         selection,                                 //WHERE 절
                         selectionArgs,                             //WHERE 절 인자
@@ -178,7 +177,7 @@ public class VoluntaryProvider extends ContentProvider {
             // "voluntary"
             case VOLUNTARY: {
                 retCursor = db.query(
-                        VoluntaryContract.VoluntaryEntry.TABLE_NAME,  //테이블 이름
+                        BongsaggunContract.VoluntaryEntry.TABLE_NAME,  //테이블 이름
                         projection,                                //조회할 컬럼이름
                         selection,                                 //WHERE 절
                         selectionArgs,                             //WHERE 절 인자
@@ -209,33 +208,33 @@ public class VoluntaryProvider extends ContentProvider {
 
         switch (match) {
             case SCHOOL: {
-                long _id = db.insert(VoluntaryContract.SchoolEntry.TABLE_NAME, null, values);
+                long _id = db.insert(BongsaggunContract.SchoolEntry.TABLE_NAME, null, values);
                 if (_id > 0)
-                    returnUri = VoluntaryContract.SchoolEntry.buildSchoolUri(_id);
+                    returnUri = BongsaggunContract.SchoolEntry.buildSchoolUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
             }
             case REGION: {
-                long _id = db.insert(VoluntaryContract.RegionEntry.TABLE_NAME, null, values);
+                long _id = db.insert(BongsaggunContract.RegionEntry.TABLE_NAME, null, values);
                 if (_id > 0)
-                    returnUri = VoluntaryContract.RegionEntry.buildRegionUri(_id);
+                    returnUri = BongsaggunContract.RegionEntry.buildRegionUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
             }
             case IMAGE: {
-                long _id = db.insert(VoluntaryContract.ImageEntry.TABLE_NAME, null, values);
+                long _id = db.insert(BongsaggunContract.ImageEntry.TABLE_NAME, null, values);
                 if (_id > 0)
-                    returnUri = VoluntaryContract.ImageEntry.buildImageUri(_id);
+                    returnUri = BongsaggunContract.ImageEntry.buildImageUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
             }
             case VOLUNTARY: {
-                long _id = db.insert(VoluntaryContract.VoluntaryEntry.TABLE_NAME, null, values);
+                long _id = db.insert(BongsaggunContract.VoluntaryEntry.TABLE_NAME, null, values);
                 if (_id > 0)
-                    returnUri = VoluntaryContract.VoluntaryEntry.buildVoluntaryUri(_id);
+                    returnUri = BongsaggunContract.VoluntaryEntry.buildVoluntaryUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
@@ -257,19 +256,19 @@ public class VoluntaryProvider extends ContentProvider {
         switch (match) {
             case SCHOOL:
                 rowsDeleted = db.delete(
-                        VoluntaryContract.SchoolEntry.TABLE_NAME, selection, selectionArgs);
+                        BongsaggunContract.SchoolEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             case REGION:
                 rowsDeleted = db.delete(
-                        VoluntaryContract.RegionEntry.TABLE_NAME, selection, selectionArgs);
+                        BongsaggunContract.RegionEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             case IMAGE:
                 rowsDeleted = db.delete(
-                        VoluntaryContract.ImageEntry.TABLE_NAME, selection, selectionArgs);
+                        BongsaggunContract.ImageEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             case VOLUNTARY:
                 rowsDeleted = db.delete(
-                        VoluntaryContract.VoluntaryEntry.TABLE_NAME, selection, selectionArgs);
+                        BongsaggunContract.VoluntaryEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -290,19 +289,19 @@ public class VoluntaryProvider extends ContentProvider {
         switch (match) {
             case SCHOOL:
                 rowsUpdated = db.update(
-                        VoluntaryContract.SchoolEntry.TABLE_NAME, values, selection, selectionArgs);
+                        BongsaggunContract.SchoolEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             case REGION:
                 rowsUpdated = db.update(
-                        VoluntaryContract.RegionEntry.TABLE_NAME, values, selection, selectionArgs);
+                        BongsaggunContract.RegionEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             case IMAGE:
                 rowsUpdated = db.update(
-                        VoluntaryContract.ImageEntry.TABLE_NAME, values, selection, selectionArgs);
+                        BongsaggunContract.ImageEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             case VOLUNTARY:
                 rowsUpdated = db.update(
-                        VoluntaryContract.VoluntaryEntry.TABLE_NAME, values, selection, selectionArgs);
+                        BongsaggunContract.VoluntaryEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -317,14 +316,14 @@ public class VoluntaryProvider extends ContentProvider {
     static UriMatcher buildUriMatcher() {
 
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
-        final String authority = VoluntaryContract.CONTENT_AUTHORITY;
+        final String authority = BongsaggunContract.CONTENT_AUTHORITY;
 
-        matcher.addURI(authority, VoluntaryContract.PATH_SCHOOL, SCHOOL);
+        matcher.addURI(authority, BongsaggunContract.PATH_SCHOOL, SCHOOL);
 //        matcher.addURI(authority, VoluntaryContract.PATH_SCHOOL, + "/*", );
 
-        matcher.addURI(authority, VoluntaryContract.PATH_REGION, REGION);
-        matcher.addURI(authority, VoluntaryContract.PATH_IMAGE, IMAGE);
-        matcher.addURI(authority, VoluntaryContract.PATH_VOLUNTARY, VOLUNTARY);
+        matcher.addURI(authority, BongsaggunContract.PATH_REGION, REGION);
+        matcher.addURI(authority, BongsaggunContract.PATH_IMAGE, IMAGE);
+        matcher.addURI(authority, BongsaggunContract.PATH_VOLUNTARY, VOLUNTARY);
 
         return matcher;
     }
@@ -340,7 +339,7 @@ public class VoluntaryProvider extends ContentProvider {
                 db.beginTransaction();
                 try {
                     for (ContentValues value : values) {
-                        long _id = db.insert(VoluntaryContract.SchoolEntry.TABLE_NAME, null, value);
+                        long _id = db.insert(BongsaggunContract.SchoolEntry.TABLE_NAME, null, value);
                         if (_id != -1) {
                             returnCount++;
                         }
@@ -354,7 +353,7 @@ public class VoluntaryProvider extends ContentProvider {
                 db.beginTransaction();
                 try {
                     for (ContentValues value : values) {
-                        long _id = db.insert(VoluntaryContract.RegionEntry.TABLE_NAME, null, value);
+                        long _id = db.insert(BongsaggunContract.RegionEntry.TABLE_NAME, null, value);
                         if (_id != -1) {
                             returnCount++;
                         }
@@ -368,7 +367,7 @@ public class VoluntaryProvider extends ContentProvider {
                 db.beginTransaction();
                 try {
                     for (ContentValues value : values) {
-                        long _id = db.insert(VoluntaryContract.ImageEntry.TABLE_NAME, null, value);
+                        long _id = db.insert(BongsaggunContract.ImageEntry.TABLE_NAME, null, value);
                         if (_id != -1) {
                             returnCount++;
                         }
@@ -382,7 +381,7 @@ public class VoluntaryProvider extends ContentProvider {
                 db.beginTransaction();
                 try {
                     for (ContentValues value : values) {
-                        long _id = db.insert(VoluntaryContract.VoluntaryEntry.TABLE_NAME, null, value);
+                        long _id = db.insert(BongsaggunContract.VoluntaryEntry.TABLE_NAME, null, value);
                         if (_id != -1) {
                             returnCount++;
                         }

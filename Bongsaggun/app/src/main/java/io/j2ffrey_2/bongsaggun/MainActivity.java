@@ -84,26 +84,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.e(TAG, " onDestroy");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.e(TAG, " onRestart");
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         Log.e(TAG, " onResume");
 
         try {
-            NetworkManager.getInstance().getSchoolList();
-            NetworkManager.getInstance().getRegionList();
-            NetworkManager.getInstance().getAllVoluntaryList();
+            NetworkManager.getInstance(this).getSchoolList();
+            NetworkManager.getInstance(this).getRegionList();
+            NetworkManager.getInstance(this).getTimeList();
+            NetworkManager.getInstance(this).getAllVoluntaryList();
 
 //            printLogContactData(getContactCursor());
 

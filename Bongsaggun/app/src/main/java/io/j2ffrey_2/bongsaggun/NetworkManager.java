@@ -12,8 +12,6 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
-import org.json.JSONException;
-
 import java.io.IOException;
 import java.util.Vector;
 
@@ -27,29 +25,33 @@ public class NetworkManager {
     public static final String TAG = NetworkManager.class.getSimpleName();
 
     private static NetworkManager instance;
+    private Context mContext;
     private OkHttpClient client;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     /**
      * Restful api
      **/
+    private String testEndPoint = "https://dosomething-j2ffrey-2.c9.io";  //c9 테스트 서버
     private String endPoint = "http://bongsaloadbalancer-882197660.ap-northeast-1.elb.amazonaws.com";
     private String format = "json";
     private String apiVoluntary = "filter";
     private String apiSchool = "school";
     private String apiRegion = "region";
+    private String apiBtime = "btime";
     private String apiZzim = "my_bucket";
     private String apiLogin = "login";
 
-    public static NetworkManager getInstance() {
+    public static NetworkManager getInstance(Context context) {
         if (instance == null) {
-            instance = new NetworkManager();
+            instance = new NetworkManager(context);
         }
         return instance;
     }
 
-    private NetworkManager() {
+    private NetworkManager(Context context) {
         client = new OkHttpClient();
+        mContext = context;
     }
 
     //Todo: 회원가입
@@ -117,8 +119,15 @@ public class NetworkManager {
 
                     Vector<ContentValues> cVVector = JsonParser.jsonSchoolListParser(strJson);  //파싱한거 넘기기
 
+                    //add to database
+                    if (cVVector.size() > 0) {
+                        ContentValues[] cvArray = new ContentValues[cVVector.size()];
+                        cVVector.toArray(cvArray);
 
+                        mContext.getContentResolver().bulkInsert(BongsaggunContract.SchoolEntry.CONTENT_URI, cvArray);
 
+                        //updateAt보고 db갱신 할것
+                    }
                 }
             }
         });
@@ -148,15 +157,64 @@ public class NetworkManager {
                     String strJson = response.body().string();
                     Log.d(TAG, "region json " + strJson);
 
-                    try {
-                        JsonParser.jsonRegionListParser(strJson);  //파싱한거 넘기기
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+
+                    Vector<ContentValues> cVVector = JsonParser.jsonRegionListParser(strJson);  //파싱한거 넘기기
+
+                    //add to database
+                    if (cVVector.size() > 0) {
+                        ContentValues[] cvArray = new ContentValues[cVVector.size()];
+                        cVVector.toArray(cvArray);
+
+                        mContext.getContentResolver().bulkInsert(BongsaggunContract.RegionEntry.CONTENT_URI, cvArray);
+
+                        //updateAt보고 db갱신 할것
                     }
+
                 }
             }
         });
     }
+
+    //봉사시간 분류 리스트
+    public void getTimeList() throws IOException {
+        String url = testEndPoint + "/" + format + "/" + apiBtime;
+        Log.d(TAG, " " + url);
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code " + response);
+                } else {
+                    String strJson = response.body().string();
+                    Log.d(TAG, "region json " + strJson);
+
+                    Vector<ContentValues> cVVector = JsonParser.jsonTimeListParser(strJson);  //파싱한거 넘기기
+
+                    //add to database
+                    if (cVVector.size() > 0) {
+                        ContentValues[] cvArray = new ContentValues[cVVector.size()];
+                        cVVector.toArray(cvArray);
+
+//                        mContext.getContentResolver().bulkInsert(BongsaggunContract.TimeEntry.CONTENT_URI, cvArray);
+
+                        //updateAt보고 db갱신 할것
+                    }
+
+                }
+            }
+        });
+    }
+
 
     //전체 봉사 리스트
     //GET
@@ -182,11 +240,18 @@ public class NetworkManager {
                     String strJson = response.body().string();
                     Log.d(TAG, "allVoluntary json " + strJson);
 
-                    try {
-                        JsonParser.jsonVoluntaryListParser(strJson);  //파싱한거 넘기기
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    Vector<ContentValues> cVVector = JsonParser.jsonVoluntaryListParser(strJson);  //파싱한거 넘기기
+
+                    //add to database
+                    if (cVVector.size() > 0) {
+                        ContentValues[] cvArray = new ContentValues[cVVector.size()];
+                        cVVector.toArray(cvArray);
+
+                        mContext.getContentResolver().bulkInsert(BongsaggunContract.VoluntaryEntry.CONTENT_URI, cvArray);
+
+                        //updateAt보고 db갱신 할것
                     }
+
                 }
             }
         });
@@ -217,11 +282,9 @@ public class NetworkManager {
                     String strJson = response.body().string();
                     Log.d(TAG, "voluntary json " + strJson);
 
-                    try {
-                        JsonParser.jsonVoluntaryListParser(strJson);  //파싱한거 넘기기
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+
+                    JsonParser.jsonVoluntaryListParser(strJson);  //파싱한거 넘기기
+
                 }
             }
         });
@@ -333,7 +396,6 @@ public class NetworkManager {
 //    } catch (IOException e) {
 //        e.printStackTrace();
 //    }
-
 
 
 }
