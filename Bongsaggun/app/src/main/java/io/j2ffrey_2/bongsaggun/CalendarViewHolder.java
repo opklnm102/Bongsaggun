@@ -56,19 +56,19 @@ public class CalendarViewHolder extends RecyclerView.ViewHolder {
 
         if (isHeader) {
             //header
-            tvCalendarDay.setText(calendarItem.getDay());
+//            tvCalendarDay.setText(calendarItem.getDay());
             tvCalendarDayOfWeek.setText(calendarItem.getDayOfWeek());
         } else {
             //line
-            if (calendarItem.isState()) {
-                ivVoluntaryWorkState.setImageResource(R.drawable.img_recruit_start);
-            } else {
-                ivVoluntaryWorkState.setImageResource(R.drawable.img_recruit_finish);
-            }
-            tvVoluntaryWorkDday.setText(calendarItem.getdDay());
-            tvVoluntaryWorkTitle.setText(calendarItem.getTitle());
-            tvVoluntaryWorkLocation.setText(calendarItem.getLocation());
-            tvVoluntaryWorkTime.setText(calendarItem.getTime());
+//            if (calendarItem.isState()) {
+//                ivVoluntaryWorkState.setImageResource(R.drawable.img_recruit_start);
+//            } else {
+//                ivVoluntaryWorkState.setImageResource(R.drawable.img_recruit_finish);
+//            }
+//            tvVoluntaryWorkDday.setText(calendarItem.getdDay());
+//            tvVoluntaryWorkTitle.setText(calendarItem.getTitle());
+//            tvVoluntaryWorkLocation.setText(calendarItem.getLocation());
+//            tvVoluntaryWorkTime.setText(calendarItem.getTime());
         }
     }
 }

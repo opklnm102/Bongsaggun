@@ -3,32 +3,34 @@ package io.j2ffrey_2.bongsaggun.homelist;
 import android.database.Cursor;
 
 import io.j2ffrey_2.bongsaggun.BongsaggunContract;
+import io.j2ffrey_2.bongsaggun.TimeUtils;
 
 /**
  * Created by vantovan on 2015. 10. 14..
  */
 public class HomeListItem {
 
-    Integer voluntaryId;
-    Integer imgSumnail;
-    String imgSumnailUrl;
-    String title;
-    Integer dDay;
-    String voluntaryPeriodStart;
-    String voluntaryPeriodEnd;
-    String voluntaryLocation;
-    Integer voluntaryTime;
+    private Integer voluntaryId;
+    private Integer imgSumnail;
+    private String imgSumnailUrl;
+    private String title;
+    private Integer dDay;
+    private String voluntaryDateRecruitStart;
+    private String voluntaryDateRecruitEnd;
+    private String voluntaryRegion;
+    private Integer voluntaryTime;
 
     public static HomeListItem fromCursor(Cursor cursor) {
         HomeListItem item = new HomeListItem();
 
         item.voluntaryId = cursor.getInt(cursor.getColumnIndex(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID));
         item.title = cursor.getString(cursor.getColumnIndex(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TITLE));
-        item.voluntaryLocation = cursor.getString(cursor.getColumnIndex(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ADDRESS));
-        item.voluntaryPeriodStart = cursor.getString(cursor.getColumnIndex(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_REAL_START));
-        item.voluntaryPeriodEnd = cursor.getString(cursor.getColumnIndex(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_REAL_END));
+        item.voluntaryDateRecruitStart = cursor.getString(cursor.getColumnIndex(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START));
+        item.voluntaryDateRecruitEnd = cursor.getString(cursor.getColumnIndex(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END));
         item.imgSumnailUrl = cursor.getString(cursor.getColumnIndex(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_MAINIMAGEURL));;
         item.voluntaryTime = Integer.valueOf(cursor.getString(cursor.getColumnIndex(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TIME)));
+//        item.voluntaryRegion = cursor.getString(cursor.getColumnIndex(BongsaggunContract.RegionEntry.COLUMN_REGION_NAME));
+        item.dDay = TimeUtils.dateToDday(item.voluntaryDateRecruitEnd);
 
         return item;
     }
@@ -37,19 +39,19 @@ public class HomeListItem {
         this.imgSumnail = null;
         this.title = "";
         this.dDay = 0;
-        this.voluntaryPeriodStart = "";
-        this.voluntaryPeriodEnd = "";
-        this.voluntaryLocation = "";
+        this.voluntaryDateRecruitStart = "";
+        this.voluntaryDateRecruitEnd = "";
+        this.voluntaryRegion = "";
         this.voluntaryTime = 0;
     }
 
-    public HomeListItem(Integer imgSumnail, String title, Integer dDay, String voluntaryPeriodStart, String voluntaryPeriodEnd, String voluntaryLocation, Integer voluntaryTime) {
+    public HomeListItem(Integer imgSumnail, String title, Integer dDay, String voluntaryDateRecruitStart, String voluntaryDateRecruitEnd, String voluntaryRegion, Integer voluntaryTime) {
         this.imgSumnail = imgSumnail;
         this.title = title;
         this.dDay = dDay;
-        this.voluntaryPeriodStart = voluntaryPeriodStart;
-        this.voluntaryPeriodEnd = voluntaryPeriodEnd;
-        this.voluntaryLocation = voluntaryLocation;
+        this.voluntaryDateRecruitStart = voluntaryDateRecruitStart;
+        this.voluntaryDateRecruitEnd = voluntaryDateRecruitEnd;
+        this.voluntaryRegion = voluntaryRegion;
         this.voluntaryTime = voluntaryTime;
     }
 
@@ -93,28 +95,28 @@ public class HomeListItem {
         this.dDay = dDay;
     }
 
-    public String getVoluntaryPeriodStart() {
-        return voluntaryPeriodStart;
+    public String getVoluntaryDateRecruitStart() {
+        return voluntaryDateRecruitStart;
     }
 
-    public void setVoluntaryPeriodStart(String voluntaryPeriodStart) {
-        this.voluntaryPeriodStart = voluntaryPeriodStart;
+    public void setVoluntaryDateRecruitStart(String voluntaryDateRecruitStart) {
+        this.voluntaryDateRecruitStart = voluntaryDateRecruitStart;
     }
 
-    public String getVoluntaryPeriodEnd() {
-        return voluntaryPeriodEnd;
+    public String getVoluntaryDateRecruitEnd() {
+        return voluntaryDateRecruitEnd;
     }
 
-    public void setVoluntaryPeriodEnd(String voluntaryPeriodEnd) {
-        this.voluntaryPeriodEnd = voluntaryPeriodEnd;
+    public void setVoluntaryDateRecruitEnd(String voluntaryDateRecruitEnd) {
+        this.voluntaryDateRecruitEnd = voluntaryDateRecruitEnd;
     }
 
-    public String getVoluntaryLocation() {
-        return voluntaryLocation;
+    public String getVoluntaryRegion() {
+        return voluntaryRegion;
     }
 
-    public void setVoluntaryLocation(String voluntaryLocation) {
-        this.voluntaryLocation = voluntaryLocation;
+    public void setVoluntaryRegion(String voluntaryRegion) {
+        this.voluntaryRegion = voluntaryRegion;
     }
 
     public Integer getVoluntaryTime() {

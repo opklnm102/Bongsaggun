@@ -28,8 +28,10 @@ public class BongsaggunProvider extends ContentProvider {
     //URI Matcher를 위한 상수
     private static final int SCHOOL = 100;
     private static final int REGION = 200;
-    private static final int IMAGE = 300;
-    private static final int VOLUNTARY = 400;
+    private static final int TIME = 300;
+    private static final int CATEGORY = 400;
+    private static final int VOLUNTARY = 500;
+    private static final int IMAGE = 600;
 
     private static final SQLiteQueryBuilder sVoluntarySettingQueryBuilder;
 
@@ -110,6 +112,10 @@ public class BongsaggunProvider extends ContentProvider {
                 return BongsaggunContract.SchoolEntry.CONTENT_TYPE;
             case REGION:
                 return BongsaggunContract.RegionEntry.CONTENT_TYPE;
+            case TIME:
+                return BongsaggunContract.TimeEntry.CONTENT_TYPE;
+            case CATEGORY:
+                return BongsaggunContract.CategoryEntry.CONTENT_TYPE;
             case IMAGE:
                 return BongsaggunContract.ImageEntry.CONTENT_TYPE;
             case VOLUNTARY:
@@ -132,9 +138,8 @@ public class BongsaggunProvider extends ContentProvider {
 
         //uri객체를 통해 원하는 요청이 무엇인지 검사
         switch (sUriMatcher.match(uri)) {
-            // "school"
             case SCHOOL: {
-                if(TextUtils.isEmpty(sortOrder)){  //정렬값이 없다면 id를 기준으로 정렬
+                if(TextUtils.isEmpty(sortOrder)){  //정렬값이 없다면 id를 기준으로 오름차순 정렬
                     sortOrder = BongsaggunContract.SchoolEntry.SORT_ORDER_DEFAULT;
                 }
                 retCursor = db.query(
@@ -148,8 +153,10 @@ public class BongsaggunProvider extends ContentProvider {
                 );
                 break;
             }
-            // "region"
             case REGION: {
+                if (TextUtils.isEmpty(sortOrder)) {  //정렬값이 없다면 id를 기준으로 오름차순 정렬
+                    sortOrder = BongsaggunContract.RegionEntry.SORT_ORDER_DEFAULT;
+                }
                 retCursor = db.query(
                         BongsaggunContract.RegionEntry.TABLE_NAME,  //테이블 이름
                         projection,                                //조회할 컬럼이름
@@ -161,7 +168,36 @@ public class BongsaggunProvider extends ContentProvider {
                 );
                 break;
             }
-            // "image"
+            case TIME: {
+                if(TextUtils.isEmpty(sortOrder)){  //정렬값이 없다면 id를 기준으로 오름차순 정렬
+                    sortOrder = BongsaggunContract.TimeEntry.SORT_ORDER_DEFAULT;
+                }
+                retCursor = db.query(
+                        BongsaggunContract.TimeEntry.TABLE_NAME,  //테이블 이름
+                        projection,                                //조회할 컬럼이름
+                        selection,                                 //WHERE 절
+                        selectionArgs,                             //WHERE 절 인자
+                        null,                                      //GROUP BY 절
+                        null,                                      //HAVING 절
+                        sortOrder                                  //ORDER BY 절
+                );
+                break;
+            }
+            case CATEGORY: {
+                if(TextUtils.isEmpty(sortOrder)){  //정렬값이 없다면 id를 기준으로 오름차순 정렬
+                    sortOrder = BongsaggunContract.CategoryEntry.SORT_ORDER_DEFAULT;
+                }
+                retCursor = db.query(
+                        BongsaggunContract.CategoryEntry.TABLE_NAME,  //테이블 이름
+                        projection,                                //조회할 컬럼이름
+                        selection,                                 //WHERE 절
+                        selectionArgs,                             //WHERE 절 인자
+                        null,                                      //GROUP BY 절
+                        null,                                      //HAVING 절
+                        sortOrder                                  //ORDER BY 절
+                );
+                break;
+            }
             case IMAGE: {
                 retCursor = db.query(
                         BongsaggunContract.ImageEntry.TABLE_NAME,  //테이블 이름
@@ -174,8 +210,10 @@ public class BongsaggunProvider extends ContentProvider {
                 );
                 break;
             }
-            // "voluntary"
             case VOLUNTARY: {
+                if(TextUtils.isEmpty(sortOrder)){  //정렬값이 없다면 id를 기준으로 내림차순 정렬
+                    sortOrder = BongsaggunContract.VoluntaryEntry.SORT_ORDER_DEFAULT;
+                }
                 retCursor = db.query(
                         BongsaggunContract.VoluntaryEntry.TABLE_NAME,  //테이블 이름
                         projection,                                //조회할 컬럼이름
@@ -223,6 +261,22 @@ public class BongsaggunProvider extends ContentProvider {
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
             }
+            case TIME: {
+                long _id = db.insert(BongsaggunContract.TimeEntry.TABLE_NAME, null, values);
+                if (_id > 0)
+                    returnUri = BongsaggunContract.TimeEntry.buildTimeUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
+            case CATEGORY: {
+                long _id = db.insert(BongsaggunContract.CategoryEntry.TABLE_NAME, null, values);
+                if (_id > 0)
+                    returnUri = BongsaggunContract.CategoryEntry.buildCategoryUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
             case IMAGE: {
                 long _id = db.insert(BongsaggunContract.ImageEntry.TABLE_NAME, null, values);
                 if (_id > 0)
@@ -262,6 +316,14 @@ public class BongsaggunProvider extends ContentProvider {
                 rowsDeleted = db.delete(
                         BongsaggunContract.RegionEntry.TABLE_NAME, selection, selectionArgs);
                 break;
+            case TIME:
+                rowsDeleted = db.delete(
+                        BongsaggunContract.TimeEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+            case CATEGORY:
+                rowsDeleted = db.delete(
+                        BongsaggunContract.CategoryEntry.TABLE_NAME, selection, selectionArgs);
+                break;
             case IMAGE:
                 rowsDeleted = db.delete(
                         BongsaggunContract.ImageEntry.TABLE_NAME, selection, selectionArgs);
@@ -295,6 +357,14 @@ public class BongsaggunProvider extends ContentProvider {
                 rowsUpdated = db.update(
                         BongsaggunContract.RegionEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
+            case TIME:
+                rowsUpdated = db.update(
+                        BongsaggunContract.TimeEntry.TABLE_NAME, values, selection, selectionArgs);
+                break;
+            case CATEGORY:
+                rowsUpdated = db.update(
+                        BongsaggunContract.CategoryEntry.TABLE_NAME, values, selection, selectionArgs);
+                break;
             case IMAGE:
                 rowsUpdated = db.update(
                         BongsaggunContract.ImageEntry.TABLE_NAME, values, selection, selectionArgs);
@@ -322,6 +392,8 @@ public class BongsaggunProvider extends ContentProvider {
 //        matcher.addURI(authority, VoluntaryContract.PATH_SCHOOL, + "/*", );
 
         matcher.addURI(authority, BongsaggunContract.PATH_REGION, REGION);
+        matcher.addURI(authority, BongsaggunContract.PATH_TIME, TIME);
+        matcher.addURI(authority, BongsaggunContract.PATH_CATEGORY, CATEGORY);
         matcher.addURI(authority, BongsaggunContract.PATH_IMAGE, IMAGE);
         matcher.addURI(authority, BongsaggunContract.PATH_VOLUNTARY, VOLUNTARY);
 
@@ -368,6 +440,34 @@ public class BongsaggunProvider extends ContentProvider {
                 try {
                     for (ContentValues value : values) {
                         long _id = db.insert(BongsaggunContract.ImageEntry.TABLE_NAME, null, value);
+                        if (_id != -1) {
+                            returnCount++;
+                        }
+                    }
+                    db.setTransactionSuccessful();
+                } finally {
+                    db.endTransaction();
+                }
+                break;
+            case TIME:
+                db.beginTransaction();
+                try {
+                    for (ContentValues value : values) {
+                        long _id = db.insert(BongsaggunContract.TimeEntry.TABLE_NAME, null, value);
+                        if (_id != -1) {
+                            returnCount++;
+                        }
+                    }
+                    db.setTransactionSuccessful();
+                } finally {
+                    db.endTransaction();
+                }
+                break;
+            case CATEGORY:
+                db.beginTransaction();
+                try {
+                    for (ContentValues value : values) {
+                        long _id = db.insert(BongsaggunContract.CategoryEntry.TABLE_NAME, null, value);
                         if (_id != -1) {
                             returnCount++;
                         }

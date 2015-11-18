@@ -51,11 +51,11 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
         //dummyData
         for (int i = 1; i < 10; i++) {
-            mCalendarItemArrayList.add(new CalendarItem("2015", "10", Integer.toString(i), "월", false, "D-4", "봉사닷", "서울", "4시간"));
-            mCalendarItemArrayList.add(new CalendarItem("2015", "9", Integer.toString(i), "월", false, "D-2", "봉봉", "문산", "5시간"));
-            mCalendarItemArrayList.add(new CalendarItem("2015", "10", Integer.toString(i), "월", true, "D-2", "봉황", "진산", "6시간"));
-            mCalendarItemArrayList.add(new CalendarItem("2015", "10", Integer.toString(i), "월", false, "D-2", "황황", "가산", "7시간"));
-            mCalendarItemArrayList.add(new CalendarItem("2015", "10", Integer.toString(i), "월", true, "D-2", "봉황만세세ㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔ", "오산", "8시간"));
+//            mCalendarItemArrayList.add(new CalendarItem("2015", "10", Integer.toString(i), "월", false, "D-4", "봉사닷", "서울", "4시간"));
+//            mCalendarItemArrayList.add(new CalendarItem("2015", "9", Integer.toString(i), "월", false, "D-2", "봉봉", "문산", "5시간"));
+//            mCalendarItemArrayList.add(new CalendarItem("2015", "10", Integer.toString(i), "월", true, "D-2", "봉황", "진산", "6시간"));
+//            mCalendarItemArrayList.add(new CalendarItem("2015", "10", Integer.toString(i), "월", false, "D-2", "황황", "가산", "7시간"));
+//            mCalendarItemArrayList.add(new CalendarItem("2015", "10", Integer.toString(i), "월", true, "D-2", "봉황만세세ㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔ", "오산", "8시간"));
         }
 
         //insert headers into list of items
@@ -64,17 +64,17 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         int headerCount = 0;
         int sectionFirstPosition = 0;
         for (int i = 0; i < mCalendarItemArrayList.size(); i++) {
-            String header = mCalendarItemArrayList.get(i).getDay();
-            if (!TextUtils.equals(lastHeader, header)) {
-                //insert new header view and update section data.
-                sectionManager = (sectionManager + 1) % 2;
-                sectionFirstPosition = i + headerCount;
-                lastHeader = header;
-                headerCount += 1;
-
-                mCalendarLineItemArrayList.add(new CalendarLineItem(mCalendarItemArrayList.get(i), sectionManager, sectionFirstPosition, true));
-
-            }
+//            String header = mCalendarItemArrayList.get(i).getDay();
+//            if (!TextUtils.equals(lastHeader, header)) {
+//                //insert new header view and update section data.
+//                sectionManager = (sectionManager + 1) % 2;
+//                sectionFirstPosition = i + headerCount;
+//                lastHeader = header;
+//                headerCount += 1;
+//
+//                mCalendarLineItemArrayList.add(new CalendarLineItem(mCalendarItemArrayList.get(i), sectionManager, sectionFirstPosition, true));
+//
+//            }
             mCalendarLineItemArrayList.add(new CalendarLineItem(mCalendarItemArrayList.get(i), sectionManager, sectionFirstPosition, false));
         }
     }

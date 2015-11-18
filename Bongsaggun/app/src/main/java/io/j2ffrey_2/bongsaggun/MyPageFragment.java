@@ -52,8 +52,8 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
     TextView tvZzimCount;
     @Bind(R.id.textView_name)
     TextView tvName;
-    @Bind(R.id.imageView_profile)
-    ImageView ivProfile;
+//    @Bind(R.id.imageView_profile)
+//    ImageView ivProfile;
     @Bind(R.id.textView_activity_Time)
     TextView tvActivityTime;
 
@@ -90,7 +90,7 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
     void initProfile() {
 
         //Todo: 로그인시 분기 처리, 이미지 o,x
-        ivProfile.setImageResource(R.drawable.cheese_1);
+        //ivProfile.setImageResource(R.drawable.cheese_1);
 
         setMyVoluntaryCount(2);
         setZzimCount(2);

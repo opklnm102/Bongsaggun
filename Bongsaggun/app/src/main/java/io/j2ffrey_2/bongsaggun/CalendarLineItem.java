@@ -13,8 +13,6 @@ public class CalendarLineItem {
 
     public CalendarItem mCalendarItem;  //data
 
-
-
     public CalendarLineItem(CalendarItem calendarItem, int sectionManager, int sectionFirstPosition, boolean isHeader) {
         this.sectionManager = sectionManager;
         this.sectionFirstPosition = sectionFirstPosition;

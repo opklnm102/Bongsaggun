@@ -39,6 +39,7 @@ public class NetworkManager {
     private String apiSchool = "school";
     private String apiRegion = "region";
     private String apiBtime = "btime";
+    private String apiCategory = "category";
     private String apiZzim = "my_bucket";
     private String apiLogin = "login";
 
@@ -126,7 +127,7 @@ public class NetworkManager {
 
                         mContext.getContentResolver().bulkInsert(BongsaggunContract.SchoolEntry.CONTENT_URI, cvArray);
 
-                        //updateAt보고 db갱신 할것
+                        //Todo: updateAt보고 db갱신 할것
                     }
                 }
             }
@@ -167,7 +168,7 @@ public class NetworkManager {
 
                         mContext.getContentResolver().bulkInsert(BongsaggunContract.RegionEntry.CONTENT_URI, cvArray);
 
-                        //updateAt보고 db갱신 할것
+                        //Todo: updateAt보고 db갱신 할것
                     }
 
                 }
@@ -178,7 +179,7 @@ public class NetworkManager {
     //봉사시간 분류 리스트
     //GET
     public void getTimeList() throws IOException {
-        String url = testEndPoint + "/" + format + "/" + apiBtime;
+        String url = endPoint + "/" + format + "/" + apiBtime;
         Log.d(TAG, " " + url);
 
         Request request = new Request.Builder()
@@ -206,11 +207,51 @@ public class NetworkManager {
                         ContentValues[] cvArray = new ContentValues[cVVector.size()];
                         cVVector.toArray(cvArray);
 
-//                        mContext.getContentResolver().bulkInsert(BongsaggunContract.TimeEntry.CONTENT_URI, cvArray);
+                        mContext.getContentResolver().bulkInsert(BongsaggunContract.TimeEntry.CONTENT_URI, cvArray);
 
-                        //updateAt보고 db갱신 할것
+                        //Todo: updateAt보고 db갱신 할것
                     }
 
+                }
+            }
+        });
+    }
+
+    //카테고리 리스트
+    //GET
+    public void getCategoryList() throws IOException {
+        String url = endPoint + "/" + format + "/" + apiCategory;
+        Log.d(TAG, " " + url);
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code " + response);
+                } else {
+                    String strJson = response.body().string();
+                    Log.d(TAG, "region json " + strJson);
+
+                    Vector<ContentValues> cVVector = JsonParser.jsonCategoryListParser(strJson);  //파싱한거 넘기기
+
+                    //add to database
+                    if (cVVector.size() > 0) {
+                        ContentValues[] cvArray = new ContentValues[cVVector.size()];
+                        cVVector.toArray(cvArray);
+
+                        mContext.getContentResolver().bulkInsert(BongsaggunContract.CategoryEntry.CONTENT_URI, cvArray);
+
+                        //Todo: updateAt보고 db갱신 할것
+                    }
                 }
             }
         });
@@ -249,6 +290,7 @@ public class NetworkManager {
 
                         mContext.getContentResolver().bulkInsert(BongsaggunContract.VoluntaryEntry.CONTENT_URI, cvArray);
 
+                        //Todo: updateAt보고 db갱신 할것
                         // delete old data so we don't build up an endless history
 //                        mContext.getContentResolver().delete(BongsaggunContract.VoluntaryEntry.CONTENT_URI,
 //                                BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_UPDATEAT + " <= ?",
@@ -262,6 +304,7 @@ public class NetworkManager {
         });
     }
 
+    //Todo: 나중에
     //봉사 리스트
     //GET
     //몇번 인덱스(offset)부터 몇개까지(limit)
@@ -293,6 +336,7 @@ public class NetworkManager {
         });
     }
 
+    //Todo: 나중에
     //찜 목록
     //GET
     public void getZzimList(int userId) {
@@ -320,6 +364,7 @@ public class NetworkManager {
         });
     }
 
+    //Todo: 나중에
     //찜 추가
     //GET
     public void addZzim(int userId, int voluntaryId) {
@@ -383,10 +428,11 @@ public class NetworkManager {
 //            .addQueryParameter("q",)
     }
 
+
+
     //사용 example
 //    try {
 //        NetworkManager manager = NetworkManager.getInstance();
-//
 //        manager.getRegionList();
 //        manager.getSchoolList();
 //        manager.getAllVoluntaryList();
@@ -399,6 +445,4 @@ public class NetworkManager {
 //    } catch (IOException e) {
 //        e.printStackTrace();
 //    }
-
-
 }

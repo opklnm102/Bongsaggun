@@ -92,7 +92,9 @@ public class MainActivity extends AppCompatActivity {
             NetworkManager.getInstance(this).getSchoolList();
             NetworkManager.getInstance(this).getRegionList();
             NetworkManager.getInstance(this).getTimeList();
+            NetworkManager.getInstance(this).getCategoryList();
             NetworkManager.getInstance(this).getAllVoluntaryList();
+
 
             Cursor c = getContentResolver().query(BongsaggunContract.VoluntaryEntry.CONTENT_URI, null, null, null, null);
 

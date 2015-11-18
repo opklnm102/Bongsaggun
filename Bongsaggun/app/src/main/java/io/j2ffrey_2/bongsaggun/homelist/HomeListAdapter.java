@@ -2,7 +2,6 @@ package io.j2ffrey_2.bongsaggun.homelist;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.net.LinkAddress;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,9 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-
-import java.util.Collections;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -50,6 +46,8 @@ public class HomeListAdapter extends CursorRecyclerViewAdapter<HomeListAdapter.H
     public void onBindViewHolder(HomeListViewHolder viewHolder, Cursor cursor) {
         HomeListItem homeListItem = HomeListItem.fromCursor(cursor);
 
+
+
         viewHolder.tvTitle.setText(homeListItem.getTitle());
 
         String imgSumailUrl = homeListItem.getImgSumnailUrl();
@@ -57,16 +55,25 @@ public class HomeListAdapter extends CursorRecyclerViewAdapter<HomeListAdapter.H
         Log.e(TAG,imgSumailUrl);
 
         if(!"null".equals(imgSumailUrl)){
-            Glide.with(mContext).load(imgSumailUrl).into(viewHolder.ivSumnail);
+            Glide.with(mContext).
+                    load(imgSumailUrl)
+                    .centerCrop()
+                    .placeholder(R.mipmap.ic_logo)
+                    .crossFade()
+                    .into(viewHolder.ivSumnail);
         }else{
-            Glide.with(mContext).load(R.mipmap.ic_launcher).into(viewHolder.ivSumnail);
+            Glide.with(mContext).
+                    load(R.mipmap.ic_logo)
+                    .centerCrop()
+                    .crossFade()
+                    .into(viewHolder.ivSumnail);
         }
 //        viewHolder.ivSumnail.setImageResource(homeListItem.getImgSumnail());
 
         viewHolder.tvDday.setText("D-" + homeListItem.getdDay());
-        viewHolder.tvVoluntaryPeriodStart.setText(homeListItem.getVoluntaryPeriodStart());
-        viewHolder.tvVoluntaryPeriodEnd.setText(homeListItem.getVoluntaryPeriodEnd());
-        viewHolder.tvVoluntaryWorkLocation.setText(homeListItem.getVoluntaryLocation());
+        viewHolder.tvVoluntaryPeriodStart.setText(homeListItem.getVoluntaryDateRecruitStart());
+        viewHolder.tvVoluntaryPeriodEnd.setText(homeListItem.getVoluntaryDateRecruitEnd());
+        viewHolder.tvVoluntaryWorkLocation.setText(homeListItem.getVoluntaryRegion());
         viewHolder.tvVoluntaryWorkTime.setText(homeListItem.getVoluntaryTime() + "시간");
     }
 

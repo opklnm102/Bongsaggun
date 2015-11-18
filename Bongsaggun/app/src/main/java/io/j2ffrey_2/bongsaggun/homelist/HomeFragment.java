@@ -22,27 +22,21 @@ import io.j2ffrey_2.bongsaggun.R;
 
 public class HomeFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    public static final String TAG = "HomeFragment";
+    public static final String TAG = HomeFragment.class.getSimpleName();
 
+    //Todo: 보여줘야 할것, 메인이미지, 제목, 모집기간 시작, 종료, 봉사시간, 지역, D-day(모집마감부터 계산)
     private static final int HOMELIST_LOADER = 0;
     private static final String[] HOMELIST_COLUMNS = {
-            BongsaggunContract.VoluntaryEntry._ID,
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID,
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TITLE,
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CONTENT,
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ADDRESS,
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_APPROVAL,
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START,
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END,
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_REAL_START,
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_REAL_END,
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_MAINIMAGEURL,
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_POSTERIMAGEURL,
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CLERKNAME,
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CLERKCALL,
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CLERKEMAIL,
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_REQUIREMENT,
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TIME
+            BongsaggunContract.VoluntaryEntry._ID,  //쿼리용
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID,  //쿼리용
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TITLE,  //제목
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START,  //모집기간 시작
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END,  //모집기간 종료
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_MAINIMAGEURL,  //메인 이미지
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TIME,  //봉사시간
+
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID,  //지역
+            //d-day는 모집마감일부터 계산
     };
 
     @Bind(R.id.recyclerView_home)
@@ -50,40 +44,12 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
 
     HomeListAdapter mHomeListAdapter;
 
-
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
         return fragment;
     }
 
     public HomeFragment() {
-    }
-
-    //getdata
-    public List<HomeListItem> getData() {
-        List<HomeListItem> data = new ArrayList<>();
-        Log.i("MyActivity", "MyClass.getView() — get item number ");
-        String[] titles = {"유기견 봉사활동", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2"
-                , "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2"
-                , "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2"
-                , "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2"
-                , "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2", "봉사꾼2"};
-
-        for (int i = 0; i < titles.length; i++) {
-            HomeListItem current = new HomeListItem();
-
-            current.setTitle(titles[i]);
-            current.setImgSumnail(R.mipmap.ic_launcher);
-            current.setdDay(0);
-            current.setVoluntaryPeriodStart("2015.3.13");
-            current.setVoluntaryPeriodEnd("2015.3.20");
-            current.setVoluntaryLocation("서울 서초구");
-            current.setVoluntaryTime(13);
-
-            data.add(current);
-        }
-
-        return data;
     }
 
     @Override

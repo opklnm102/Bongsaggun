@@ -112,7 +112,7 @@ public class BongsaggunContract {
         //COLUMN_TIME_ID를 기준으로 정렬
         public static final String SORT_ORDER_DEFAULT = COLUMN_TIME_ID + " ASC";
 
-        public static Uri buildRegionUri(long id) {
+        public static Uri buildTimeUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }
@@ -139,7 +139,7 @@ public class BongsaggunContract {
         //COLUMN_CATEGORY_ID를 기준으로 정렬
         public static final String SORT_ORDER_DEFAULT = COLUMN_CATEGORY_ID + " ASC";
 
-        public static Uri buildSchoolUri(long id) {
+        public static Uri buildCategoryUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }
@@ -175,6 +175,7 @@ public class BongsaggunContract {
 
         public static final String TABLE_NAME = "voluntary";
 
+        //Todo: 찜여부 컬럼 추가
         //컬럼속성
         public static final String COLUMN_VOLUNTARY_ID = "voluntary_id";  //INTEGER
         public static final String COLUMN_VOLUNTARY_TITLE = "voluntary_title";  //TEXT  제목
@@ -235,6 +236,19 @@ public class BongsaggunContract {
 //        public static final String COLUMN_VOLUNTARY_BTIME = "voluntary_btime";  //TEXT  봉사시간 (검색시 사용)
 //        public static final String COLUMN_VOLUNTARY_REGION = "voluntary_regioin";  //TEXT  활동지역 (검색시 사용)
 //        public static final String COLUMN_VOLUNTARY_SCHOOL = "voluntary_school";  //INTEGER  학교 (검색시 사용)
+
+        public static final String[] PROJECTION_ALL = {COLUMN_VOLUNTARY_ID, COLUMN_VOLUNTARY_TITLE, COLUMN_VOLUNTARY_SUMMARY,
+                COLUMN_VOLUNTARY_CONTENT, COLUMN_VOLUNTARY_CONTENTETC, COLUMN_VOLUNTARY_ADDRESS, COLUMN_VOLUNTARY_APPROVAL,
+                COLUMN_VOLUNTARY_LINK, COLUMN_VOLUNTARY_DATE_RECRUIT_START, COLUMN_VOLUNTARY_DATE_RECRUIT_END, COLUMN_VOLUNTARY_DATE_REAL_START,
+                COLUMN_VOLUNTARY_DATE_REAL_END, COLUMN_VOLUNTARY_TIME, COLUMN_VOLUNTARY_MAINIMAGEURL, COLUMN_VOLUNTARY_POSTERIMAGEURL,
+                COLUMN_VOLUNTARY_INCENTIVE, COLUMN_VOLUNTARY_REQUIREMENT, COLUMN_VOLUNTARY_RECRUIT_PEOPLE_TOTAL, COLUMN_VOLUNTARY_RECRUIT_PEOPLE_CURRENT,
+                COLUMN_VOLUNTARY_STATUS, COLUMN_VOLUNTARY_CLERKNAME, COLUMN_VOLUNTARY_CLERKCALL, COLUMN_VOLUNTARY_CLERKEMAIL, COLUMN_VOLUNTARY_CLERKLINK,
+                COLUMN_VOLUNTARY_ORIGANIZATIONID, COLUMN_VOLUNTARY_REGIONID, COLUMN_VOLUNTARY_SCHOOLID, COLUMN_VOLUNTARY_CATEGORYID, COLUMN_VOLUNTARY_BTIMEID,
+                COLUMN_VOLUNTARY_UPDATEAT
+        };
+
+        //COLUMN_VOLUNTARY_ID를 기준으로 정렬
+        public static final String SORT_ORDER_DEFAULT = COLUMN_VOLUNTARY_ID + " DESC";
 
         public static Uri buildVoluntaryUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
