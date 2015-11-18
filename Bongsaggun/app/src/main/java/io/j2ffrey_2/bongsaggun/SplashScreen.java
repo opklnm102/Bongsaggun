@@ -40,8 +40,6 @@ public class SplashScreen extends Activity {
         sa.startAnimation(saAni);
         ggun.startAnimation(ggunAni);
 
-
-
         new Handler().postDelayed(new Runnable() {
 
             /*

@@ -176,6 +176,7 @@ public class NetworkManager {
     }
 
     //봉사시간 분류 리스트
+    //GET
     public void getTimeList() throws IOException {
         String url = testEndPoint + "/" + format + "/" + apiBtime;
         Log.d(TAG, " " + url);
@@ -215,7 +216,6 @@ public class NetworkManager {
         });
     }
 
-
     //전체 봉사 리스트
     //GET
     public void getAllVoluntaryList() throws IOException {
@@ -249,7 +249,12 @@ public class NetworkManager {
 
                         mContext.getContentResolver().bulkInsert(BongsaggunContract.VoluntaryEntry.CONTENT_URI, cvArray);
 
-                        //updateAt보고 db갱신 할것
+                        // delete old data so we don't build up an endless history
+//                        mContext.getContentResolver().delete(BongsaggunContract.VoluntaryEntry.CONTENT_URI,
+//                                BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_UPDATEAT + " <= ?",
+//                                new String[] { });
+
+
                     }
 
                 }
@@ -282,9 +287,7 @@ public class NetworkManager {
                     String strJson = response.body().string();
                     Log.d(TAG, "voluntary json " + strJson);
 
-
                     JsonParser.jsonVoluntaryListParser(strJson);  //파싱한거 넘기기
-
                 }
             }
         });

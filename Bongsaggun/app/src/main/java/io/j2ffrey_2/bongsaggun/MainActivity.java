@@ -94,6 +94,15 @@ public class MainActivity extends AppCompatActivity {
             NetworkManager.getInstance(this).getTimeList();
             NetworkManager.getInstance(this).getAllVoluntaryList();
 
+            Cursor c = getContentResolver().query(BongsaggunContract.VoluntaryEntry.CONTENT_URI, null, null, null, null);
+
+            //로그에 결과 출력
+            while (c.moveToNext()) {
+                Log.i(TAG, " " + c.getInt(0) +
+                        c.getInt(1) + " " + c.getString(2) + " " + c.getString(6) + " " + c.getString(7) + " " + c.getString(8) + " " + c.getString(9));
+            }
+
+
 //            printLogContactData(getContactCursor());
 
         } catch (IOException e) {
@@ -207,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
 
-        if(id == R.id.action_search){
+        if (id == R.id.action_search) {
             Log.e(TAG, " search");
 
             Intent intent = new Intent(MainActivity.this, SearchMainActivity.class);

@@ -1,17 +1,12 @@
 package io.j2ffrey_2.bongsaggun;
 
-import android.content.Intent;
+import android.app.LoaderManager;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 
 public class HomeFragment extends Fragment {

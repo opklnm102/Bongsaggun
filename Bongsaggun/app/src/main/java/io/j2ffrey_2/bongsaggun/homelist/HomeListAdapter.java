@@ -1,69 +1,73 @@
 package io.j2ffrey_2.bongsaggun.homelist;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.net.LinkAddress;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
-
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.Collections;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.j2ffrey_2.bongsaggun.CursorRecyclerViewAdapter;
 import io.j2ffrey_2.bongsaggun.R;
 
 /**
  * Created by vantovan on 2015. 10. 6..
  */
 
-public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeListViewHolder> {
+public class HomeListAdapter extends CursorRecyclerViewAdapter<HomeListAdapter.HomeListViewHolder> {
+
+    public static final String TAG = HomeListAdapter.class.getSimpleName();
 
     private Context mContext;
-    private LayoutInflater inflater;
-    private List items;
+    private final LayoutInflater mInflater;
 
-    // 뿌려주는 값 받음
-    List<HomeListItem> mDataset = Collections.emptyList();
-
-    public HomeListAdapter(Context context, List<HomeListItem> data) {
+    public HomeListAdapter(Context context, Cursor cursor) {
+        super(context, cursor);
         mContext = context;
-        inflater = LayoutInflater.from(context);
-        mDataset = data;
+        mInflater = LayoutInflater.from(mContext);
     }
-    // Provide a suitable constructor (depends on the kind of dataset)
 
-
-    // Create new views (invoked by the layout manager)
     @Override
     public HomeListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
-        View view = inflater.inflate(R.layout.item_homelist, parent, false);
+        View itemView = mInflater.inflate(R.layout.item_homelist, parent, false);
 
-        return new HomeListViewHolder(view);
+        return new HomeListViewHolder(itemView);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
-    public void onBindViewHolder(HomeListViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        HomeListItem current = mDataset.get(position);  //get current item
+    @Override
+    public void onBindViewHolder(HomeListViewHolder viewHolder, Cursor cursor) {
+        HomeListItem homeListItem = HomeListItem.fromCursor(cursor);
 
-        holder.tvTitle.setText(current.getTitle());
-        holder.ivSumnail.setImageResource(current.getImgSumnail());
-        holder.tvDday.setText("D-" + current.getdDay());
-        holder.tvVoluntaryPeriodStart.setText(current.getVoluntaryPeriodStart());
-        holder.tvVoluntaryPeriodEnd.setText(current.getVoluntaryPeriodEnd());
-        holder.tvVoluntaryWorkLocation.setText(current.getVoluntaryLocation());
-        holder.tvVoluntaryWorkTime.setText(current.getVoluntaryTime() + "시간");
-    }
+        viewHolder.tvTitle.setText(homeListItem.getTitle());
 
-    // Return the size of your dataset (invoked by the layout manager)
-    public int getItemCount() {
-        return mDataset.size();
+        String imgSumailUrl = homeListItem.getImgSumnailUrl();
+
+        Log.e(TAG,imgSumailUrl);
+
+        if(!"null".equals(imgSumailUrl)){
+            Glide.with(mContext).load(imgSumailUrl).into(viewHolder.ivSumnail);
+        }else{
+            Glide.with(mContext).load(R.mipmap.ic_launcher).into(viewHolder.ivSumnail);
+        }
+//        viewHolder.ivSumnail.setImageResource(homeListItem.getImgSumnail());
+
+        viewHolder.tvDday.setText("D-" + homeListItem.getdDay());
+        viewHolder.tvVoluntaryPeriodStart.setText(homeListItem.getVoluntaryPeriodStart());
+        viewHolder.tvVoluntaryPeriodEnd.setText(homeListItem.getVoluntaryPeriodEnd());
+        viewHolder.tvVoluntaryWorkLocation.setText(homeListItem.getVoluntaryLocation());
+        viewHolder.tvVoluntaryWorkTime.setText(homeListItem.getVoluntaryTime() + "시간");
     }
 
     public static class HomeListViewHolder extends RecyclerView.ViewHolder {

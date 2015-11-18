@@ -36,8 +36,12 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
     RelativeLayout rlayoutMyVoluntaryList;
     @Bind(R.id.container_zzimList)
     RelativeLayout rlayoutZzimList;
+    @Bind(R.id.container_webSite)
+    RelativeLayout rlayoutWebSitet;
     @Bind(R.id.container_inquire)
     RelativeLayout rlayoutInquire;
+    @Bind(R.id.container_evaluation)
+    RelativeLayout rlayoutEvaluation;
     @Bind(R.id.container_aboutAs)
     RelativeLayout rlayoutAboutAs;
     @Bind(R.id.container_settings)
@@ -69,8 +73,7 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_page, container, false);
         ButterKnife.bind(this, view);
         return view;
@@ -80,15 +83,18 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initProfile();
+        initProfile();  //Todo: 로그인시 호출
     }
 
     //Todo: 로그인시 호출
     void initProfile() {
+
+        //Todo: 로그인시 분기 처리, 이미지 o,x
+        ivProfile.setImageResource(R.drawable.cheese_1);
+
         setMyVoluntaryCount(2);
         setZzimCount(2);
         tvName.setText("Jeffery Lee");
-        ivProfile.setImageResource(R.drawable.cheese_1);
         tvActivityTime.setText("33");
     }
 
@@ -100,27 +106,33 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
         tvZzimCount.setText(count + "건");
     }
 
-    @OnClick({R.id.container_login, R.id.container_myVoluntaryList, R.id.container_zzimList, R.id.container_inquire, R.id.container_aboutAs, R.id.container_settings})
+    @OnClick({R.id.container_login, R.id.container_myVoluntaryList, R.id.container_zzimList, R.id.container_webSite, R.id.container_inquire, R.id.container_evaluation, R.id.container_aboutAs, R.id.container_settings})
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()){
-            case R.id.container_login:
+        switch (view.getId()) {
+            case R.id.container_login:  //나중에
                 Log.d(TAG, " container_login");
                 break;
-            case R.id.container_myVoluntaryList:
+            case R.id.container_myVoluntaryList:  //나중에
                 Log.d(TAG, " container_myVoluntaryList");
                 break;
-            case R.id.container_zzimList:
+            case R.id.container_zzimList:  //나중에
                 Log.d(TAG, " container_zzimList");
                 break;
-            case R.id.container_inquire:
+            case R.id.container_webSite:  //Todo: 웹사이트로 연결, 암시적 인텐트
+                Log.d(TAG, " container_webSite");
+                break;
+            case R.id.container_inquire:  //Todo: 메일 보내기, 암시적 인텐트
                 Log.d(TAG, " container_inquire");
                 break;
-            case R.id.container_aboutAs:
+            case R.id.container_evaluation:  //나중에
+                Log.d(TAG, " container_evaluation");
+                break;
+            case R.id.container_aboutAs:  //나중에
                 Log.d(TAG, " container_aboutAs");
                 break;
-            case R.id.container_settings:
+            case R.id.container_settings:  //나중에
                 Log.d(TAG, " container_settings");
                 break;
         }

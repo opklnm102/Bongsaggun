@@ -35,42 +35,77 @@ public class JsonParser {
             for (int i = 0, j = 0; i < jsonArray.length(); i++, j = 0) {
                 JSONObject json = jsonArray.getJSONObject(i);
 
-                Integer id = json.getInt(jsonName[j++]);
-                Boolean approval = json.optBoolean(jsonName[j++], false);
-                String address = json.optString(jsonName[j++], "");
-                JSONObject joMainImage = json.getJSONObject(jsonName[j++]);
+//                Integer id = json.getInt(jsonName[j++]);
+//                Boolean approval = json.optBoolean(jsonName[j++], false);
+//                String address = json.optString(jsonName[j++], "");
+//                JSONObject joMainImage = json.getJSONObject(jsonName[j++]);
+//                String urlMainImage = joMainImage.optString("url", "");
+//                JSONObject joPosterImage = json.getJSONObject(jsonName[j++]);
+//                String urlPosterImage = joPosterImage.optString("url", "");
+//                String title = json.optString(jsonName[j++], "");
+//                String content = json.optString(jsonName[j++], "");
+//                Boolean isEdu = json.optBoolean(jsonName[j++], false);
+//                Integer status = json.optInt(jsonName[j++], -1);
+//                Integer origanizationId = json.optInt(jsonName[j++], -1);
+//                String clerkName = json.optString(jsonName[j++], "");
+//                String clerkCall = json.optString(jsonName[j++], "");
+//                String clerkEmail = json.optString(jsonName[j++], "");
+//                Boolean isRegular = json.optBoolean(jsonName[j++], false);
+//                String dateRecruitStart = json.optString(jsonName[j++], "");
+//                String dateRecruitEnd = json.optString(jsonName[j++], "");
+//                String dateRealStart = json.optString(jsonName[j++], "");
+//                String dateRealEnd = json.optString(jsonName[j++], "");
+//                String timeDailyStart = json.optString(jsonName[j++], "");
+//                String timeDailyEnd = json.optString(jsonName[j++], "");
+//                Integer timeExpectTotal = json.optInt(jsonName[j++], -1);
+//                Integer vltrNum = json.optInt(jsonName[j++], -1);
+//                Integer vltrAgeId = json.optInt(jsonName[j++], -1);
+//                Integer vltrSex = json.optInt(jsonName[j++], -1);
+//                String vltrReq = json.optString(jsonName[j++], "");
+//                Integer regionId = json.optInt(jsonName[j++], -1);
+//                Integer schoolId = json.optInt(jsonName[j++], -1);
+//                Integer bTimeId = json.optInt(jsonName[j++], -1);
+//                Integer categoryId = json.optInt(jsonName[j++], -1);
+//                String adminAdd = json.optString(jsonName[j++], "");
+//                String admin_mod = json.optString(jsonName[j++], "");
+//                Integer actTime = json.optInt(jsonName[j++], -1);
+//                String createdAt = json.getString(jsonName[j++]);
+//                String updatedAt = json.getString(jsonName[j++]);
+
+
+                Integer id = json.getInt("id");
+                Boolean approval = json.optBoolean("is_approval", false);
+                String address = json.optString("address", "");
+                JSONObject joMainImage = json.getJSONObject("img_main");
                 String urlMainImage = joMainImage.optString("url", "");
-                JSONObject joPosterImage = json.getJSONObject(jsonName[j++]);
+                JSONObject joPosterImage = json.getJSONObject("img_poster");
                 String urlPosterImage = joPosterImage.optString("url", "");
-                String title = json.optString(jsonName[j++], "");
-                String content = json.optString(jsonName[j++], "");
-                Boolean isEdu = json.optBoolean(jsonName[j++], false);
-                Integer status = json.optInt(jsonName[j++], -1);
-                Integer origanizationId = json.optInt(jsonName[j++], -1);
-                String clerkName = json.optString(jsonName[j++], "");
-                String clerkCall = json.optString(jsonName[j++], "");
-                String clerkEmail = json.optString(jsonName[j++], "");
-                Boolean isRegular = json.optBoolean(jsonName[j++], false);
-                String dateRecruitStart = json.optString(jsonName[j++], "");
-                String dateRecruitEnd = json.optString(jsonName[j++], "");
-                String dateRealStart = json.optString(jsonName[j++], "");
-                String dateRealEnd = json.optString(jsonName[j++], "");
-                String timeDailyStart = json.optString(jsonName[j++], "");
-                String timeDailyEnd = json.optString(jsonName[j++], "");
-                Integer timeExpectTotal = json.optInt(jsonName[j++], -1);
-                Integer vltrNum = json.optInt(jsonName[j++], -1);
-                Integer vltrAgeId = json.optInt(jsonName[j++], -1);
-                Integer vltrSex = json.optInt(jsonName[j++], -1);
-                String vltrReq = json.optString(jsonName[j++], "");
-                Integer regionId = json.optInt(jsonName[j++], -1);
-                Integer schoolId = json.optInt(jsonName[j++], -1);
-                Integer bTimeId = json.optInt(jsonName[j++], -1);
-                Integer categoryId = json.optInt(jsonName[j++], -1);
-                String adminAdd = json.optString(jsonName[j++], "");
-                String admin_mod = json.optString(jsonName[j++], "");
-                Integer actTime = json.optInt(jsonName[j++], -1);
-                String createdAt = json.getString(jsonName[j++]);
-                String updatedAt = json.getString(jsonName[j++]);
+                String title = json.optString("name", "");
+                String content = json.optString("content", "");
+                String summary = json.optString("summary", "");
+                String contentEtc = json.optString("content_etc", "");
+                String incentive = json.optString("incentive", "");
+                String status = json.optString("status", "");
+                String link = json.optString("link", "");
+                String dateRecruitStart = json.optString("date_recruit_start", "");
+                String dateRecruitEnd = json.optString("date_recruit_end", "");
+                String dateRealStart = json.optString("date_real_start", "");
+                String dateRealEnd = json.optString("date_real_end", "");
+                String clerkName = json.optString("clerk_name", "");
+                String clerkCall = json.optString("clerk_call", "");
+                String clerkEmail = json.optString("clerk_email", "");
+                String clerkLink = json.optString("clerk_link", "");
+                String vltrReq = json.optString("vltr_req", "");
+                String recruitPeopleTotal = json.optString("vltr_num", "");
+                String recruitPeopleCurrent = json.optString("vltr_num2", "");
+                Integer origanizationId = json.optInt("organization_id", -1);
+                Integer regionId = json.optInt("region_id", -1);
+                Integer schoolId = json.optInt("school_id", -1);
+                Integer bTimeId = json.optInt("btime_id", -1);
+                Integer categoryId = json.optInt("category_id", -1);
+                Integer timeExpectTotal = json.optInt("time_expect_total", -1);
+                String updatedAt = json.getString("updated_at");
+
 
                 //파싱 끝 저장
 //                Log.d(TAG, "parseredData " + id + " " + approval + " " + address + " " + urlMainImage + " " + urlPosterImage + " " + title + " " + content + " " + isEdu + " " + status + " " + origanizationId
@@ -81,23 +116,33 @@ public class JsonParser {
                 ContentValues voluntaryValues = new ContentValues();
                 voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID, id);
                 voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TITLE, title);
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ADDRESS, address);
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_SUMMARY, summary);
                 voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CONTENT, content);
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CONTENTETC, contentEtc);
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_INCENTIVE, incentive);
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_STATUS, status);
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_LINK, link);
                 voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_APPROVAL, approval);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATERECRUITSTART, dateRecruitStart);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATERECRUITEND, dateRecruitEnd);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATESTART, dateRealStart);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATEEND, dateRealEnd);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_IMAGEID, clerkEmail);
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START, dateRecruitStart);
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END, dateRecruitEnd);
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_REAL_START, dateRealStart);
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_REAL_END, dateRealEnd);
                 voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_MAINIMAGEURL, urlMainImage);
                 voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_POSTERIMAGEURL, urlPosterImage);
                 voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CLERKNAME, clerkName);
                 voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CLERKCALL, clerkCall);
                 voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CLERKEMAIL, clerkEmail);
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CLERKLINK, clerkLink);
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_REQUIREMENT, vltrReq);
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_RECRUIT_PEOPLE_TOTAL, recruitPeopleTotal);
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_RECRUIT_PEOPLE_CURRENT, recruitPeopleCurrent);
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TIME, timeExpectTotal);
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ORIGANIZATIONID, origanizationId);
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CATEGORYID, categoryId);
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_BTIMEID, bTimeId);
                 voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID, regionId);
-//                voluntaryValues.put(VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_REQUIRE, );
-//                voluntaryValues.put(VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_REQUIRESEX, );
                 voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_SCHOOLID, schoolId);
-//                voluntaryValues.put(VoluntaryContract.VoluntaryEntry.COLUMN_VOLUNTARY_TIME, );
                 voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_UPDATEAT, updatedAt);
 
                 cVVector.add(voluntaryValues);
@@ -151,7 +196,6 @@ public class JsonParser {
     public static Vector<ContentValues> jsonRegionListParser(String strJson) {
 
         try {
-
             JSONObject jsonObject = new JSONObject(strJson);
             Log.d(TAG, "jsonObject " + jsonObject);
 
@@ -221,6 +265,44 @@ public class JsonParser {
                 timeValues.put(BongsaggunContract.TimeEntry.COLUMN_TIME_UPDATEAT, updatedAt);
 
                 cVVector.add(timeValues);
+            }
+            return cVVector;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Vector<ContentValues> jsonCategoryListParser(String strJson) {
+
+        try {
+            JSONObject jsonObject = new JSONObject(strJson);
+            Log.d(TAG, "jsonObject " + jsonObject);
+
+            JSONArray jsonArray = jsonObject.getJSONArray("Category");
+
+            String[] jsonName = {"id", "name", "created_at", "updated_at"};
+
+            Vector<ContentValues> cVVector = new Vector<>(jsonArray.length());
+
+            for (int i = 0, j = 0; i < jsonArray.length(); i++, j = 0) {
+                JSONObject json = jsonArray.getJSONObject(i);
+
+                Integer id = json.getInt(jsonName[j++]);
+                String name = json.getString(jsonName[j++]);
+                String createdAt = json.getString(jsonName[j++]);
+                String updatedAt = json.getString(jsonName[j++]);
+
+                //파싱 끝 저장
+//                Log.d(TAG, "parseredData " + id + " " + name + " " + createdAt + " " + updatedAt);
+
+                ContentValues categoryValues = new ContentValues();
+                categoryValues.put(BongsaggunContract.CategoryEntry.COLUMN_CATEGORY_ID, id);
+                categoryValues.put(BongsaggunContract.CategoryEntry.COLUMN_CATEGORY_NAME, name);
+                categoryValues.put(BongsaggunContract.CategoryEntry.COLUMN_CATEGORY_CREATEAT, createdAt);
+                categoryValues.put(BongsaggunContract.CategoryEntry.COLUMN_CATEGORY_UPDATEAT, updatedAt);
+
+                cVVector.add(categoryValues);
             }
             return cVVector;
         } catch (JSONException e) {

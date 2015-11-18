@@ -7,68 +7,70 @@
               tools:context="io.j2ffrey_2.bongsaggun.MyPageFragment">
 
     <RelativeLayout
-        android:id="@+id/my_page_image_container"
+        android:id="@+id/my_page_profile_container"
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:background="@color/app_theme">
 
         <TextView
-            android:id="@+id/textView_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Jeffery Lee"/>
+            android:visibility="gone"
+        android:id="@+id/textView_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Jeffery Lee"/>
 
         <!--<com.pkmmte.view.CircularImageView-->
-        <!--android:id="@+id/my_page_image_View"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:id="@+id/imageView_profile"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:src="@mipmap/ic_launcher"-->
+            <!--app:border="true"-->
+            <!--app:border_color="#EEEEEE"-->
+            <!--app:border_width="4dp"-->
+            <!--app:shadow="true"/>-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/imageView_profile"-->
         <!--android:layout_width="100dp"-->
         <!--android:layout_height="100dp"-->
         <!--android:layout_above="@id/textView_name"-->
         <!--android:layout_centerHorizontal="true"-->
         <!--android:layout_marginTop="10dp"-->
-        <!--android:src="@mipmap/ic_launcher"-->
-        <!--app:border="true"-->
-        <!--app:border_color="#EEEEEE"-->
-        <!--app:border_width="4dp"-->
-        <!--app:shadow="true"/>-->
-
-        <ImageView
-            android:id="@+id/imageView_profile"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_above="@id/textView_name"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:src="@mipmap/ic_launcher"/>
+        <!--android:src="@mipmap/ic_launcher"/>-->
 
         <TextView
-            android:id="@+id/textView_activity_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView_name"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="4dp"
-            android:text="@string/myPage_activity_time"/>
+            android:visibility="gone"
+        android:id="@+id/textView_activity_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="4dp"
+        android:text="@string/myPage_activity_time"/>
 
         <TextView
-            android:id="@+id/textView_activity_Time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView_activity_text"
-            android:layout_centerHorizontal="true"
-            android:text="32"
-            android:textColor="@color/myPage"
-            android:textSize="20sp"/>
+            android:visibility="gone"
+        android:id="@+id/textView_activity_Time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_activity_text"
+        android:layout_centerHorizontal="true"
+        android:text="32"
+        android:textColor="@color/myPage"
+        android:textSize="20sp"/>
 
         <TextView
-            android:id="@+id/textView_activity_suffix"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/textView_activity_Time"
-            android:layout_toRightOf="@id/textView_activity_Time"
-            android:text="H"/>
+            android:visibility="gone"
+        android:id="@+id/textView_activity_suffix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/textView_activity_Time"
+        android:layout_toRightOf="@id/textView_activity_Time"
+        android:text="H"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -103,6 +105,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/container_myVoluntaryList"
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -133,6 +136,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/container_zzimList"
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -163,6 +167,27 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/container_webSite"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/myPage_webSite"/>
+
+            <ImageView
+                android:id="@+id/imageView_webSite"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_expand_24dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/container_inquire"
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -184,6 +209,29 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/container_evaluation"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/myPage_evaluation"/>
+
+            <ImageView
+                android:id="@+id/imageView_evaluation"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_expand_24dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/container_aboutAs"
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -205,6 +253,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/container_settings"
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -225,7 +274,6 @@
                 android:src="@drawable/ic_expand_24dp"/>
         </RelativeLayout>
     </LinearLayout>
-
 
 </LinearLayout>
 

@@ -43,7 +43,9 @@
     <string name="myPage_activity_time">활동시간</string>
     <string name="myPage_voluntary_list">나의 봉사목록</string>
     <string name="myPage_voluntary_zzim">찜한 봉사활동</string>
-    <string name="myPage_inquire">문의</string>
+    <string name="myPage_webSite">웹페이지</string>
+    <string name="myPage_inquire">문의하기</string>
+    <string name="myPage_evaluation">평가하기</string>
     <string name="myPage_aboutAs">팀 소개</string>
     <string name="myPage_settings">설정</string>
     <string name="myPage_login">로그인</string>

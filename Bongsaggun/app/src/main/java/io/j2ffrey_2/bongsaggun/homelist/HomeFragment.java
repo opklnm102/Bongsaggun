@@ -1,7 +1,10 @@
 package io.j2ffrey_2.bongsaggun.homelist;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,16 +17,38 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.j2ffrey_2.bongsaggun.BongsaggunContract;
 import io.j2ffrey_2.bongsaggun.R;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     public static final String TAG = "HomeFragment";
+
+    private static final int HOMELIST_LOADER = 0;
+    private static final String[] HOMELIST_COLUMNS = {
+            BongsaggunContract.VoluntaryEntry._ID,
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID,
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TITLE,
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CONTENT,
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ADDRESS,
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_APPROVAL,
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START,
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END,
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_REAL_START,
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_REAL_END,
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_MAINIMAGEURL,
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_POSTERIMAGEURL,
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CLERKNAME,
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CLERKCALL,
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CLERKEMAIL,
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_REQUIREMENT,
+            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TIME
+    };
 
     @Bind(R.id.recyclerView_home)
     RecyclerView rvHomeList;
 
-    HomeListAdapter adapter;
+    HomeListAdapter mHomeListAdapter;
 
 
     public static HomeFragment newInstance() {
@@ -31,7 +56,8 @@ public class HomeFragment extends Fragment {
         return fragment;
     }
 
-    public HomeFragment() {}
+    public HomeFragment() {
+    }
 
     //getdata
     public List<HomeListItem> getData() {
@@ -77,9 +103,38 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        adapter = new HomeListAdapter(getActivity(), getData());
+        mHomeListAdapter = new HomeListAdapter(getActivity(), null);
 
-        rvHomeList.setAdapter(adapter);
+        rvHomeList.setAdapter(mHomeListAdapter);
         rvHomeList.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        getLoaderManager().initLoader(HOMELIST_LOADER, null, this);
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
+
+        String sortOrder = BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID + " DESC";
+
+        return new CursorLoader(getActivity(),
+                BongsaggunContract.VoluntaryEntry.CONTENT_URI,
+                HOMELIST_COLUMNS,
+                null,
+                null,
+                sortOrder);
+    }
+
+    @Override
+    public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {
+        mHomeListAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(android.support.v4.content.Loader<Cursor> loader) {
+        mHomeListAdapter.swapCursor(null);
     }
 }

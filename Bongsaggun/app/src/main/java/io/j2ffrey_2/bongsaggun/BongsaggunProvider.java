@@ -47,8 +47,8 @@ public class BongsaggunProvider extends ContentProvider {
                         "ON " + BongsaggunContract.SchoolEntry.TABLE_NAME + "." + BongsaggunContract.SchoolEntry.COLUMN_SCHOOL_ID +
                         "=" + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_SCHOOLID +
                         " LEFT OUTER JOIN " + BongsaggunContract.ImageEntry.TABLE_NAME +
-                        "ON " + BongsaggunContract.ImageEntry.TABLE_NAME + "." + BongsaggunContract.ImageEntry.COLUMN_IMAGE_ID +
-                        "=" + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_IMAGEID
+                        "ON " + BongsaggunContract.ImageEntry.TABLE_NAME + "." + BongsaggunContract.ImageEntry.COLUMN_IMAGE_FK_VOLUNTARY_ID +
+                        "=" + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID
         );
     }
 
@@ -57,7 +57,7 @@ public class BongsaggunProvider extends ContentProvider {
     //image update할 때 사용
     //voluntary.voluntary_mainImageId = ?
     private static final String imageSelection =
-            BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_IMAGEID + "= ?";
+            BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID + "= ?";
 
 //    private Cursor getVoluntaryInformation(Uri uri, String[] projection, String sortOrder) {
 //        String locationSetting = WeatherContract.WeatherEntry.getLocationSettingFromUri(uri);
