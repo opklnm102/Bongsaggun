@@ -23,19 +23,18 @@ import io.j2ffrey_2.bongsaggun.R;
 public class HomeFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     public static final String TAG = HomeFragment.class.getSimpleName();
-
+    //Todo: 레이아웃 조정
     //Todo: 보여줘야 할것, 메인이미지, 제목, 모집기간 시작, 종료, 봉사시간, 지역, D-day(모집마감부터 계산)
     private static final int HOMELIST_LOADER = 0;
     private static final String[] HOMELIST_COLUMNS = {
-            BongsaggunContract.VoluntaryEntry._ID,  //쿼리용
+            BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry._ID,  //쿼리용
             BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID,  //쿼리용
             BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TITLE,  //제목
             BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START,  //모집기간 시작
             BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END,  //모집기간 종료
             BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_MAINIMAGEURL,  //메인 이미지
             BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TIME,  //봉사시간
-
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID,  //지역
+            BongsaggunContract.RegionEntry.COLUMN_REGION_NAME,  //지역
             //d-day는 모집마감일부터 계산
     };
 

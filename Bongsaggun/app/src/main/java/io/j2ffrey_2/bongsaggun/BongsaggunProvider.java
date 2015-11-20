@@ -43,14 +43,24 @@ public class BongsaggunProvider extends ContentProvider {
         //LEFT OUTER JOIN Image ON Image .id=Voluntary.ImageId
         sVoluntarySettingQueryBuilder.setTables(BongsaggunContract.VoluntaryEntry.TABLE_NAME +
                         " LEFT OUTER JOIN " + BongsaggunContract.RegionEntry.TABLE_NAME +
-                        "ON " + BongsaggunContract.RegionEntry.TABLE_NAME + "." + BongsaggunContract.RegionEntry.COLUMN_REGION_ID +
-                        "=" + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID +
+                        " ON " + BongsaggunContract.RegionEntry.TABLE_NAME + "." + BongsaggunContract.RegionEntry.COLUMN_REGION_ID +
+                        " = " + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID +
+
                         " LEFT OUTER JOIN " + BongsaggunContract.SchoolEntry.TABLE_NAME +
-                        "ON " + BongsaggunContract.SchoolEntry.TABLE_NAME + "." + BongsaggunContract.SchoolEntry.COLUMN_SCHOOL_ID +
-                        "=" + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_SCHOOLID +
+                        " ON " + BongsaggunContract.SchoolEntry.TABLE_NAME + "." + BongsaggunContract.SchoolEntry.COLUMN_SCHOOL_ID +
+                        " = " + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_SCHOOLID +
+
+                        " LEFT OUTER JOIN " + BongsaggunContract.TimeEntry.TABLE_NAME +
+                        " ON " + BongsaggunContract.TimeEntry.TABLE_NAME + "." + BongsaggunContract.TimeEntry.COLUMN_TIME_ID +
+                        " = " + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_BTIMEID +
+
+                        " LEFT OUTER JOIN " + BongsaggunContract.CategoryEntry.TABLE_NAME +
+                        " ON " + BongsaggunContract.CategoryEntry.TABLE_NAME + "." + BongsaggunContract.CategoryEntry.COLUMN_CATEGORY_ID +
+                        " = " + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CATEGORYID +
+
                         " LEFT OUTER JOIN " + BongsaggunContract.ImageEntry.TABLE_NAME +
-                        "ON " + BongsaggunContract.ImageEntry.TABLE_NAME + "." + BongsaggunContract.ImageEntry.COLUMN_IMAGE_FK_VOLUNTARY_ID +
-                        "=" + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID
+                        " ON " + BongsaggunContract.ImageEntry.TABLE_NAME + "." + BongsaggunContract.ImageEntry.COLUMN_IMAGE_FK_VOLUNTARY_ID +
+                        " = " + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID
         );
     }
 
@@ -60,6 +70,23 @@ public class BongsaggunProvider extends ContentProvider {
     //voluntary.voluntary_mainImageId = ?
     private static final String imageSelection =
             BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID + "= ?";
+
+    //HomeList에서 사용
+    private static final String sVoluntaryWithRegionSelection =
+            BongsaggunContract.RegionEntry.TABLE_NAME + "." + BongsaggunContract.RegionEntry.COLUMN_REGION_ID + "= ?";
+
+    private Cursor getHomeList(Uri uri, String[] projection, String sortOrder) {
+
+        return sVoluntarySettingQueryBuilder.query(mOpenHelper.getReadableDatabase(),
+                projection,
+                null,
+                null,
+                null,
+                null,
+                sortOrder
+        );
+    }
+
 
 //    private Cursor getVoluntaryInformation(Uri uri, String[] projection, String sortOrder) {
 //        String locationSetting = WeatherContract.WeatherEntry.getLocationSettingFromUri(uri);
@@ -94,7 +121,7 @@ public class BongsaggunProvider extends ContentProvider {
         return true;
     }
 
-    private void deleteDatabase(){
+    private void deleteDatabase() {
         mOpenHelper.close();
         Context context = getContext();
         BongsaggunDbHelper.deleteDatabase(context);
@@ -139,7 +166,7 @@ public class BongsaggunProvider extends ContentProvider {
         //uri객체를 통해 원하는 요청이 무엇인지 검사
         switch (sUriMatcher.match(uri)) {
             case SCHOOL: {
-                if(TextUtils.isEmpty(sortOrder)){  //정렬값이 없다면 id를 기준으로 오름차순 정렬
+                if (TextUtils.isEmpty(sortOrder)) {  //정렬값이 없다면 id를 기준으로 오름차순 정렬
                     sortOrder = BongsaggunContract.SchoolEntry.SORT_ORDER_DEFAULT;
                 }
                 retCursor = db.query(
@@ -169,7 +196,7 @@ public class BongsaggunProvider extends ContentProvider {
                 break;
             }
             case TIME: {
-                if(TextUtils.isEmpty(sortOrder)){  //정렬값이 없다면 id를 기준으로 오름차순 정렬
+                if (TextUtils.isEmpty(sortOrder)) {  //정렬값이 없다면 id를 기준으로 오름차순 정렬
                     sortOrder = BongsaggunContract.TimeEntry.SORT_ORDER_DEFAULT;
                 }
                 retCursor = db.query(
@@ -184,7 +211,7 @@ public class BongsaggunProvider extends ContentProvider {
                 break;
             }
             case CATEGORY: {
-                if(TextUtils.isEmpty(sortOrder)){  //정렬값이 없다면 id를 기준으로 오름차순 정렬
+                if (TextUtils.isEmpty(sortOrder)) {  //정렬값이 없다면 id를 기준으로 오름차순 정렬
                     sortOrder = BongsaggunContract.CategoryEntry.SORT_ORDER_DEFAULT;
                 }
                 retCursor = db.query(
@@ -211,18 +238,20 @@ public class BongsaggunProvider extends ContentProvider {
                 break;
             }
             case VOLUNTARY: {
-                if(TextUtils.isEmpty(sortOrder)){  //정렬값이 없다면 id를 기준으로 내림차순 정렬
+                if (TextUtils.isEmpty(sortOrder)) {  //정렬값이 없다면 id를 기준으로 내림차순 정렬
                     sortOrder = BongsaggunContract.VoluntaryEntry.SORT_ORDER_DEFAULT;
                 }
-                retCursor = db.query(
-                        BongsaggunContract.VoluntaryEntry.TABLE_NAME,  //테이블 이름
-                        projection,                                //조회할 컬럼이름
-                        selection,                                 //WHERE 절
-                        selectionArgs,                             //WHERE 절 인자
-                        null,                                      //GROUP BY 절
-                        null,                                      //HAVING 절
-                        sortOrder                                  //ORDER BY 절
-                );
+//                retCursor = db.query(
+//                        BongsaggunContract.VoluntaryEntry.TABLE_NAME,  //테이블 이름
+//                        projection,                                //조회할 컬럼이름
+//                        selection,                                 //WHERE 절
+//                        selectionArgs,                             //WHERE 절 인자
+//                        null,                                      //GROUP BY 절
+//                        null,                                      //HAVING 절
+//                        sortOrder                                  //ORDER BY 절
+//                );
+                retCursor = getHomeList(uri, projection, sortOrder);
+
                 break;
             }
             // "voluntary/*/*"

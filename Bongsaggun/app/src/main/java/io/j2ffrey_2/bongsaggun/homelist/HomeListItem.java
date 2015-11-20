@@ -29,7 +29,7 @@ public class HomeListItem {
         item.voluntaryDateRecruitEnd = cursor.getString(cursor.getColumnIndex(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END));
         item.imgSumnailUrl = cursor.getString(cursor.getColumnIndex(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_MAINIMAGEURL));;
         item.voluntaryTime = Integer.valueOf(cursor.getString(cursor.getColumnIndex(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TIME)));
-//        item.voluntaryRegion = cursor.getString(cursor.getColumnIndex(BongsaggunContract.RegionEntry.COLUMN_REGION_NAME));
+        item.voluntaryRegion = cursor.getString(cursor.getColumnIndex(BongsaggunContract.RegionEntry.COLUMN_REGION_NAME));
         item.dDay = TimeUtils.dateToDday(item.voluntaryDateRecruitEnd);
 
         return item;
