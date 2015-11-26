@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.util.Vector;
 
 import io.j2ffrey_2.bongsaggun.BongsaggunContract;
+import io.j2ffrey_2.bongsaggun.TimeUtils;
 
 public class JsonParser {
 
@@ -144,6 +145,16 @@ public class JsonParser {
                 voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID, regionId);
                 voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_SCHOOLID, schoolId);
                 voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_UPDATEAT, updatedAt);
+
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START_YEAR, TimeUtils.dateToYear(dateRecruitStart));
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START_MONTH, TimeUtils.dateToMonth(dateRecruitStart));
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START_DAY, TimeUtils.dateToDay(dateRecruitStart));
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START_DAYOFWEEK, TimeUtils.dateDayOfWeek(dateRecruitStart));
+
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END_YEAR, TimeUtils.dateToYear(dateRecruitEnd));
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END_MONTH, TimeUtils.dateToMonth(dateRecruitEnd));
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END_DAY, TimeUtils.dateToDay(dateRecruitEnd));
+                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END_DAYOFWEEK, TimeUtils.dateDayOfWeek(dateRecruitEnd));
 
                 cVVector.add(voluntaryValues);
             }

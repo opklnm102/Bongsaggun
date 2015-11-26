@@ -36,6 +36,37 @@ public class TimeUtils {
         return Integer.valueOf(str[1]);
     }
 
+    public static int dateToDay(String strDate) {
+
+        String[] str = strDate.split("-");
+
+        return Integer.valueOf(str[2]);
+    }
+
+    public static String dateDayOfWeek(String strDate) {
+
+        final String[] week = {"일", "월", "화", "수", "목", "금", "토"};
+
+        SimpleDateFormat convertedSdf = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+
+        Date timeDate = null;  //String -> Date
+        try {
+            timeDate = convertedSdf.parse(strDate);
+
+            Log.d(TAG, " " + timeDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        return week[calendar.get(Calendar.DAY_OF_WEEK)-1];
+    }
+
     public static int dateToDday(String strDate) {
 
         SimpleDateFormat convertedSdf = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);

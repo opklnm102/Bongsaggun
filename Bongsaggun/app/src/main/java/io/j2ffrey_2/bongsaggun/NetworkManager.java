@@ -97,7 +97,7 @@ public class NetworkManager {
     //학교 리스트
     //GET
     public void getSchoolList() throws IOException {
-        String url = endPoint + "/" + format + "/" + apiSchool;
+        String url = testEndPoint + "/" + format + "/" + apiSchool;
         Log.d(TAG, " " + url);
 
         Request request = new Request.Builder()
@@ -137,7 +137,7 @@ public class NetworkManager {
     //지역 리스트
     //GET
     public void getRegionList() throws IOException {
-        String url = endPoint + "/" + format + "/" + apiRegion;
+        String url = testEndPoint + "/" + format + "/" + apiRegion;
         Log.d(TAG, " " + url);
 
         Request request = new Request.Builder()
@@ -179,7 +179,7 @@ public class NetworkManager {
     //봉사시간 분류 리스트
     //GET
     public void getTimeList() throws IOException {
-        String url = endPoint + "/" + format + "/" + apiBtime;
+        String url = testEndPoint + "/" + format + "/" + apiBtime;
         Log.d(TAG, " " + url);
 
         Request request = new Request.Builder()
@@ -220,7 +220,7 @@ public class NetworkManager {
     //카테고리 리스트
     //GET
     public void getCategoryList() throws IOException {
-        String url = endPoint + "/" + format + "/" + apiCategory;
+        String url = testEndPoint + "/" + format + "/" + apiCategory;
         Log.d(TAG, " " + url);
 
         Request request = new Request.Builder()
@@ -260,7 +260,7 @@ public class NetworkManager {
     //전체 봉사 리스트
     //GET
     public void getAllVoluntaryList() throws IOException {
-        String url = endPoint + "/" + format + "/" + apiVoluntary;
+        String url = testEndPoint + "/" + format + "/" + apiVoluntary;
         Log.d(TAG, " " + url);
 
         Request request = new Request.Builder()
@@ -309,7 +309,7 @@ public class NetworkManager {
     //GET
     //몇번 인덱스(offset)부터 몇개까지(limit)
     public void getVoluntaryList(int offset, int limit) throws IOException {
-        String url = endPoint + "/" + format + "/" + apiVoluntary + "?offset=" + offset + "&limit=" + limit;
+        String url = testEndPoint + "/" + format + "/" + apiVoluntary + "?offset=" + offset + "&limit=" + limit;
         Log.d(TAG, " " + url);
 
         Request request = new Request.Builder()
@@ -368,7 +368,7 @@ public class NetworkManager {
     //찜 추가
     //GET
     public void addZzim(int userId, int voluntaryId) {
-        String url = endPoint + "/" + format + "/" + apiZzim + "_add?user_id=" + userId + "&id=" + voluntaryId;
+        String url = testEndPoint + "/" + format + "/" + apiZzim + "_add?user_id=" + userId + "&id=" + voluntaryId;
         Log.d(TAG, " " + url);
 
         Request request = new Request.Builder()
@@ -395,7 +395,7 @@ public class NetworkManager {
     //찜 취소
     //GET
     public void deleteZzim(int userId, int voluntaryId) {
-        String url = endPoint + "/" + format + "/" + apiZzim + "_del?user_id=" + userId + "&id=" + voluntaryId;
+        String url = testEndPoint + "/" + format + "/" + apiZzim + "_del?user_id=" + userId + "&id=" + voluntaryId;
         Log.d(TAG, " " + url);
 
         Request request = new Request.Builder()
