@@ -47,11 +47,12 @@ public class HomeListAdapter extends CursorRecyclerViewAdapter<HomeListAdapter.H
         HomeListItem homeListItem = HomeListItem.fromCursor(cursor);
 
 
+
         viewHolder.tvTitle.setText(homeListItem.getTitle());
 
         String imgSumailUrl = homeListItem.getImgSumnailUrl();
 
-        Log.d(TAG,imgSumailUrl);
+        Log.e(TAG,imgSumailUrl);
 
         if(!"null".equals(imgSumailUrl)){
             Glide.with(mContext).

@@ -208,16 +208,6 @@ public class BongsaggunContract {
         public static final String COLUMN_VOLUNTARY_BTIMEID = "voluntary_btimeId";  //TEXT  봉사시간 id (검색시 사용)
         public static final String COLUMN_VOLUNTARY_UPDATEAT = "voluntary_updateAt";  //TEXT  DB 업데이트 판
 
-        public static final String COLUMN_VOLUNTARY_DATE_RECRUIT_START_YEAR = "voluntary_dateRecruitStartYear";  //모집기간 시작 년
-        public static final String COLUMN_VOLUNTARY_DATE_RECRUIT_START_MONTH = "voluntary_dateRecruitStartMonth";  //모집기간 시작 월
-        public static final String COLUMN_VOLUNTARY_DATE_RECRUIT_START_DAY = "voluntary_dateRecruitStartDay";  //모집기간 시작 일
-        public static final String COLUMN_VOLUNTARY_DATE_RECRUIT_START_DAYOFWEEK = "voluntary_dateRecruitStartDayOfWeek";  //모집기간 시작 요일
-
-        public static final String COLUMN_VOLUNTARY_DATE_RECRUIT_END_YEAR = "voluntary_dateRecruitEndYear";  //모집기간 끝 년
-        public static final String COLUMN_VOLUNTARY_DATE_RECRUIT_END_MONTH = "voluntary_dateRecruitEndMonth";  //모집기간 끝 월
-        public static final String COLUMN_VOLUNTARY_DATE_RECRUIT_END_DAY = "voluntary_dateRecruitEndDay";  //모집기간 끝 일
-        public static final String COLUMN_VOLUNTARY_DATE_RECRUIT_END_DAYOFWEEK = "voluntary_dateRecruitEndDayOfWeek";  //모집기간 끝 요일
-
         //api vserson2용
 //        public static final String COLUMN_VOLUNTARY_ID = "voluntary_id";  //INTEGER
 //        public static final String COLUMN_VOLUNTARY_TITLE = "voluntary_title";  //TEXT  제목
@@ -262,10 +252,6 @@ public class BongsaggunContract {
 
         public static Uri buildVoluntaryUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
-        }
-
-        public static Uri buildVoluntaryCalendarUri(String str){
-            return CONTENT_URI.buildUpon().appendPath(str).build();
         }
     }
 }

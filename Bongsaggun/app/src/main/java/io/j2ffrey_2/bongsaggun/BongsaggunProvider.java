@@ -31,31 +31,17 @@ public class BongsaggunProvider extends ContentProvider {
     private static final int TIME = 300;
     private static final int CATEGORY = 400;
     private static final int VOLUNTARY = 500;
-    private static final int VOLUNTARY_CALENDAR = 501;
     private static final int IMAGE = 600;
 
-    private static final SQLiteQueryBuilder sVoluntaryRegionQueryBuilder;
-    private static final SQLiteQueryBuilder sVoluntaryDetailQueryBuilder;
+    private static final SQLiteQueryBuilder sVoluntarySettingQueryBuilder;
 
     static {
-        sVoluntaryRegionQueryBuilder = new SQLiteQueryBuilder();
+        sVoluntarySettingQueryBuilder = new SQLiteQueryBuilder();
 
         //Voluntary LEFT OUTER JOIN Region ON Region.id=Voluntary.regioinId
         //LEFT OUTER JOIN School ON School.id=Voluntary.schoolId
         //LEFT OUTER JOIN Image ON Image .id=Voluntary.ImageId
-        sVoluntaryRegionQueryBuilder.setTables(BongsaggunContract.VoluntaryEntry.TABLE_NAME +
-                        " LEFT OUTER JOIN " + BongsaggunContract.RegionEntry.TABLE_NAME +
-                        " ON " + BongsaggunContract.RegionEntry.TABLE_NAME + "." + BongsaggunContract.RegionEntry.COLUMN_REGION_ID +
-                        " = " + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID +
-
-                        " LEFT OUTER JOIN " + BongsaggunContract.ImageEntry.TABLE_NAME +
-                        " ON " + BongsaggunContract.ImageEntry.TABLE_NAME + "." + BongsaggunContract.ImageEntry.COLUMN_IMAGE_FK_VOLUNTARY_ID +
-                        " = " + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID
-        );
-
-        sVoluntaryDetailQueryBuilder = new SQLiteQueryBuilder();
-
-        sVoluntaryDetailQueryBuilder.setTables(BongsaggunContract.VoluntaryEntry.TABLE_NAME +
+        sVoluntarySettingQueryBuilder.setTables(BongsaggunContract.VoluntaryEntry.TABLE_NAME +
                         " LEFT OUTER JOIN " + BongsaggunContract.RegionEntry.TABLE_NAME +
                         " ON " + BongsaggunContract.RegionEntry.TABLE_NAME + "." + BongsaggunContract.RegionEntry.COLUMN_REGION_ID +
                         " = " + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID +
@@ -76,8 +62,6 @@ public class BongsaggunProvider extends ContentProvider {
                         " ON " + BongsaggunContract.ImageEntry.TABLE_NAME + "." + BongsaggunContract.ImageEntry.COLUMN_IMAGE_FK_VOLUNTARY_ID +
                         " = " + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID
         );
-
-
     }
 
     //query문 작성(where절, 앞에 부분)
@@ -93,7 +77,7 @@ public class BongsaggunProvider extends ContentProvider {
 
     private Cursor getHomeList(Uri uri, String[] projection, String sortOrder) {
 
-        return sVoluntaryRegionQueryBuilder.query(mOpenHelper.getReadableDatabase(),
+        return sVoluntarySettingQueryBuilder.query(mOpenHelper.getReadableDatabase(),
                 projection,
                 null,
                 null,
@@ -101,47 +85,6 @@ public class BongsaggunProvider extends ContentProvider {
                 null,
                 sortOrder
         );
-    }
-
-    private Cursor getCalendarList(Uri uri, String[] selectionArgs) {
-
-        String[] args = new String[4];
-        args[0] = selectionArgs[0];
-        args[1] = selectionArgs[1];
-        args[2] = selectionArgs[0];
-        args[3] = selectionArgs[1];
-
-        String query = "SELECT " + BongsaggunContract.VoluntaryEntry._ID + ", " + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID + ", " +
-                BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TITLE + ", " + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START + ", " +
-                BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END + ", " + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TIME + ", " +
-                BongsaggunContract.RegionEntry.COLUMN_REGION_NAME + ", " + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START_YEAR + " as year, " +
-                BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START_MONTH + " as month, " + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START_DAY + " as day, " +
-                BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START_DAYOFWEEK + " as dayOfWeek " +
-                "FROM " + BongsaggunContract.VoluntaryEntry.TABLE_NAME +
-                " LEFT OUTER JOIN " + BongsaggunContract.RegionEntry.TABLE_NAME +
-                " ON " + BongsaggunContract.RegionEntry.TABLE_NAME + "." + BongsaggunContract.RegionEntry.COLUMN_REGION_ID +
-                " = " + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID +
-                "WHERE year = ? AND month = ?" +
-                " ORDER BY day" +
-                " UNION ALL " +
-                "SELECT " + BongsaggunContract.VoluntaryEntry._ID + ", " + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID + ", " +
-                BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TITLE + ", " + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START + ", " +
-                BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END + ", " + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TIME + ", " +
-                BongsaggunContract.RegionEntry.COLUMN_REGION_NAME + ", " + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END_YEAR + " as year, " +
-                BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END_MONTH + " as , month" + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END_DAY + " as day, " +
-                BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END_DAYOFWEEK + " as dayOfWeek " +
-                "FROM " + BongsaggunContract.VoluntaryEntry.TABLE_NAME +
-                " LEFT OUTER JOIN " + BongsaggunContract.RegionEntry.TABLE_NAME +
-                " ON " + BongsaggunContract.RegionEntry.TABLE_NAME + "." + BongsaggunContract.RegionEntry.COLUMN_REGION_ID +
-                " = " + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID +
-                "WHERE year = ? AND month = ?" +
-                " ORDER BY day";
-
-        Cursor cursor = mOpenHelper.getReadableDatabase().rawQuery(query, args);
-
-        Log.e(TAG, " " + cursor);
-
-        return cursor;
     }
 
 
@@ -160,7 +103,7 @@ public class BongsaggunProvider extends ContentProvider {
 //            selection = sLocationSettingWithStartDateSelection;
 //        }
 //
-//        return sVoluntaryRegionQueryBuilder.query(
+//        return sVoluntarySettingQueryBuilder.query(
 //                mOpenHelper.getReadableDatabase(),  //DB
 //                projection,
 //                selection,
@@ -203,8 +146,6 @@ public class BongsaggunProvider extends ContentProvider {
             case IMAGE:
                 return BongsaggunContract.ImageEntry.CONTENT_TYPE;
             case VOLUNTARY:
-                return BongsaggunContract.VoluntaryEntry.CONTENT_TYPE;
-            case VOLUNTARY_CALENDAR:
                 return BongsaggunContract.VoluntaryEntry.CONTENT_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -310,12 +251,6 @@ public class BongsaggunProvider extends ContentProvider {
 //                        sortOrder                                  //ORDER BY 절
 //                );
                 retCursor = getHomeList(uri, projection, sortOrder);
-
-                break;
-            }
-            case VOLUNTARY_CALENDAR: {
-
-                retCursor = getCalendarList(uri, selectionArgs);
 
                 break;
             }
@@ -490,7 +425,6 @@ public class BongsaggunProvider extends ContentProvider {
         matcher.addURI(authority, BongsaggunContract.PATH_CATEGORY, CATEGORY);
         matcher.addURI(authority, BongsaggunContract.PATH_IMAGE, IMAGE);
         matcher.addURI(authority, BongsaggunContract.PATH_VOLUNTARY, VOLUNTARY);
-        matcher.addURI(authority, BongsaggunContract.PATH_VOLUNTARY + "/*", VOLUNTARY_CALENDAR);
 
         return matcher;
     }

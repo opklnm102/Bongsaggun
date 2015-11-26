@@ -91,17 +91,6 @@ public class BongsaggunDbHelper extends SQLiteOpenHelper {
                 BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_SCHOOLID + " INTEGER NOT NULL, " +  //학교 id
                 BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CATEGORYID + " INTEGER NOT NULL, " +  //카테고리 id
                 BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_BTIMEID + " INTEGER NOT NULL, " +  //봉사시간 id
-
-                BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START_YEAR + " INTEGER, " +  //모집기간 시작 년
-                BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START_MONTH + " INTEGER, " +  //모집기간 시작 월
-                BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START_DAY + " INTEGER, " +  //모집기간 시작 일
-                BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START_DAYOFWEEK + " TEXT, " +  //모집기간 시작 요일
-
-                BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END_YEAR + " INTEGER, " +  //모집기간 끝 년
-                BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END_MONTH + " INTEGER, " +  //모집기간 끝 월
-                BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END_DAY + " INTEGER, " +  //모집기간 끝 일
-                BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END_DAYOFWEEK + " TEXT, " +  //모집기간 끝 요일
-
                 BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_UPDATEAT + " TEXT NOT NULL, " +  //DB업데이트 판별
                 " FOREIGN KEY (" + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CATEGORYID + ") REFERENCES " +
                 BongsaggunContract.CategoryEntry.TABLE_NAME + " (" + BongsaggunContract.CategoryEntry.COLUMN_CATEGORY_ID + ")," +

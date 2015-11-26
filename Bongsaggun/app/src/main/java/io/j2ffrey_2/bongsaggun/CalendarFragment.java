@@ -1,12 +1,7 @@
 package io.j2ffrey_2.bongsaggun;
 
-
-import android.content.Loader;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,25 +20,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class CalendarFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class CalendarFragment extends Fragment {
 
-    public static final String TAG = CalendarFragment.class.getSimpleName();
-
-    private static final int CALENDAR_LOADER = 1;
-
-    private static final String[] CALENDAR_COLUMNS = {
-            BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry._ID,  //쿼리용
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID,  //쿼리용
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TITLE,  //제목
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START,  //모집기간 시작
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END,  //모집기간 종료
-
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TIME,  //봉사시간
-
-            BongsaggunContract.RegionEntry.COLUMN_REGION_NAME,  //지역
-            //d-day는 모집마감일부터 계산
-    };
-
+    public static final String TAG = "CalendarFragment";
 
     private ViewHolder mViews;
 
@@ -67,6 +46,7 @@ public class CalendarFragment extends Fragment implements LoaderManager.LoaderCa
 
     public static CalendarFragment newInstance() {
         CalendarFragment fragment = new CalendarFragment();
+
         return fragment;
     }
 
@@ -121,10 +101,10 @@ public class CalendarFragment extends Fragment implements LoaderManager.LoaderCa
             @Override
             public void onClick(View v) {
                 //Todo: hash map에서 이전 월에 대한 ArrayList를 꺼낸다.
-                if (currMonth == 1) {
+                if(currMonth == 1){
                     currYear -= 1;
                     currMonth = 12;
-                } else {
+                }else{
                     currMonth -= 1;
                 }
                 voluntaryWorkHashMap.get(currMonth);  //list에 담는다. 년도는 어떻게 처리..?
@@ -137,10 +117,10 @@ public class CalendarFragment extends Fragment implements LoaderManager.LoaderCa
             @Override
             public void onClick(View v) {
                 //Todo: hash map에서 다음 월에 대한 ArrayList를 꺼낸다.
-                if (currMonth == 12) {
+                if(currMonth == 12){
                     currYear += 1;
                     currMonth = 1;
-                } else {
+                }else{
                     currMonth += 1;
                 }
                 voluntaryWorkHashMap.get(currMonth);   //list에 담는다. 년도는 어떻게 처리..?
@@ -159,29 +139,6 @@ public class CalendarFragment extends Fragment implements LoaderManager.LoaderCa
         Calendar c = Calendar.getInstance();
         return c.get(Calendar.MONTH) + 1;
     }
-
-    @Override
-    public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
-
-        return new CursorLoader(getActivity(),
-                BongsaggunContract.VoluntaryEntry.buildVoluntaryCalendarUri("calendar"),
-                null,
-                null,
-                null,
-                null);
-    }
-
-    @Override
-    public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {
-        mCalendarAdapter.swapCursor(data);
-
-    }
-
-    @Override
-    public void onLoaderReset(android.support.v4.content.Loader<Cursor> loader) {
-        mCalendarAdapter.swapCursor(null);
-    }
-
 
     private static class ViewHolder {
 
