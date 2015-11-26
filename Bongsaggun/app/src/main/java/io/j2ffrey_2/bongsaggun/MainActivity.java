@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
 import io.j2ffrey_2.bongsaggun.homelist.HomeFragment;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
 

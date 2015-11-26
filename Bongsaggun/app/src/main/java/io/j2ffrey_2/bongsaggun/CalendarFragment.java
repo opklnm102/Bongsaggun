@@ -3,6 +3,7 @@ package io.j2ffrey_2.bongsaggun;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Explode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.tonicartos.superslim.LayoutManager;
 
 import java.util.ArrayList;
@@ -18,11 +22,16 @@ import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.j2ffrey_2.bongsaggun.model.Token;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 
-public class CalendarFragment extends Fragment {
+public class CalendarFragment extends BaseFragment {
 
-    public static final String TAG = "CalendarFragment";
+    public static final String TAG = CalendarFragment.class.getSimpleName();
 
     private ViewHolder mViews;
 
@@ -32,7 +41,6 @@ public class CalendarFragment extends Fragment {
 
     private boolean mAreMarginsFixed;  //필요
 
-    private HashMap<String, CalendarItem> voluntaryWorkHashMap;
     private ArrayList<CalendarItem> mCalendarItemArrayList;
     private Integer currYear;  //현재 년도
     private Integer currMonth;  //현재 월
@@ -78,7 +86,6 @@ public class CalendarFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        voluntaryWorkHashMap = new HashMap<>();
         mCalendarItemArrayList = new ArrayList<>();
         currYear = getCurrentYear();
         currMonth = getCurrentMonth();
@@ -107,9 +114,9 @@ public class CalendarFragment extends Fragment {
                 }else{
                     currMonth -= 1;
                 }
-                voluntaryWorkHashMap.get(currMonth);  //list에 담는다. 년도는 어떻게 처리..?
                 tvCalendarTitle.setText(currYear.toString() + "년 " + currMonth.toString() + "월");
                 Log.d(TAG, "before currMonth " + currMonth);
+                getCalendarList(currYear, currMonth);
             }
         });
 
@@ -123,9 +130,52 @@ public class CalendarFragment extends Fragment {
                 }else{
                     currMonth += 1;
                 }
-                voluntaryWorkHashMap.get(currMonth);   //list에 담는다. 년도는 어떻게 처리..?
                 tvCalendarTitle.setText(currYear.toString() + "년 " + currMonth.toString() + "월");
                 Log.d(TAG, "after currMonth " + currMonth);
+                getCalendarList(currYear, currMonth);
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getCalendarList(currYear, currMonth);
+    }
+
+    public void getCalendarList(int year, int month){
+
+        mCalendarItemArrayList = new ArrayList<>();
+
+        Call<JsonObject> call = requestHelper.getCalendarList(year, month);
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Response<JsonObject> response, Retrofit retrofit) {
+
+                JsonObject jsonObject = response.body();
+                Log.d(TAG, " jsonObject is " + jsonObject);
+
+                Token token = new Gson().fromJson(jsonObject.getAsJsonObject("Token"), Token.class);
+
+                if(token.getStatus() == 200){  //데이터 얻기 성공
+                    JsonArray jsonArray = jsonObject.getAsJsonArray("Bongsa");
+
+                    for(int i=0; i<jsonArray.size(); i++){
+                        CalendarItem item = new Gson().fromJson(jsonArray.get(i), CalendarItem.class);
+                        mCalendarItemArrayList.add(item);
+                        Log.e(TAG, " " + item.getId() + item.getdDay() + item.getRegion() + item.getTitle() + item.getType() + item.getDayOfWeek() + item.getDay());
+                    }
+
+                    mCalendarAdapter.setCalendarData(mCalendarItemArrayList);
+
+                }else{
+                    //데이터 얻기 실패
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.e(TAG, " Throwable is " + t);
             }
         });
     }

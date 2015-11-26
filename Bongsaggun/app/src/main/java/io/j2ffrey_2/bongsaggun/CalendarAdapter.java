@@ -12,6 +12,8 @@ import com.tonicartos.superslim.LayoutManager;
 import com.tonicartos.superslim.LinearSLM;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Created by dong on 2015-10-06.
@@ -40,7 +42,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
     private int sectionManager;
 
-    public CalendarAdapter(Context context , int headerMode) {
+    public CalendarAdapter(Context context, int headerMode) {
         this.mContext = context;
         this.mCalendarLineItemArrayList = new ArrayList<>();
         this.mCalendarItemArrayList = new ArrayList<>();
@@ -50,13 +52,19 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         sectionManager = LINEAR;
 
         //dummyData
-        for (int i = 1; i < 10; i++) {
+//        for (int i = 1; i < 10; i++) {
 //            mCalendarItemArrayList.add(new CalendarItem("2015", "10", Integer.toString(i), "월", false, "D-4", "봉사닷", "서울", "4시간"));
 //            mCalendarItemArrayList.add(new CalendarItem("2015", "9", Integer.toString(i), "월", false, "D-2", "봉봉", "문산", "5시간"));
 //            mCalendarItemArrayList.add(new CalendarItem("2015", "10", Integer.toString(i), "월", true, "D-2", "봉황", "진산", "6시간"));
 //            mCalendarItemArrayList.add(new CalendarItem("2015", "10", Integer.toString(i), "월", false, "D-2", "황황", "가산", "7시간"));
 //            mCalendarItemArrayList.add(new CalendarItem("2015", "10", Integer.toString(i), "월", true, "D-2", "봉황만세세ㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔ", "오산", "8시간"));
-        }
+//        }
+
+//        insertHeaderView();
+    }
+
+    private void insertHeaderView() {
+        mCalendarLineItemArrayList.clear();
 
         //insert headers into list of items
         String lastHeader = "";
@@ -64,23 +72,36 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         int headerCount = 0;
         int sectionFirstPosition = 0;
         for (int i = 0; i < mCalendarItemArrayList.size(); i++) {
-//            String header = mCalendarItemArrayList.get(i).getDay();
-//            if (!TextUtils.equals(lastHeader, header)) {
-//                //insert new header view and update section data.
-//                sectionManager = (sectionManager + 1) % 2;
-//                sectionFirstPosition = i + headerCount;
-//                lastHeader = header;
-//                headerCount += 1;
-//
-//                mCalendarLineItemArrayList.add(new CalendarLineItem(mCalendarItemArrayList.get(i), sectionManager, sectionFirstPosition, true));
-//
-//            }
+            String header = String.valueOf(mCalendarItemArrayList.get(i).getDay());
+            if (!TextUtils.equals(lastHeader, header)) {
+                //insert new header view and update section data.
+                sectionManager = (sectionManager + 1) % 2;
+                sectionFirstPosition = i + headerCount;
+                lastHeader = header;
+                headerCount += 1;
+
+                mCalendarLineItemArrayList.add(new CalendarLineItem(mCalendarItemArrayList.get(i), sectionManager, sectionFirstPosition, true));
+            }
             mCalendarLineItemArrayList.add(new CalendarLineItem(mCalendarItemArrayList.get(i), sectionManager, sectionFirstPosition, false));
         }
     }
 
-    public void setCalendarData(ArrayList<CalendarLineItem> list) {
-        mCalendarLineItemArrayList = list;
+    public void setCalendarData(ArrayList<CalendarItem> list) {
+        mCalendarItemArrayList.clear();
+
+        mCalendarItemArrayList = list;
+
+        //오름차순 정렬
+        Collections.sort(mCalendarItemArrayList, new Comparator<CalendarItem>() {
+            @Override
+            public int compare(CalendarItem obj1, CalendarItem obj2) {
+                return (obj1.getDay() < obj2.getDay()) ? -1 : (obj1.getDay() > obj2.getDay()) ? 1:0;
+            }
+        });
+
+        //헤더처리
+        insertHeaderView();
+
         notifyDataSetChanged();
     }
 
