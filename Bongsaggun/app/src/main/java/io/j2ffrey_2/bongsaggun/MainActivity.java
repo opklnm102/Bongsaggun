@@ -88,28 +88,29 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         Log.e(TAG, " onResume");
 
-        try {
-            NetworkManager.getInstance(this).getSchoolList();
-            NetworkManager.getInstance(this).getRegionList();
-            NetworkManager.getInstance(this).getTimeList();
-            NetworkManager.getInstance(this).getCategoryList();
-            NetworkManager.getInstance(this).getAllVoluntaryList();
-
-
-            Cursor c = getContentResolver().query(BongsaggunContract.VoluntaryEntry.CONTENT_URI, null, null, null, null);
-
-            //로그에 결과 출력
-            while (c.moveToNext()) {
-                Log.i(TAG, " " + c.getInt(0) +
-                        c.getInt(1) + " " + c.getString(2) + " " + c.getString(6) + " " + c.getString(7) + " " + c.getString(8) + " " + c.getString(9));
-            }
-
-
-//            printLogContactData(getContactCursor());
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            NetworkManager.getInstance(this).getSchoolList();
+//            NetworkManager.getInstance(this).getRegionList();
+//            NetworkManager.getInstance(this).getTimeList();
+//            NetworkManager.getInstance(this).getCategoryList();
+//            NetworkManager.getInstance(this).getAllVoluntaryList();
+//            NetworkManager.getInstance(this).getCalendarList(2015,11);
+//
+//
+//            Cursor c = getContentResolver().query(BongsaggunContract.VoluntaryEntry.CONTENT_URI, null, null, null, null);
+//
+//            //로그에 결과 출력
+//            while (c.moveToNext()) {
+//                Log.i(TAG, " " + c.getInt(0) +
+//                        c.getInt(1) + " " + c.getString(2) + " " + c.getString(6) + " " + c.getString(7) + " " + c.getString(8) + " " + c.getString(9));
+//            }
+//
+//
+////            printLogContactData(getContactCursor());
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     private Cursor getContactCursor() {

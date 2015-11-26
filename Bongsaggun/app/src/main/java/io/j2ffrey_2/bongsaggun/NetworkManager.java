@@ -35,6 +35,8 @@ public class NetworkManager {
     private String testEndPoint = "https://dosomething-j2ffrey-2.c9.io";  //c9 테스트 서버
     private String endPoint = "http://bongsaloadbalancer-882197660.ap-northeast-1.elb.amazonaws.com";
     private String format = "json";
+    private String newFormat = "new_json";
+
     private String apiVoluntary = "filter";
     private String apiSchool = "school";
     private String apiRegion = "region";
@@ -42,6 +44,48 @@ public class NetworkManager {
     private String apiCategory = "category";
     private String apiZzim = "my_bucket";
     private String apiLogin = "login";
+    private String apiCalendar = "calendar";
+
+    //달력 리스트
+    //GET
+    public void getCalendarList(int year, int month) throws IOException {
+        String url = testEndPoint + "/" + newFormat + "/" + apiCalendar + "?year=" + year + "&month=" + month;
+        Log.d(TAG, " " + url);
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code " + response);
+                } else {
+                    String strJson = response.body().string();
+                    Log.d(TAG, "calendar json " + strJson);
+
+                    //Vector<ContentValues> cVVector = JsonParser.jsonSchoolListParser(strJson);  //파싱한거 넘기기
+
+                    //add to database
+                    // if (cVVector.size() > 0) {
+                    //   ContentValues[] cvArray = new ContentValues[cVVector.size()];
+                    //   cVVector.toArray(cvArray);
+
+                    //  mContext.getContentResolver().bulkInsert(BongsaggunContract.SchoolEntry.CONTENT_URI, cvArray);
+
+                    //Todo: updateAt보고 db갱신 할것
+                }
+            }
+
+        });
+    }
+
 
     public static NetworkManager getInstance(Context context) {
         if (instance == null) {
@@ -427,7 +471,6 @@ public class NetworkManager {
 //            .addPathSegment(api)
 //            .addQueryParameter("q",)
     }
-
 
 
     //사용 example
