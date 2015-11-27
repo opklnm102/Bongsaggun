@@ -8,8 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -18,11 +21,11 @@ import com.tonicartos.superslim.LayoutManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.j2ffrey_2.bongsaggun.model.Token;
+import io.j2ffrey_2.bongsaggun.view.RecyclerViewEmptySupport;
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
@@ -51,6 +54,11 @@ public class CalendarFragment extends BaseFragment {
     ImageView tvCalendarBefore;
     @Bind(R.id.imageView_calendar_after)
     ImageView tvCalendarAfter;
+
+    @Bind(R.id.viewSwitcher_calendar)
+    ViewSwitcher vsCalendar;
+
+    Animation slide_in_left, slide_out_right;
 
     public static CalendarFragment newInstance() {
         CalendarFragment fragment = new CalendarFragment();
@@ -102,21 +110,28 @@ public class CalendarFragment extends BaseFragment {
         mCalendarAdapter = new CalendarAdapter(getActivity(), mHeaderDisplay);
         mViews.setAdapter(mCalendarAdapter);
 
+        //animation
+        slide_in_left = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_in_left);
+        slide_out_right = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_out_right);
+        vsCalendar.setInAnimation(slide_in_left);
+        vsCalendar.setOutAnimation(slide_out_right);
+
         tvCalendarTitle.setText(currYear.toString() + "년 " + currMonth.toString() + "월");
 
         tvCalendarBefore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Todo: hash map에서 이전 월에 대한 ArrayList를 꺼낸다.
-                if(currMonth == 1){
+                if (currMonth == 1) {
                     currYear -= 1;
                     currMonth = 12;
-                }else{
+                } else {
                     currMonth -= 1;
                 }
+                getCalendarList(currYear, currMonth);
                 tvCalendarTitle.setText(currYear.toString() + "년 " + currMonth.toString() + "월");
                 Log.d(TAG, "before currMonth " + currMonth);
-                getCalendarList(currYear, currMonth);
+                vsCalendar.showPrevious();
             }
         });
 
@@ -124,15 +139,16 @@ public class CalendarFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 //Todo: hash map에서 다음 월에 대한 ArrayList를 꺼낸다.
-                if(currMonth == 12){
+                if (currMonth == 12) {
                     currYear += 1;
                     currMonth = 1;
-                }else{
+                } else {
                     currMonth += 1;
                 }
+                getCalendarList(currYear, currMonth);
                 tvCalendarTitle.setText(currYear.toString() + "년 " + currMonth.toString() + "월");
                 Log.d(TAG, "after currMonth " + currMonth);
-                getCalendarList(currYear, currMonth);
+                vsCalendar.showNext();
             }
         });
     }
@@ -143,7 +159,7 @@ public class CalendarFragment extends BaseFragment {
         getCalendarList(currYear, currMonth);
     }
 
-    public void getCalendarList(int year, int month){
+    public void getCalendarList(int year, int month) {
 
         mCalendarItemArrayList = new ArrayList<>();
 
@@ -157,20 +173,18 @@ public class CalendarFragment extends BaseFragment {
 
                 Token token = new Gson().fromJson(jsonObject.getAsJsonObject("Token"), Token.class);
 
-                if(token.getStatus() == 200){  //데이터 얻기 성공
+                if (token.getStatus() == 200) {  //데이터 얻기 성공
                     JsonArray jsonArray = jsonObject.getAsJsonArray("Bongsa");
 
-                    for(int i=0; i<jsonArray.size(); i++){
+                    for (int i = 0; i < jsonArray.size(); i++) {
                         CalendarItem item = new Gson().fromJson(jsonArray.get(i), CalendarItem.class);
                         mCalendarItemArrayList.add(item);
                         Log.e(TAG, " " + item.getId() + item.getdDay() + item.getRegion() + item.getTitle() + item.getType() + item.getDayOfWeek() + item.getDay());
                     }
-
-                    mCalendarAdapter.setCalendarData(mCalendarItemArrayList);
-
-                }else{
+                } else {
                     //데이터 얻기 실패
                 }
+                mCalendarAdapter.setCalendarData(mCalendarItemArrayList);
             }
 
             @Override
@@ -192,10 +206,13 @@ public class CalendarFragment extends BaseFragment {
 
     private static class ViewHolder {
 
-        private final RecyclerView rvCalendar;
+        private final RecyclerViewEmptySupport rvCalendar;
+        private final TextView tvEmpty;
 
         public ViewHolder(View view) {
-            rvCalendar = (RecyclerView) view.findViewById(R.id.recyclerView_calendar);
+            rvCalendar = (RecyclerViewEmptySupport) view.findViewById(R.id.recyclerView_calendar);
+            tvEmpty = (TextView)view.findViewById(R.id.textView_empty_calendar);
+            rvCalendar.setEmptyView(tvEmpty);
         }
 
         public void initViews(LayoutManager lm) {

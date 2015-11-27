@@ -34,9 +34,23 @@
                 android:layout_height="30dp"/>
         </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView_calendar"
+    <ViewSwitcher
+        android:id="@+id/viewSwitcher_calendar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <io.j2ffrey_2.bongsaggun.view.RecyclerViewEmptySupport
+            android:id="@+id/recyclerView_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/textView_empty_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/calendar_empty"
+            android:gravity="center"/>
+    </ViewSwitcher>
+
 
 </LinearLayout>
