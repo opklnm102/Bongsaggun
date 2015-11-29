@@ -169,22 +169,26 @@ public class CalendarFragment extends BaseFragment {
             public void onResponse(Response<JsonObject> response, Retrofit retrofit) {
 
                 JsonObject jsonObject = response.body();
-                Log.d(TAG, " jsonObject is " + jsonObject);
 
-                Token token = new Gson().fromJson(jsonObject.getAsJsonObject("Token"), Token.class);
+                if (jsonObject != null) {
 
-                if (token.getStatus() == 200) {  //데이터 얻기 성공
-                    JsonArray jsonArray = jsonObject.getAsJsonArray("Bongsa");
+                    Log.d(TAG, " jsonObject is " + jsonObject);
 
-                    for (int i = 0; i < jsonArray.size(); i++) {
-                        CalendarItem item = new Gson().fromJson(jsonArray.get(i), CalendarItem.class);
-                        mCalendarItemArrayList.add(item);
-                        Log.e(TAG, " " + item.getId() + item.getdDay() + item.getRegion() + item.getTitle() + item.getType() + item.getDayOfWeek() + item.getDay());
+                    Token token = new Gson().fromJson(jsonObject.getAsJsonObject("Token"), Token.class);
+
+                    if (token.getStatus() == 200) {  //데이터 얻기 성공
+                        JsonArray jsonArray = jsonObject.getAsJsonArray("Bongsa");
+
+                        for (int i = 0; i < jsonArray.size(); i++) {
+                            CalendarItem item = new Gson().fromJson(jsonArray.get(i), CalendarItem.class);
+                            mCalendarItemArrayList.add(item);
+                            Log.e(TAG, " " + item.getId() + item.getdDay() + item.getRegion() + item.getTitle() + item.getType() + item.getDayOfWeek() + item.getDay());
+                        }
+                    } else {
+                        //데이터 얻기 실패
                     }
-                } else {
-                    //데이터 얻기 실패
+                    mCalendarAdapter.setCalendarData(mCalendarItemArrayList);
                 }
-                mCalendarAdapter.setCalendarData(mCalendarItemArrayList);
             }
 
             @Override
@@ -211,7 +215,7 @@ public class CalendarFragment extends BaseFragment {
 
         public ViewHolder(View view) {
             rvCalendar = (RecyclerViewEmptySupport) view.findViewById(R.id.recyclerView_calendar);
-            tvEmpty = (TextView)view.findViewById(R.id.textView_empty_calendar);
+            tvEmpty = (TextView) view.findViewById(R.id.textView_empty_calendar);
             rvCalendar.setEmptyView(tvEmpty);
         }
 

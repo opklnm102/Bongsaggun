@@ -17,6 +17,37 @@ public interface BackendService {
     //캘린더
     @GET("/new_json/calendar")
     Call<JsonObject> getCalendarList(@Query("year") int year, @Query("month") int month);
+    //http://dosomething-j2ffrey-2.c9.io/new_json/calendar?year=2015&month=11
+
+    //로그인
+    @GET("/new_json/signin")
+    Call<JsonObject> doSignIn(@Query("email") String email, @Query("password") String passWord);
+    //http://dosomething-j2ffrey-2.c9.io/new_json/signin?email=opklnm102@naver.com&password=1008
+
+    //상세페이지
+    @GET("/new_json/info")
+    Call<JsonObject> getInfoPage(@Query("id") int voluntaryId);
+    //http://dosomething-j2ffrey-2.c9.io/new_json/info?id=176
+
+    //찜하기
+    @GET("/new_json/bucket_save")
+    Call<JsonObject> addZzim(@Query("u_id") int userId, @Query("b_id") int voluntaryId);
+    //http://dosomething-j2ffrey-2.c9.io/new_json/bucket_save?u_id=52&b_id=176
+
+    //찜리스트
+    @GET("/new_json/bucket")
+    Call<JsonObject> getZzimList(@Query("id") int userId);
+    //http://dosomething-j2ffrey-2.c9.io/new_json/bucket?id=52
+
+    //홈리스트
+    @GET("/new_json/bucket_save")
+    Call<JsonObject> getHomeList(@Query("id") int voluntaryId, @Query("limit") int limit);
+    //http://dosomething-j2ffrey-2.c9.io/new_json/home?limit=5
+    //http://dosomething-j2ffrey-2.c9.io/new_json/home?id=236&limit=5
+    //현재 id 포함 5개 나온다.
+
+
+
 
 
 
