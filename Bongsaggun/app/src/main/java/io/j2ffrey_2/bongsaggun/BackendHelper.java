@@ -40,27 +40,32 @@ public class BackendHelper {
     }
 
     //로그인
-    Call<JsonObject> doSignIn(String email, String passWord){
+    public Call<JsonObject> doSignIn(String email, String passWord){
         return service.doSignIn(email, passWord);
     }
 
     //상세페이지
-    Call<JsonObject> getInfoPage(int voluntaryId){
+    public Call<JsonObject> getInfoPage(int voluntaryId){
         return service.getInfoPage(voluntaryId);
     }
 
     //찜하기
-    Call<JsonObject> addZzim(int userId, int voluntaryId){
+    public Call<JsonObject> addZzim(int userId, int voluntaryId){
         return service.addZzim(userId, voluntaryId);
     }
 
     //찜리스트
-    Call<JsonObject> getZzimList(int userId){
+    public Call<JsonObject> getZzimList(int userId){
         return service.getZzimList(userId);
     }
 
     //홈리스트
-    Call<JsonObject> getHomeList(int voluntaryId, int limit){
+    public Call<JsonObject> getHomeList(int voluntaryId, int limit){
         return service.getHomeList(voluntaryId, limit);
+    }
+
+    //홈리스트
+    public Call<JsonObject> getHomeList(int limit){
+        return service.getHomeList(limit);
     }
 }

@@ -1,7 +1,5 @@
 package io.j2ffrey_2.bongsaggun;
 
-import android.database.Cursor;
-
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -9,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public class CalendarItem {
 
-    int id;
+    int voluntaryId;
     int day;
     @SerializedName("weekday")
     String dayOfWeek;
@@ -19,13 +17,14 @@ public class CalendarItem {
     int dDay;
     String region;
     int type;
+    int voluntaryTime;  //Todo: 추가해달라고 말하기
 
-    public int getId() {
-        return id;
+    public int getVoluntaryId() {
+        return voluntaryId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setVoluntaryId(int voluntaryId) {
+        this.voluntaryId = voluntaryId;
     }
 
     public int getDay() {
@@ -76,8 +75,8 @@ public class CalendarItem {
         this.type = type;
     }
 
-    public CalendarItem(int id, int day, String dayOfWeek, String title, int dDay, String region, int type) {
-        this.id = id;
+    public CalendarItem(int voluntaryId, int day, String dayOfWeek, String title, int dDay, String region, int type) {
+        this.voluntaryId = voluntaryId;
         this.day = day;
         this.dayOfWeek = dayOfWeek;
         this.title = title;

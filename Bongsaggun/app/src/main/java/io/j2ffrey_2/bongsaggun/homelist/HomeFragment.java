@@ -12,36 +12,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.j2ffrey_2.bongsaggun.BaseFragment;
 import io.j2ffrey_2.bongsaggun.BongsaggunContract;
+import io.j2ffrey_2.bongsaggun.CalendarItem;
 import io.j2ffrey_2.bongsaggun.R;
+import io.j2ffrey_2.bongsaggun.model.Token;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
-public class HomeFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class HomeFragment extends BaseFragment {
 
     public static final String TAG = HomeFragment.class.getSimpleName();
     //Todo: 레이아웃 조정
-    //Todo: 보여줘야 할것, 메인이미지, 제목, 모집기간 시작, 종료, 봉사시간, 지역, D-day(모집마감부터 계산)
-    private static final int HOMELIST_LOADER = 0;
-    private static final String[] HOMELIST_COLUMNS = {
-            BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry._ID,  //쿼리용
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID,  //쿼리용
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TITLE,  //제목
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START,  //모집기간 시작
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END,  //모집기간 종료
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_MAINIMAGEURL,  //메인 이미지
-            BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TIME,  //봉사시간
-            BongsaggunContract.RegionEntry.COLUMN_REGION_NAME,  //지역
-            //d-day는 모집마감일부터 계산
-    };
 
     @Bind(R.id.recyclerView_home)
     RecyclerView rvHomeList;
 
     HomeListAdapter mHomeListAdapter;
+
+    private ArrayList<HomeListItem> mHomeListItemArrayList;
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -68,38 +68,99 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mHomeListAdapter = new HomeListAdapter(getActivity(), null);
+        mHomeListItemArrayList = new ArrayList<>();
+
+        mHomeListAdapter = new HomeListAdapter(getActivity(), mHomeListItemArrayList);
 
         rvHomeList.setAdapter(mHomeListAdapter);
         rvHomeList.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        getLoaderManager().initLoader(HOMELIST_LOADER, null, this);
-        super.onActivityCreated(savedInstanceState);
+    public void onResume() {
+        super.onResume();
+
+        getHomeList(10);
     }
 
-    @Override
-    public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    public void getHomeList(int voluntaryId, int limit) {
 
-        String sortOrder = BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID + " DESC";
+        mHomeListItemArrayList = new ArrayList<>();
 
-        return new CursorLoader(getActivity(),
-                BongsaggunContract.VoluntaryEntry.CONTENT_URI,
-                HOMELIST_COLUMNS,
-                null,
-                null,
-                sortOrder);
+        Call<JsonObject> call = requestHelper.getHomeList(voluntaryId, limit);
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Response<JsonObject> response, Retrofit retrofit) {
+
+                JsonObject jsonObject = response.body();
+
+                if (jsonObject != null) {
+
+                    Log.d(TAG, " jsonObject is " + jsonObject);
+
+                    Token token = new Gson().fromJson(jsonObject.getAsJsonObject("Token"), Token.class);
+
+                    if (token.getStatus() == 200) {  //데이터 얻기 성공
+                        JsonArray jsonArray = jsonObject.getAsJsonArray("Bongsa");
+
+                        for (int i = 0; i < jsonArray.size(); i++) {
+                            HomeListItem item = new Gson().fromJson(jsonArray.get(i), HomeListItem.class);
+                            mHomeListItemArrayList.add(item);
+                            Log.e(TAG, " " + item.getVoluntaryId() + item.getdDay() + item.getRegion() + item.getTitle() + item.getVoluntaryTime() + item.getVoluntaryDateRecruitStart() + item.getVoluntaryDateRecruitEnd() + item.getImgMainUrl());
+                        }
+                    } else {
+                        Log.e(TAG, " " + mHomeListItemArrayList.size());
+
+                    }
+                    mHomeListAdapter.setData(mHomeListItemArrayList);
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.e(TAG, " Throwable is " + t);
+            }
+        });
     }
 
-    @Override
-    public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {
-        mHomeListAdapter.swapCursor(data);
+    public void getHomeList(int limit) {
+
+        mHomeListItemArrayList = new ArrayList<>();
+
+        Call<JsonObject> call = requestHelper.getHomeList(limit);
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Response<JsonObject> response, Retrofit retrofit) {
+
+                JsonObject jsonObject = response.body();
+
+                if (jsonObject != null) {
+
+                    Log.d(TAG, " jsonObject is " + jsonObject);
+
+                    Token token = new Gson().fromJson(jsonObject.getAsJsonObject("Token"), Token.class);
+
+                    if (token.getStatus() == 200) {  //데이터 얻기 성공
+                        JsonArray jsonArray = jsonObject.getAsJsonArray("Bongsa");
+
+                        for (int i = 0; i < jsonArray.size(); i++) {
+                            HomeListItem item = new Gson().fromJson(jsonArray.get(i), HomeListItem.class);
+                            mHomeListItemArrayList.add(item);
+                            Log.e(TAG, " " + item.getVoluntaryId() + item.getdDay() + item.getRegion() + item.getTitle() + item.getVoluntaryTime() + item.getVoluntaryDateRecruitStart() + item.getVoluntaryDateRecruitEnd() + item.getImgMainUrl());
+                        }
+                    } else {
+                        Log.e(TAG, " " + mHomeListItemArrayList.size());
+
+                    }
+                    mHomeListAdapter.setData(mHomeListItemArrayList);
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.e(TAG, " Throwable is " + t);
+            }
+        });
     }
 
-    @Override
-    public void onLoaderReset(android.support.v4.content.Loader<Cursor> loader) {
-        mHomeListAdapter.swapCursor(null);
-    }
 }

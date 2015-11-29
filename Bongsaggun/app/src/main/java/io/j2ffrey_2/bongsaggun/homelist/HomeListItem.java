@@ -2,6 +2,8 @@ package io.j2ffrey_2.bongsaggun.homelist;
 
 import android.database.Cursor;
 
+import com.google.gson.annotations.SerializedName;
+
 import io.j2ffrey_2.bongsaggun.BongsaggunContract;
 import io.j2ffrey_2.bongsaggun.TimeUtils;
 
@@ -10,50 +12,23 @@ import io.j2ffrey_2.bongsaggun.TimeUtils;
  */
 public class HomeListItem {
 
+    //Todo: 보여줘야 할것, 메인이미지, 제목, 모집기간 시작, 종료, 봉사시간, 지역, D-day
+
+    @SerializedName("id")
     private Integer voluntaryId;
-    private Integer imgSumnail;
-    private String imgSumnailUrl;
-    private String title;
-    private Integer dDay;
-    private String voluntaryDateRecruitStart;
-    private String voluntaryDateRecruitEnd;
-    private String voluntaryRegion;
-    private Integer voluntaryTime;
-
-    public static HomeListItem fromCursor(Cursor cursor) {
-        HomeListItem item = new HomeListItem();
-
-        item.voluntaryId = cursor.getInt(cursor.getColumnIndex(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID));
-        item.title = cursor.getString(cursor.getColumnIndex(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TITLE));
-        item.voluntaryDateRecruitStart = cursor.getString(cursor.getColumnIndex(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START));
-        item.voluntaryDateRecruitEnd = cursor.getString(cursor.getColumnIndex(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END));
-        item.imgSumnailUrl = cursor.getString(cursor.getColumnIndex(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_MAINIMAGEURL));;
-        item.voluntaryTime = Integer.valueOf(cursor.getString(cursor.getColumnIndex(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TIME)));
-        item.voluntaryRegion = cursor.getString(cursor.getColumnIndex(BongsaggunContract.RegionEntry.COLUMN_REGION_NAME));
-        item.dDay = TimeUtils.dateToDday(item.voluntaryDateRecruitEnd);
-
-        return item;
-    }
-
-    public HomeListItem() {
-        this.imgSumnail = null;
-        this.title = "";
-        this.dDay = 0;
-        this.voluntaryDateRecruitStart = "";
-        this.voluntaryDateRecruitEnd = "";
-        this.voluntaryRegion = "";
-        this.voluntaryTime = 0;
-    }
-
-    public HomeListItem(Integer imgSumnail, String title, Integer dDay, String voluntaryDateRecruitStart, String voluntaryDateRecruitEnd, String voluntaryRegion, Integer voluntaryTime) {
-        this.imgSumnail = imgSumnail;
-        this.title = title;
-        this.dDay = dDay;
-        this.voluntaryDateRecruitStart = voluntaryDateRecruitStart;
-        this.voluntaryDateRecruitEnd = voluntaryDateRecruitEnd;
-        this.voluntaryRegion = voluntaryRegion;
-        this.voluntaryTime = voluntaryTime;
-    }
+    @SerializedName("img_main_url")
+    String imgMainUrl;
+    @SerializedName("name")
+    String title;
+    @SerializedName("d_day")
+    int dDay;
+    @SerializedName("date_recruit_start")
+    String voluntaryDateRecruitStart;
+    @SerializedName("date_recruit_end")
+    String voluntaryDateRecruitEnd;
+    String region;
+    @SerializedName("time_expect_total")
+    int voluntaryTime;
 
     public Integer getVoluntaryId() {
         return voluntaryId;
@@ -63,20 +38,12 @@ public class HomeListItem {
         this.voluntaryId = voluntaryId;
     }
 
-    public String getImgSumnailUrl() {
-        return imgSumnailUrl;
+    public String getImgMainUrl() {
+        return imgMainUrl;
     }
 
-    public void setImgSumnailUrl(String imgSumnailUrl) {
-        this.imgSumnailUrl = imgSumnailUrl;
-    }
-
-    public Integer getImgSumnail() {
-        return imgSumnail;
-    }
-
-    public void setImgSumnail(Integer imgSumnail) {
-        this.imgSumnail = imgSumnail;
+    public void setImgMainUrl(String imgMainUrl) {
+        this.imgMainUrl = imgMainUrl;
     }
 
     public String getTitle() {
@@ -87,11 +54,11 @@ public class HomeListItem {
         this.title = title;
     }
 
-    public Integer getdDay() {
+    public int getdDay() {
         return dDay;
     }
 
-    public void setdDay(Integer dDay) {
+    public void setdDay(int dDay) {
         this.dDay = dDay;
     }
 
@@ -111,19 +78,30 @@ public class HomeListItem {
         this.voluntaryDateRecruitEnd = voluntaryDateRecruitEnd;
     }
 
-    public String getVoluntaryRegion() {
-        return voluntaryRegion;
+    public String getRegion() {
+        return region;
     }
 
-    public void setVoluntaryRegion(String voluntaryRegion) {
-        this.voluntaryRegion = voluntaryRegion;
+    public void setRegion(String region) {
+        this.region = region;
     }
 
-    public Integer getVoluntaryTime() {
+    public int getVoluntaryTime() {
         return voluntaryTime;
     }
 
-    public void setVoluntaryTime(Integer voluntaryTime) {
+    public void setVoluntaryTime(int voluntaryTime) {
+        this.voluntaryTime = voluntaryTime;
+    }
+
+    public HomeListItem(Integer voluntaryId, String imgMainUrl, String title, int dDay, String voluntaryDateRecruitStart, String voluntaryDateRecruitEnd, String region, int voluntaryTime) {
+        this.voluntaryId = voluntaryId;
+        this.imgMainUrl = imgMainUrl;
+        this.title = title;
+        this.dDay = dDay;
+        this.voluntaryDateRecruitStart = voluntaryDateRecruitStart;
+        this.voluntaryDateRecruitEnd = voluntaryDateRecruitEnd;
+        this.region = region;
         this.voluntaryTime = voluntaryTime;
     }
 }

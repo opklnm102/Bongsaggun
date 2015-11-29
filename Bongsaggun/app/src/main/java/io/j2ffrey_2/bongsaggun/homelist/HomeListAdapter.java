@@ -1,7 +1,6 @@
 package io.j2ffrey_2.bongsaggun.homelist;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,26 +11,28 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import io.j2ffrey_2.bongsaggun.CursorRecyclerViewAdapter;
 import io.j2ffrey_2.bongsaggun.R;
 
 /**
  * Created by vantovan on 2015. 10. 6..
  */
 
-public class HomeListAdapter extends CursorRecyclerViewAdapter<HomeListAdapter.HomeListViewHolder> {
+public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeListViewHolder> {
 
     public static final String TAG = HomeListAdapter.class.getSimpleName();
 
     private Context mContext;
     private final LayoutInflater mInflater;
+    private ArrayList<HomeListItem> mHomeListItems;
 
-    public HomeListAdapter(Context context, Cursor cursor) {
-        super(context, cursor);
+    public HomeListAdapter(Context context, ArrayList<HomeListItem> homeListItems) {
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
+        mHomeListItems = homeListItems;
     }
 
     @Override
@@ -43,38 +44,41 @@ public class HomeListAdapter extends CursorRecyclerViewAdapter<HomeListAdapter.H
     }
 
     @Override
-    public void onBindViewHolder(HomeListViewHolder viewHolder, Cursor cursor) {
-        HomeListItem homeListItem = HomeListItem.fromCursor(cursor);
+    public void onBindViewHolder(HomeListViewHolder holder, int position) {
 
+        HomeListItem item = mHomeListItems.get(position);
 
+        holder.tvTitle.setText(item.getTitle());
 
-        viewHolder.tvTitle.setText(homeListItem.getTitle());
+        String imgMainUrl = item.getImgMainUrl();
 
-        String imgSumailUrl = homeListItem.getImgSumnailUrl();
+        Log.e(TAG,imgMainUrl);
 
-        Log.e(TAG,imgSumailUrl);
-
-        if(!"null".equals(imgSumailUrl)){
+        if(!"null".equals(imgMainUrl)){
             Glide.with(mContext).
-                    load(imgSumailUrl)
+                    load(imgMainUrl)
                     .centerCrop()
                     .placeholder(R.mipmap.ic_logo)
                     .crossFade()
-                    .into(viewHolder.ivSumnail);
+                    .into(holder.ivSumnail);
         }else{
             Glide.with(mContext).
                     load(R.mipmap.ic_logo)
                     .centerCrop()
                     .crossFade()
-                    .into(viewHolder.ivSumnail);
+                    .into(holder.ivSumnail);
         }
-//        viewHolder.ivSumnail.setImageResource(homeListItem.getImgSumnail());
 
-        viewHolder.tvDday.setText("D-" + homeListItem.getdDay());
-        viewHolder.tvVoluntaryPeriodStart.setText(homeListItem.getVoluntaryDateRecruitStart());
-        viewHolder.tvVoluntaryPeriodEnd.setText(homeListItem.getVoluntaryDateRecruitEnd());
-        viewHolder.tvVoluntaryWorkLocation.setText(homeListItem.getVoluntaryRegion());
-        viewHolder.tvVoluntaryWorkTime.setText(homeListItem.getVoluntaryTime() + "시간");
+        holder.tvDday.setText("D-" + item.getdDay());
+        holder.tvVoluntaryPeriodStart.setText(item.getVoluntaryDateRecruitStart());
+        holder.tvVoluntaryPeriodEnd.setText(item.getVoluntaryDateRecruitEnd());
+        holder.tvVoluntaryRegion.setText(item.getRegion());
+        holder.tvVoluntaryTime.setText(item.getVoluntaryTime() + "시간");
+    }
+
+    @Override
+    public int getItemCount() {
+        return mHomeListItems.size();
     }
 
     public static class HomeListViewHolder extends RecyclerView.ViewHolder {
@@ -90,9 +94,9 @@ public class HomeListAdapter extends CursorRecyclerViewAdapter<HomeListAdapter.H
         @Bind(R.id.textView_voluntaryPeriod_end)
         TextView tvVoluntaryPeriodEnd;
         @Bind(R.id.textView_location)
-        TextView tvVoluntaryWorkLocation;
+        TextView tvVoluntaryRegion;
         @Bind(R.id.textView_time)
-        TextView tvVoluntaryWorkTime;
+        TextView tvVoluntaryTime;
 
         View mView;
 
@@ -102,5 +106,13 @@ public class HomeListAdapter extends CursorRecyclerViewAdapter<HomeListAdapter.H
 
             ButterKnife.bind(this, mView);
         }
+    }
+
+    public void setData(ArrayList<HomeListItem> list){
+        mHomeListItems.clear();
+
+        mHomeListItems = list;
+
+        notifyDataSetChanged();
     }
 }

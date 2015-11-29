@@ -86,7 +86,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         }
     }
 
-    public void setCalendarData(ArrayList<CalendarItem> list) {
+    public void setData(ArrayList<CalendarItem> list) {
         mCalendarItemArrayList.clear();
 
         mCalendarItemArrayList = list;

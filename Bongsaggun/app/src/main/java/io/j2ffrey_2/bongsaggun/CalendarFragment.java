@@ -1,9 +1,7 @@
 package io.j2ffrey_2.bongsaggun;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.transition.Explode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -182,12 +180,12 @@ public class CalendarFragment extends BaseFragment {
                         for (int i = 0; i < jsonArray.size(); i++) {
                             CalendarItem item = new Gson().fromJson(jsonArray.get(i), CalendarItem.class);
                             mCalendarItemArrayList.add(item);
-                            Log.e(TAG, " " + item.getId() + item.getdDay() + item.getRegion() + item.getTitle() + item.getType() + item.getDayOfWeek() + item.getDay());
+                            Log.e(TAG, " " + item.getVoluntaryId() + item.getdDay() + item.getRegion() + item.getTitle() + item.getType() + item.getDayOfWeek() + item.getDay());
                         }
                     } else {
                         //데이터 얻기 실패
                     }
-                    mCalendarAdapter.setCalendarData(mCalendarItemArrayList);
+                    mCalendarAdapter.setData(mCalendarItemArrayList);
                 }
             }
 
