@@ -111,11 +111,11 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
 
+        Intent intent;
+
         switch (view.getId()) {
-            case R.id.container_login:
-
-                Intent intent = new Intent(getActivity(), SigninActivity.class);
-
+            case R.id.container_login:  //로그인
+                intent = new Intent(getActivity(), SigninActivity.class);
                 startActivity(intent);
                 break;
             case R.id.container_myVoluntaryList:  //나중에
@@ -124,8 +124,11 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
             case R.id.container_zzimList:  //나중에
                 Log.d(TAG, " container_zzimList");
                 break;
-            case R.id.container_webSite:  //Todo: 웹사이트로 연결, 암시적 인텐트
-                Log.d(TAG, " container_webSite");
+            case R.id.container_webSite:  //웹사이트로 연결, 암시적 인텐트
+                intent = new Intent(Intent.ACTION_VIEW);
+                Uri uri = Uri.parse("http://bongsaggun.com/");
+                intent.setData(uri);
+                startActivity(intent);
                 break;
             case R.id.container_inquire:  //Todo: 메일 보내기, 암시적 인텐트
                 Log.d(TAG, " container_inquire");
