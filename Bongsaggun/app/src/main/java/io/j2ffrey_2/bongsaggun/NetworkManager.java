@@ -169,7 +169,7 @@ public class NetworkManager {
                         ContentValues[] cvArray = new ContentValues[cVVector.size()];
                         cVVector.toArray(cvArray);
 
-                        mContext.getContentResolver().bulkInsert(BongsaggunContract.SchoolEntry.CONTENT_URI, cvArray);
+                        mContext.getContentResolver().bulkInsert(BongsaggunContracts.SchoolEntry.CONTENT_URI, cvArray);
 
                         //Todo: updateAt보고 db갱신 할것
                     }
@@ -210,7 +210,7 @@ public class NetworkManager {
                         ContentValues[] cvArray = new ContentValues[cVVector.size()];
                         cVVector.toArray(cvArray);
 
-                        mContext.getContentResolver().bulkInsert(BongsaggunContract.RegionEntry.CONTENT_URI, cvArray);
+                        mContext.getContentResolver().bulkInsert(BongsaggunContracts.RegionEntry.CONTENT_URI, cvArray);
 
                         //Todo: updateAt보고 db갱신 할것
                     }
@@ -251,7 +251,7 @@ public class NetworkManager {
                         ContentValues[] cvArray = new ContentValues[cVVector.size()];
                         cVVector.toArray(cvArray);
 
-                        mContext.getContentResolver().bulkInsert(BongsaggunContract.TimeEntry.CONTENT_URI, cvArray);
+                        mContext.getContentResolver().bulkInsert(BongsaggunContracts.TimeEntry.CONTENT_URI, cvArray);
 
                         //Todo: updateAt보고 db갱신 할것
                     }
@@ -292,7 +292,7 @@ public class NetworkManager {
                         ContentValues[] cvArray = new ContentValues[cVVector.size()];
                         cVVector.toArray(cvArray);
 
-                        mContext.getContentResolver().bulkInsert(BongsaggunContract.CategoryEntry.CONTENT_URI, cvArray);
+                        mContext.getContentResolver().bulkInsert(BongsaggunContracts.CategoryEntry.CONTENT_URI, cvArray);
 
                         //Todo: updateAt보고 db갱신 할것
                     }
@@ -332,7 +332,7 @@ public class NetworkManager {
                         ContentValues[] cvArray = new ContentValues[cVVector.size()];
                         cVVector.toArray(cvArray);
 
-                        mContext.getContentResolver().bulkInsert(BongsaggunContract.VoluntaryEntry.CONTENT_URI, cvArray);
+                        mContext.getContentResolver().bulkInsert(BongsaggunContracts.VoluntaryEntry.CONTENT_URI, cvArray);
 
                         //Todo: updateAt보고 db갱신 할것
                         // delete old data so we don't build up an endless history

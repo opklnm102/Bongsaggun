@@ -2,6 +2,7 @@ package io.j2ffrey_2.bongsaggun;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -111,8 +112,11 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
 
         switch (view.getId()) {
-            case R.id.container_login:  //나중에
-                Log.d(TAG, " container_login");
+            case R.id.container_login:
+
+                Intent intent = new Intent(getActivity(), SigninActivity.class);
+
+                startActivity(intent);
                 break;
             case R.id.container_myVoluntaryList:  //나중에
                 Log.d(TAG, " container_myVoluntaryList");

@@ -11,7 +11,14 @@ import android.provider.BaseColumns;
  * 외부에서 Provider를 사용하기 위해 필요한 값들이 저장
  * Provider에 접근하기 위한 API라고 생각하면 편하다
  */
-public class BongsaggunContract {
+public class BongsaggunContracts {
+
+
+    //SharedPreference
+    public static final String PREFERENCE_NAME = "bongsaggun_settings";
+
+    public static final String PREFERENCE_KEY_USER_ID = "uid";
+
 
     /*
     VoluntaryProvider의 AUTHORITY

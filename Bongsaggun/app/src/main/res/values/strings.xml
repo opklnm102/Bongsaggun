@@ -69,8 +69,9 @@
     <!-- SyncAdapter related -->
     <string name="sync_account_type">bongsaggun.j2ffrey_2.io</string>
     <string name="content_authority">io.j2ffrey_2.bongsaggun.app</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="title_activity_login">LoginActivity</string>
+
+
+    <string name="title_activity_signin">SigninActivity</string>
     <string name="title_activity_search_main">SearchMainActivity</string>
     <string name="title_activity_search_category">SearchCategoryActivity</string>
 

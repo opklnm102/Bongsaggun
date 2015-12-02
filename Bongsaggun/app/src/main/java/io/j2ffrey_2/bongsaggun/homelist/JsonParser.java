@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import java.util.Vector;
 
-import io.j2ffrey_2.bongsaggun.BongsaggunContract;
+import io.j2ffrey_2.bongsaggun.BongsaggunContracts;
 
 public class JsonParser {
 
@@ -114,36 +114,36 @@ public class JsonParser {
 //                        + " " + adminAdd + " " + admin_mod + " " + actTime + " " + createdAt + " " + updatedAt);
 
                 ContentValues voluntaryValues = new ContentValues();
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID, id);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TITLE, title);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ADDRESS, address);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_SUMMARY, summary);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CONTENT, content);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CONTENTETC, contentEtc);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_INCENTIVE, incentive);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_STATUS, status);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_LINK, link);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_APPROVAL, approval);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START, dateRecruitStart);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END, dateRecruitEnd);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_REAL_START, dateRealStart);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_REAL_END, dateRealEnd);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_MAINIMAGEURL, urlMainImage);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_POSTERIMAGEURL, urlPosterImage);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CLERKNAME, clerkName);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CLERKCALL, clerkCall);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CLERKEMAIL, clerkEmail);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CLERKLINK, clerkLink);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_REQUIREMENT, vltrReq);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_RECRUIT_PEOPLE_TOTAL, recruitPeopleTotal);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_RECRUIT_PEOPLE_CURRENT, recruitPeopleCurrent);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_TIME, timeExpectTotal);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ORIGANIZATIONID, origanizationId);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CATEGORYID, categoryId);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_BTIMEID, bTimeId);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID, regionId);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_SCHOOLID, schoolId);
-                voluntaryValues.put(BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_UPDATEAT, updatedAt);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_ID, id);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_TITLE, title);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_ADDRESS, address);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_SUMMARY, summary);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_CONTENT, content);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_CONTENTETC, contentEtc);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_INCENTIVE, incentive);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_STATUS, status);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_LINK, link);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_APPROVAL, approval);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_START, dateRecruitStart);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_RECRUIT_END, dateRecruitEnd);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_REAL_START, dateRealStart);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_DATE_REAL_END, dateRealEnd);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_MAINIMAGEURL, urlMainImage);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_POSTERIMAGEURL, urlPosterImage);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_CLERKNAME, clerkName);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_CLERKCALL, clerkCall);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_CLERKEMAIL, clerkEmail);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_CLERKLINK, clerkLink);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_REQUIREMENT, vltrReq);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_RECRUIT_PEOPLE_TOTAL, recruitPeopleTotal);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_RECRUIT_PEOPLE_CURRENT, recruitPeopleCurrent);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_TIME, timeExpectTotal);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_ORIGANIZATIONID, origanizationId);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_CATEGORYID, categoryId);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_BTIMEID, bTimeId);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID, regionId);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_SCHOOLID, schoolId);
+                voluntaryValues.put(BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_UPDATEAT, updatedAt);
 
                 cVVector.add(voluntaryValues);
             }
@@ -179,10 +179,10 @@ public class JsonParser {
 //                Log.d(TAG, "parseredData " + id + " " + name + " " + createdAt + " " + updatedAt);
 
                 ContentValues schoolValues = new ContentValues();
-                schoolValues.put(BongsaggunContract.SchoolEntry.COLUMN_SCHOOL_ID, id);
-                schoolValues.put(BongsaggunContract.SchoolEntry.COLUMN_SCHOOL_NAME, name);
-                schoolValues.put(BongsaggunContract.SchoolEntry.COLUMN_SCHOOL_CREATEAT, createdAt);
-                schoolValues.put(BongsaggunContract.SchoolEntry.COLUMN_SCHOOL_UPDATEAT, updatedAt);
+                schoolValues.put(BongsaggunContracts.SchoolEntry.COLUMN_SCHOOL_ID, id);
+                schoolValues.put(BongsaggunContracts.SchoolEntry.COLUMN_SCHOOL_NAME, name);
+                schoolValues.put(BongsaggunContracts.SchoolEntry.COLUMN_SCHOOL_CREATEAT, createdAt);
+                schoolValues.put(BongsaggunContracts.SchoolEntry.COLUMN_SCHOOL_UPDATEAT, updatedAt);
 
                 cVVector.add(schoolValues);
             }
@@ -217,10 +217,10 @@ public class JsonParser {
 //                Log.d(TAG, "parseredData " + id + " " + name + " " + createdAt + " " + updatedAt);
 
                 ContentValues regionValues = new ContentValues();
-                regionValues.put(BongsaggunContract.RegionEntry.COLUMN_REGION_ID, id);
-                regionValues.put(BongsaggunContract.RegionEntry.COLUMN_REGION_NAME, name);
-                regionValues.put(BongsaggunContract.RegionEntry.COLUMN_REGION_CREATEAT, createdAt);
-                regionValues.put(BongsaggunContract.RegionEntry.COLUMN_REGION_UPDATEAT, updatedAt);
+                regionValues.put(BongsaggunContracts.RegionEntry.COLUMN_REGION_ID, id);
+                regionValues.put(BongsaggunContracts.RegionEntry.COLUMN_REGION_NAME, name);
+                regionValues.put(BongsaggunContracts.RegionEntry.COLUMN_REGION_CREATEAT, createdAt);
+                regionValues.put(BongsaggunContracts.RegionEntry.COLUMN_REGION_UPDATEAT, updatedAt);
 
                 cVVector.add(regionValues);
             }
@@ -257,12 +257,12 @@ public class JsonParser {
 //                Log.d(TAG, "parseredData " + id + " " + name + " " + min + " " + max + " " + createdAt + " " + updatedAt);
 
                 ContentValues timeValues = new ContentValues();
-                timeValues.put(BongsaggunContract.TimeEntry.COLUMN_TIME_ID, id);
-                timeValues.put(BongsaggunContract.TimeEntry.COLUMN_TIME_NAME, name);
-                timeValues.put(BongsaggunContract.TimeEntry.COLUMN_TIME_MIN, min);
-                timeValues.put(BongsaggunContract.TimeEntry.COLUMN_TIME_MAX, max);
-                timeValues.put(BongsaggunContract.TimeEntry.COLUMN_TIME_CREATEAT, createdAt);
-                timeValues.put(BongsaggunContract.TimeEntry.COLUMN_TIME_UPDATEAT, updatedAt);
+                timeValues.put(BongsaggunContracts.TimeEntry.COLUMN_TIME_ID, id);
+                timeValues.put(BongsaggunContracts.TimeEntry.COLUMN_TIME_NAME, name);
+                timeValues.put(BongsaggunContracts.TimeEntry.COLUMN_TIME_MIN, min);
+                timeValues.put(BongsaggunContracts.TimeEntry.COLUMN_TIME_MAX, max);
+                timeValues.put(BongsaggunContracts.TimeEntry.COLUMN_TIME_CREATEAT, createdAt);
+                timeValues.put(BongsaggunContracts.TimeEntry.COLUMN_TIME_UPDATEAT, updatedAt);
 
                 cVVector.add(timeValues);
             }
@@ -297,10 +297,10 @@ public class JsonParser {
 //                Log.d(TAG, "parseredData " + id + " " + name + " " + createdAt + " " + updatedAt);
 
                 ContentValues categoryValues = new ContentValues();
-                categoryValues.put(BongsaggunContract.CategoryEntry.COLUMN_CATEGORY_ID, id);
-                categoryValues.put(BongsaggunContract.CategoryEntry.COLUMN_CATEGORY_NAME, name);
-                categoryValues.put(BongsaggunContract.CategoryEntry.COLUMN_CATEGORY_CREATEAT, createdAt);
-                categoryValues.put(BongsaggunContract.CategoryEntry.COLUMN_CATEGORY_UPDATEAT, updatedAt);
+                categoryValues.put(BongsaggunContracts.CategoryEntry.COLUMN_CATEGORY_ID, id);
+                categoryValues.put(BongsaggunContracts.CategoryEntry.COLUMN_CATEGORY_NAME, name);
+                categoryValues.put(BongsaggunContracts.CategoryEntry.COLUMN_CATEGORY_CREATEAT, createdAt);
+                categoryValues.put(BongsaggunContracts.CategoryEntry.COLUMN_CATEGORY_UPDATEAT, updatedAt);
 
                 cVVector.add(categoryValues);
             }

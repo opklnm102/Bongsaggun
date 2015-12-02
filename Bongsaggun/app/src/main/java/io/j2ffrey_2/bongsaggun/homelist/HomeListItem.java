@@ -1,11 +1,6 @@
 package io.j2ffrey_2.bongsaggun.homelist;
 
-import android.database.Cursor;
-
 import com.google.gson.annotations.SerializedName;
-
-import io.j2ffrey_2.bongsaggun.BongsaggunContract;
-import io.j2ffrey_2.bongsaggun.TimeUtils;
 
 /**
  * Created by vantovan on 2015. 10. 14..

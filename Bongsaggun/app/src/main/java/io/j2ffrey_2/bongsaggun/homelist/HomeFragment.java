@@ -1,10 +1,6 @@
 package io.j2ffrey_2.bongsaggun.homelist;
 
-import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,13 +13,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.j2ffrey_2.bongsaggun.BaseFragment;
-import io.j2ffrey_2.bongsaggun.BongsaggunContract;
-import io.j2ffrey_2.bongsaggun.CalendarItem;
 import io.j2ffrey_2.bongsaggun.R;
 import io.j2ffrey_2.bongsaggun.model.Token;
 import retrofit.Call;

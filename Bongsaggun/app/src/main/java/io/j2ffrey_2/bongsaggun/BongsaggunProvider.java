@@ -41,26 +41,26 @@ public class BongsaggunProvider extends ContentProvider {
         //Voluntary LEFT OUTER JOIN Region ON Region.id=Voluntary.regioinId
         //LEFT OUTER JOIN School ON School.id=Voluntary.schoolId
         //LEFT OUTER JOIN Image ON Image .id=Voluntary.ImageId
-        sVoluntarySettingQueryBuilder.setTables(BongsaggunContract.VoluntaryEntry.TABLE_NAME +
-                        " LEFT OUTER JOIN " + BongsaggunContract.RegionEntry.TABLE_NAME +
-                        " ON " + BongsaggunContract.RegionEntry.TABLE_NAME + "." + BongsaggunContract.RegionEntry.COLUMN_REGION_ID +
-                        " = " + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID +
+        sVoluntarySettingQueryBuilder.setTables(BongsaggunContracts.VoluntaryEntry.TABLE_NAME +
+                        " LEFT OUTER JOIN " + BongsaggunContracts.RegionEntry.TABLE_NAME +
+                        " ON " + BongsaggunContracts.RegionEntry.TABLE_NAME + "." + BongsaggunContracts.RegionEntry.COLUMN_REGION_ID +
+                        " = " + BongsaggunContracts.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_REGIONID +
 
-                        " LEFT OUTER JOIN " + BongsaggunContract.SchoolEntry.TABLE_NAME +
-                        " ON " + BongsaggunContract.SchoolEntry.TABLE_NAME + "." + BongsaggunContract.SchoolEntry.COLUMN_SCHOOL_ID +
-                        " = " + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_SCHOOLID +
+                        " LEFT OUTER JOIN " + BongsaggunContracts.SchoolEntry.TABLE_NAME +
+                        " ON " + BongsaggunContracts.SchoolEntry.TABLE_NAME + "." + BongsaggunContracts.SchoolEntry.COLUMN_SCHOOL_ID +
+                        " = " + BongsaggunContracts.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_SCHOOLID +
 
-                        " LEFT OUTER JOIN " + BongsaggunContract.TimeEntry.TABLE_NAME +
-                        " ON " + BongsaggunContract.TimeEntry.TABLE_NAME + "." + BongsaggunContract.TimeEntry.COLUMN_TIME_ID +
-                        " = " + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_BTIMEID +
+                        " LEFT OUTER JOIN " + BongsaggunContracts.TimeEntry.TABLE_NAME +
+                        " ON " + BongsaggunContracts.TimeEntry.TABLE_NAME + "." + BongsaggunContracts.TimeEntry.COLUMN_TIME_ID +
+                        " = " + BongsaggunContracts.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_BTIMEID +
 
-                        " LEFT OUTER JOIN " + BongsaggunContract.CategoryEntry.TABLE_NAME +
-                        " ON " + BongsaggunContract.CategoryEntry.TABLE_NAME + "." + BongsaggunContract.CategoryEntry.COLUMN_CATEGORY_ID +
-                        " = " + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_CATEGORYID +
+                        " LEFT OUTER JOIN " + BongsaggunContracts.CategoryEntry.TABLE_NAME +
+                        " ON " + BongsaggunContracts.CategoryEntry.TABLE_NAME + "." + BongsaggunContracts.CategoryEntry.COLUMN_CATEGORY_ID +
+                        " = " + BongsaggunContracts.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_CATEGORYID +
 
-                        " LEFT OUTER JOIN " + BongsaggunContract.ImageEntry.TABLE_NAME +
-                        " ON " + BongsaggunContract.ImageEntry.TABLE_NAME + "." + BongsaggunContract.ImageEntry.COLUMN_IMAGE_FK_VOLUNTARY_ID +
-                        " = " + BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID
+                        " LEFT OUTER JOIN " + BongsaggunContracts.ImageEntry.TABLE_NAME +
+                        " ON " + BongsaggunContracts.ImageEntry.TABLE_NAME + "." + BongsaggunContracts.ImageEntry.COLUMN_IMAGE_FK_VOLUNTARY_ID +
+                        " = " + BongsaggunContracts.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_ID
         );
     }
 
@@ -69,11 +69,11 @@ public class BongsaggunProvider extends ContentProvider {
     //image update할 때 사용
     //voluntary.voluntary_mainImageId = ?
     private static final String imageSelection =
-            BongsaggunContract.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContract.VoluntaryEntry.COLUMN_VOLUNTARY_ID + "= ?";
+            BongsaggunContracts.VoluntaryEntry.TABLE_NAME + "." + BongsaggunContracts.VoluntaryEntry.COLUMN_VOLUNTARY_ID + "= ?";
 
     //HomeList에서 사용
     private static final String sVoluntaryWithRegionSelection =
-            BongsaggunContract.RegionEntry.TABLE_NAME + "." + BongsaggunContract.RegionEntry.COLUMN_REGION_ID + "= ?";
+            BongsaggunContracts.RegionEntry.TABLE_NAME + "." + BongsaggunContracts.RegionEntry.COLUMN_REGION_ID + "= ?";
 
     private Cursor getHomeList(Uri uri, String[] projection, String sortOrder) {
 
@@ -136,17 +136,17 @@ public class BongsaggunProvider extends ContentProvider {
 
         switch (match) {
             case SCHOOL:
-                return BongsaggunContract.SchoolEntry.CONTENT_TYPE;
+                return BongsaggunContracts.SchoolEntry.CONTENT_TYPE;
             case REGION:
-                return BongsaggunContract.RegionEntry.CONTENT_TYPE;
+                return BongsaggunContracts.RegionEntry.CONTENT_TYPE;
             case TIME:
-                return BongsaggunContract.TimeEntry.CONTENT_TYPE;
+                return BongsaggunContracts.TimeEntry.CONTENT_TYPE;
             case CATEGORY:
-                return BongsaggunContract.CategoryEntry.CONTENT_TYPE;
+                return BongsaggunContracts.CategoryEntry.CONTENT_TYPE;
             case IMAGE:
-                return BongsaggunContract.ImageEntry.CONTENT_TYPE;
+                return BongsaggunContracts.ImageEntry.CONTENT_TYPE;
             case VOLUNTARY:
-                return BongsaggunContract.VoluntaryEntry.CONTENT_TYPE;
+                return BongsaggunContracts.VoluntaryEntry.CONTENT_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -167,10 +167,10 @@ public class BongsaggunProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
             case SCHOOL: {
                 if (TextUtils.isEmpty(sortOrder)) {  //정렬값이 없다면 id를 기준으로 오름차순 정렬
-                    sortOrder = BongsaggunContract.SchoolEntry.SORT_ORDER_DEFAULT;
+                    sortOrder = BongsaggunContracts.SchoolEntry.SORT_ORDER_DEFAULT;
                 }
                 retCursor = db.query(
-                        BongsaggunContract.SchoolEntry.TABLE_NAME,  //테이블 이름
+                        BongsaggunContracts.SchoolEntry.TABLE_NAME,  //테이블 이름
                         projection,                                //조회할 컬럼이름
                         selection,                                 //WHERE 절
                         selectionArgs,                             //WHERE 절 인자
@@ -182,10 +182,10 @@ public class BongsaggunProvider extends ContentProvider {
             }
             case REGION: {
                 if (TextUtils.isEmpty(sortOrder)) {  //정렬값이 없다면 id를 기준으로 오름차순 정렬
-                    sortOrder = BongsaggunContract.RegionEntry.SORT_ORDER_DEFAULT;
+                    sortOrder = BongsaggunContracts.RegionEntry.SORT_ORDER_DEFAULT;
                 }
                 retCursor = db.query(
-                        BongsaggunContract.RegionEntry.TABLE_NAME,  //테이블 이름
+                        BongsaggunContracts.RegionEntry.TABLE_NAME,  //테이블 이름
                         projection,                                //조회할 컬럼이름
                         selection,                                 //WHERE 절
                         selectionArgs,                             //WHERE 절 인자
@@ -197,10 +197,10 @@ public class BongsaggunProvider extends ContentProvider {
             }
             case TIME: {
                 if (TextUtils.isEmpty(sortOrder)) {  //정렬값이 없다면 id를 기준으로 오름차순 정렬
-                    sortOrder = BongsaggunContract.TimeEntry.SORT_ORDER_DEFAULT;
+                    sortOrder = BongsaggunContracts.TimeEntry.SORT_ORDER_DEFAULT;
                 }
                 retCursor = db.query(
-                        BongsaggunContract.TimeEntry.TABLE_NAME,  //테이블 이름
+                        BongsaggunContracts.TimeEntry.TABLE_NAME,  //테이블 이름
                         projection,                                //조회할 컬럼이름
                         selection,                                 //WHERE 절
                         selectionArgs,                             //WHERE 절 인자
@@ -212,10 +212,10 @@ public class BongsaggunProvider extends ContentProvider {
             }
             case CATEGORY: {
                 if (TextUtils.isEmpty(sortOrder)) {  //정렬값이 없다면 id를 기준으로 오름차순 정렬
-                    sortOrder = BongsaggunContract.CategoryEntry.SORT_ORDER_DEFAULT;
+                    sortOrder = BongsaggunContracts.CategoryEntry.SORT_ORDER_DEFAULT;
                 }
                 retCursor = db.query(
-                        BongsaggunContract.CategoryEntry.TABLE_NAME,  //테이블 이름
+                        BongsaggunContracts.CategoryEntry.TABLE_NAME,  //테이블 이름
                         projection,                                //조회할 컬럼이름
                         selection,                                 //WHERE 절
                         selectionArgs,                             //WHERE 절 인자
@@ -227,7 +227,7 @@ public class BongsaggunProvider extends ContentProvider {
             }
             case IMAGE: {
                 retCursor = db.query(
-                        BongsaggunContract.ImageEntry.TABLE_NAME,  //테이블 이름
+                        BongsaggunContracts.ImageEntry.TABLE_NAME,  //테이블 이름
                         projection,                                //조회할 컬럼이름
                         selection,                                 //WHERE 절
                         selectionArgs,                             //WHERE 절 인자
@@ -239,7 +239,7 @@ public class BongsaggunProvider extends ContentProvider {
             }
             case VOLUNTARY: {
                 if (TextUtils.isEmpty(sortOrder)) {  //정렬값이 없다면 id를 기준으로 내림차순 정렬
-                    sortOrder = BongsaggunContract.VoluntaryEntry.SORT_ORDER_DEFAULT;
+                    sortOrder = BongsaggunContracts.VoluntaryEntry.SORT_ORDER_DEFAULT;
                 }
 //                retCursor = db.query(
 //                        BongsaggunContract.VoluntaryEntry.TABLE_NAME,  //테이블 이름
@@ -275,49 +275,49 @@ public class BongsaggunProvider extends ContentProvider {
 
         switch (match) {
             case SCHOOL: {
-                long _id = db.insert(BongsaggunContract.SchoolEntry.TABLE_NAME, null, values);
+                long _id = db.insert(BongsaggunContracts.SchoolEntry.TABLE_NAME, null, values);
                 if (_id > 0)
-                    returnUri = BongsaggunContract.SchoolEntry.buildSchoolUri(_id);
+                    returnUri = BongsaggunContracts.SchoolEntry.buildSchoolUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
             }
             case REGION: {
-                long _id = db.insert(BongsaggunContract.RegionEntry.TABLE_NAME, null, values);
+                long _id = db.insert(BongsaggunContracts.RegionEntry.TABLE_NAME, null, values);
                 if (_id > 0)
-                    returnUri = BongsaggunContract.RegionEntry.buildRegionUri(_id);
+                    returnUri = BongsaggunContracts.RegionEntry.buildRegionUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
             }
             case TIME: {
-                long _id = db.insert(BongsaggunContract.TimeEntry.TABLE_NAME, null, values);
+                long _id = db.insert(BongsaggunContracts.TimeEntry.TABLE_NAME, null, values);
                 if (_id > 0)
-                    returnUri = BongsaggunContract.TimeEntry.buildTimeUri(_id);
+                    returnUri = BongsaggunContracts.TimeEntry.buildTimeUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
             }
             case CATEGORY: {
-                long _id = db.insert(BongsaggunContract.CategoryEntry.TABLE_NAME, null, values);
+                long _id = db.insert(BongsaggunContracts.CategoryEntry.TABLE_NAME, null, values);
                 if (_id > 0)
-                    returnUri = BongsaggunContract.CategoryEntry.buildCategoryUri(_id);
+                    returnUri = BongsaggunContracts.CategoryEntry.buildCategoryUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
             }
             case IMAGE: {
-                long _id = db.insert(BongsaggunContract.ImageEntry.TABLE_NAME, null, values);
+                long _id = db.insert(BongsaggunContracts.ImageEntry.TABLE_NAME, null, values);
                 if (_id > 0)
-                    returnUri = BongsaggunContract.ImageEntry.buildImageUri(_id);
+                    returnUri = BongsaggunContracts.ImageEntry.buildImageUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
             }
             case VOLUNTARY: {
-                long _id = db.insert(BongsaggunContract.VoluntaryEntry.TABLE_NAME, null, values);
+                long _id = db.insert(BongsaggunContracts.VoluntaryEntry.TABLE_NAME, null, values);
                 if (_id > 0)
-                    returnUri = BongsaggunContract.VoluntaryEntry.buildVoluntaryUri(_id);
+                    returnUri = BongsaggunContracts.VoluntaryEntry.buildVoluntaryUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
@@ -339,27 +339,27 @@ public class BongsaggunProvider extends ContentProvider {
         switch (match) {
             case SCHOOL:
                 rowsDeleted = db.delete(
-                        BongsaggunContract.SchoolEntry.TABLE_NAME, selection, selectionArgs);
+                        BongsaggunContracts.SchoolEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             case REGION:
                 rowsDeleted = db.delete(
-                        BongsaggunContract.RegionEntry.TABLE_NAME, selection, selectionArgs);
+                        BongsaggunContracts.RegionEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             case TIME:
                 rowsDeleted = db.delete(
-                        BongsaggunContract.TimeEntry.TABLE_NAME, selection, selectionArgs);
+                        BongsaggunContracts.TimeEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             case CATEGORY:
                 rowsDeleted = db.delete(
-                        BongsaggunContract.CategoryEntry.TABLE_NAME, selection, selectionArgs);
+                        BongsaggunContracts.CategoryEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             case IMAGE:
                 rowsDeleted = db.delete(
-                        BongsaggunContract.ImageEntry.TABLE_NAME, selection, selectionArgs);
+                        BongsaggunContracts.ImageEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             case VOLUNTARY:
                 rowsDeleted = db.delete(
-                        BongsaggunContract.VoluntaryEntry.TABLE_NAME, selection, selectionArgs);
+                        BongsaggunContracts.VoluntaryEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -380,27 +380,27 @@ public class BongsaggunProvider extends ContentProvider {
         switch (match) {
             case SCHOOL:
                 rowsUpdated = db.update(
-                        BongsaggunContract.SchoolEntry.TABLE_NAME, values, selection, selectionArgs);
+                        BongsaggunContracts.SchoolEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             case REGION:
                 rowsUpdated = db.update(
-                        BongsaggunContract.RegionEntry.TABLE_NAME, values, selection, selectionArgs);
+                        BongsaggunContracts.RegionEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             case TIME:
                 rowsUpdated = db.update(
-                        BongsaggunContract.TimeEntry.TABLE_NAME, values, selection, selectionArgs);
+                        BongsaggunContracts.TimeEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             case CATEGORY:
                 rowsUpdated = db.update(
-                        BongsaggunContract.CategoryEntry.TABLE_NAME, values, selection, selectionArgs);
+                        BongsaggunContracts.CategoryEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             case IMAGE:
                 rowsUpdated = db.update(
-                        BongsaggunContract.ImageEntry.TABLE_NAME, values, selection, selectionArgs);
+                        BongsaggunContracts.ImageEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             case VOLUNTARY:
                 rowsUpdated = db.update(
-                        BongsaggunContract.VoluntaryEntry.TABLE_NAME, values, selection, selectionArgs);
+                        BongsaggunContracts.VoluntaryEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -415,16 +415,16 @@ public class BongsaggunProvider extends ContentProvider {
     static UriMatcher buildUriMatcher() {
 
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
-        final String authority = BongsaggunContract.CONTENT_AUTHORITY;
+        final String authority = BongsaggunContracts.CONTENT_AUTHORITY;
 
-        matcher.addURI(authority, BongsaggunContract.PATH_SCHOOL, SCHOOL);
+        matcher.addURI(authority, BongsaggunContracts.PATH_SCHOOL, SCHOOL);
 //        matcher.addURI(authority, VoluntaryContract.PATH_SCHOOL, + "/*", );
 
-        matcher.addURI(authority, BongsaggunContract.PATH_REGION, REGION);
-        matcher.addURI(authority, BongsaggunContract.PATH_TIME, TIME);
-        matcher.addURI(authority, BongsaggunContract.PATH_CATEGORY, CATEGORY);
-        matcher.addURI(authority, BongsaggunContract.PATH_IMAGE, IMAGE);
-        matcher.addURI(authority, BongsaggunContract.PATH_VOLUNTARY, VOLUNTARY);
+        matcher.addURI(authority, BongsaggunContracts.PATH_REGION, REGION);
+        matcher.addURI(authority, BongsaggunContracts.PATH_TIME, TIME);
+        matcher.addURI(authority, BongsaggunContracts.PATH_CATEGORY, CATEGORY);
+        matcher.addURI(authority, BongsaggunContracts.PATH_IMAGE, IMAGE);
+        matcher.addURI(authority, BongsaggunContracts.PATH_VOLUNTARY, VOLUNTARY);
 
         return matcher;
     }
@@ -440,7 +440,7 @@ public class BongsaggunProvider extends ContentProvider {
                 db.beginTransaction();
                 try {
                     for (ContentValues value : values) {
-                        long _id = db.insert(BongsaggunContract.SchoolEntry.TABLE_NAME, null, value);
+                        long _id = db.insert(BongsaggunContracts.SchoolEntry.TABLE_NAME, null, value);
                         if (_id != -1) {
                             returnCount++;
                         }
@@ -454,7 +454,7 @@ public class BongsaggunProvider extends ContentProvider {
                 db.beginTransaction();
                 try {
                     for (ContentValues value : values) {
-                        long _id = db.insert(BongsaggunContract.RegionEntry.TABLE_NAME, null, value);
+                        long _id = db.insert(BongsaggunContracts.RegionEntry.TABLE_NAME, null, value);
                         if (_id != -1) {
                             returnCount++;
                         }
@@ -468,7 +468,7 @@ public class BongsaggunProvider extends ContentProvider {
                 db.beginTransaction();
                 try {
                     for (ContentValues value : values) {
-                        long _id = db.insert(BongsaggunContract.ImageEntry.TABLE_NAME, null, value);
+                        long _id = db.insert(BongsaggunContracts.ImageEntry.TABLE_NAME, null, value);
                         if (_id != -1) {
                             returnCount++;
                         }
@@ -482,7 +482,7 @@ public class BongsaggunProvider extends ContentProvider {
                 db.beginTransaction();
                 try {
                     for (ContentValues value : values) {
-                        long _id = db.insert(BongsaggunContract.TimeEntry.TABLE_NAME, null, value);
+                        long _id = db.insert(BongsaggunContracts.TimeEntry.TABLE_NAME, null, value);
                         if (_id != -1) {
                             returnCount++;
                         }
@@ -496,7 +496,7 @@ public class BongsaggunProvider extends ContentProvider {
                 db.beginTransaction();
                 try {
                     for (ContentValues value : values) {
-                        long _id = db.insert(BongsaggunContract.CategoryEntry.TABLE_NAME, null, value);
+                        long _id = db.insert(BongsaggunContracts.CategoryEntry.TABLE_NAME, null, value);
                         if (_id != -1) {
                             returnCount++;
                         }
@@ -510,7 +510,7 @@ public class BongsaggunProvider extends ContentProvider {
                 db.beginTransaction();
                 try {
                     for (ContentValues value : values) {
-                        long _id = db.insert(BongsaggunContract.VoluntaryEntry.TABLE_NAME, null, value);
+                        long _id = db.insert(BongsaggunContracts.VoluntaryEntry.TABLE_NAME, null, value);
                         if (_id != -1) {
                             returnCount++;
                         }
