@@ -130,8 +130,12 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
                 intent.setData(uri);
                 startActivity(intent);
                 break;
-            case R.id.container_inquire:  //Todo: 메일 보내기, 암시적 인텐트
-                Log.d(TAG, " container_inquire");
+            case R.id.container_inquire:  //메일 보내기, 암시적 인텐트
+                intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("message/rfc822");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"bongsaggun@naver.com"});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "문의드려요~!");
+                startActivity(intent);
                 break;
             case R.id.container_evaluation:  //나중에
                 Log.d(TAG, " container_evaluation");

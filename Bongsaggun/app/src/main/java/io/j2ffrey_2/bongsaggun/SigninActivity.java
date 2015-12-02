@@ -132,4 +132,19 @@ public class SigninActivity extends BaseActivity {
             }
         });
     }
+
+//    private boolean checkEmail(String email)
+//
+//    {
+//
+//        String mail = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$";
+//
+//        Pattern p = Pattern.compile(mail);
+//
+//        Matcher m = p.matcher(email);
+//
+//        return m.matches();
+//
+//    }
+
 }
