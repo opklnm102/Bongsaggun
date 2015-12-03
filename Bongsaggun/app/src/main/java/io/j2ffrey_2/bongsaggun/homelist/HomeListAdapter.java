@@ -1,6 +1,7 @@
 package io.j2ffrey_2.bongsaggun.homelist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.j2ffrey_2.bongsaggun.InfoPageActivity;
 import io.j2ffrey_2.bongsaggun.R;
 
 /**
@@ -46,7 +48,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeLi
     @Override
     public void onBindViewHolder(HomeListViewHolder holder, int position) {
 
-        HomeListItem item = mHomeListItems.get(position);
+        final HomeListItem item = mHomeListItems.get(position);
 
         holder.tvTitle.setText(item.getTitle());
 
@@ -74,6 +76,16 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeLi
         holder.tvVoluntaryPeriodEnd.setText(item.getVoluntaryDateRecruitEnd());
         holder.tvVoluntaryRegion.setText(item.getRegion());
         holder.tvVoluntaryTime.setText(item.getVoluntaryTime() + "시간");
+
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, InfoPageActivity.class);
+                intent.putExtra("voluntaryId", item.getVoluntaryId());
+                Log.e(TAG, " voluntaryId " +item.getVoluntaryId());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

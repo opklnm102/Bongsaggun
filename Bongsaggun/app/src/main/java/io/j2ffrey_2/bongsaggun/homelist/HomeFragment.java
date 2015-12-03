@@ -139,7 +139,7 @@ public class HomeFragment extends BaseFragment {
                         for (int i = 0; i < jsonArray.size(); i++) {
                             HomeListItem item = new Gson().fromJson(jsonArray.get(i), HomeListItem.class);
                             mHomeListItemArrayList.add(item);
-                            Log.e(TAG, " " + item.getVoluntaryId() + item.getdDay() + item.getRegion() + item.getTitle() + item.getVoluntaryTime() + item.getVoluntaryDateRecruitStart() + item.getVoluntaryDateRecruitEnd() + item.getImgMainUrl());
+                            Log.e(TAG, " " + item.getVoluntaryId() + " " + item.getdDay() + item.getRegion() + item.getTitle() + item.getVoluntaryTime() + item.getVoluntaryDateRecruitStart() + item.getVoluntaryDateRecruitEnd() + item.getImgMainUrl());
                         }
                     } else {
                         Log.e(TAG, " " + mHomeListItemArrayList.size());

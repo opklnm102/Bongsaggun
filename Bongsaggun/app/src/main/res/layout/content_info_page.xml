@@ -11,6 +11,43 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+       >
+
+        <Button
+            android:layout_marginRight="8dp"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/button_clerk_connection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:background="@drawable/infopage_clerk_connection_button_shape"
+            android:text="담장자 연결"/>
+
+        <Button
+            android:layout_toRightOf="@id/button_clerk_connection"
+            android:id="@+id/button_zzim_application"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/infopate_zzim_button_shape"
+            android:textColor="#ffffff"
+            android:text="찜하기"/>
+
+        <Button
+            android:visibility="gone"
+            android:layout_toRightOf="@id/button_clerk_connection"
+            android:id="@+id/button_zzim_cancel"
+            android:layout_width="wrap_content"
+            android:background="@drawable/infopate_zzim_button_shape"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="찜취소"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:paddingTop="24dp">
 
         <TextView

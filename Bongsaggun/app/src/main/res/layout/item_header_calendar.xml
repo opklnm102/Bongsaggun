@@ -6,12 +6,12 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:gravity="start"
-    android:padding="16dp"
+    android:padding="8dp"
     android:layoutDirection="locale"
     android:textDirection="locale"
     app:slm_headerDisplay="inline|sticky"
     app:slm_isHeader="true"
-    app:slm_section_headerMarginStart="56dip"
+    app:slm_section_headerMarginStart="40dp"
     tools:text="Header Item">
 
     <TextView

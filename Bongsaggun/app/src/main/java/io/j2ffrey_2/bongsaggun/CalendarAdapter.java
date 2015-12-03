@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,7 +96,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         Collections.sort(mCalendarItemArrayList, new Comparator<CalendarItem>() {
             @Override
             public int compare(CalendarItem obj1, CalendarItem obj2) {
-                return (obj1.getDay() < obj2.getDay()) ? -1 : (obj1.getDay() > obj2.getDay()) ? 1:0;
+                return (obj1.getDay() < obj2.getDay()) ? -1 : (obj1.getDay() > obj2.getDay()) ? 1 : 0;
             }
         });
 
@@ -128,13 +129,15 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
     @Override
     public void onBindViewHolder(CalendarViewHolder holder, int position) {
+
         if (mCalendarLineItemArrayList.size() == 0) {
             return;
         }
 
-        CalendarLineItem item = mCalendarLineItemArrayList.get(position);
-        final View itemView = holder.itemView;
+        final CalendarLineItem item = mCalendarLineItemArrayList.get(position);
+        final View itemView = holder.mView;
 
+        Log.e(TAG, item.mCalendarItem.getTitle());
         holder.bindItem(item.mCalendarItem, item.isHeader);
 
         LayoutManager.LayoutParams lp = (LayoutManager.LayoutParams) itemView.getLayoutParams();
@@ -146,10 +149,11 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
             lp.headerStartMarginIsAuto = !mMarginsFixed;
         }
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+        itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, InfoPageActivity.class);
+                intent.putExtra("voluntaryId", item.getCalendarItem().getVoluntaryId());
                 mContext.startActivity(intent);
             }
         });
