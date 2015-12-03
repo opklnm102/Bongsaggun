@@ -18,7 +18,8 @@ public class CalendarItem {
     int dDay;
     String region;
     int type;
-    int voluntaryTime;  //Todo: 추가해달라고 말하기
+    @SerializedName("time_expect_total")
+    int voluntaryTime;
 
     public int getVoluntaryId() {
         return voluntaryId;
@@ -76,7 +77,15 @@ public class CalendarItem {
         this.type = type;
     }
 
-    public CalendarItem(int voluntaryId, int day, String dayOfWeek, String title, int dDay, String region, int type) {
+    public int getVoluntaryTime() {
+        return voluntaryTime;
+    }
+
+    public void setVoluntaryTime(int voluntaryTime) {
+        this.voluntaryTime = voluntaryTime;
+    }
+
+    public CalendarItem(int voluntaryId, int day, String dayOfWeek, String title, int dDay, String region, int type, int voluntaryTime) {
         this.voluntaryId = voluntaryId;
         this.day = day;
         this.dayOfWeek = dayOfWeek;
@@ -84,5 +93,9 @@ public class CalendarItem {
         this.dDay = dDay;
         this.region = region;
         this.type = type;
+        this.voluntaryTime = voluntaryTime;
+    }
+
+    public CalendarItem() {
     }
 }

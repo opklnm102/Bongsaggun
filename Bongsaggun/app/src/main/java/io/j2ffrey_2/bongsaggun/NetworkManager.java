@@ -88,10 +88,12 @@ public class NetworkManager {
 
 
     public static NetworkManager getInstance(Context context) {
-        if (instance == null) {
-            instance = new NetworkManager(context);
+        synchronized (NetworkManager.class) {
+            if (instance == null) {
+                instance = new NetworkManager(context);
+            }
+            return instance;
         }
-        return instance;
     }
 
     private NetworkManager(Context context) {

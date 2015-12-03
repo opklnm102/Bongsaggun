@@ -2,49 +2,64 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layoutDirection="locale"
+    android:layout_height="60dp"
+    android:layout_margin="8dp"
     android:padding="8dp">
 
-    <ImageView
-        android:id="@+id/imageView_voluntaryWork_state"
-        android:layout_width="50dp"
-        android:layout_height="24dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/img_recruit_start"/>
-
-    <TextView
-        android:id="@+id/textView_voluntaryWork_dDay"
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:id="@+id/container_first"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="4dp"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imageView_voluntaryWork_state"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="4dp"
-        android:text="D-7"
-        android:textSize="12sp"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textView_voluntaryWork_location"
+        <ImageView
+            android:id="@+id/imageView_voluntaryWork_state"
+            android:layout_width="50dp"
+            android:layout_height="24dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_recruit_start"/>
+
+        <TextView
+            android:id="@+id/textView_voluntaryWork_dDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_below="@id/imageView_voluntaryWork_state"
+            android:text="D-7"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_toRightOf="@id/container_first"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/textView_voluntaryWork_dDay"
-        android:layout_marginTop="8dp"
-        android:layout_toRightOf="@id/textView_voluntaryWork_dDay"
-        android:text="성남시 분당구"
-        android:textColor="#606060"
-        android:textSize="12sp"/>
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView_voluntaryWork_title"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:layout_above="@id/textView_voluntaryWork_location"
-        android:layout_alignLeft="@id/textView_voluntaryWork_location"
-        android:text="분당 사랑의집 요양 봉사활동"
-        android:textColor="#000000"
-        android:textSize="12sp"/>
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:id="@+id/textView_voluntaryWork_title"
+            android:layout_width="180dp"
+            android:layout_height="0dp"
+            android:singleLine="true"
+            android:text="분당 사랑의집 요양 봉사활동"
+            android:textColor="#000000"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:id="@+id/textView_voluntaryWork_location"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="성남시 분당구"
+            android:textColor="#606060"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView_voluntaryWork_time"
@@ -59,7 +74,7 @@
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_toLeftOf="@id/textView_voluntaryWork_time"
-        android:layout_alignBaseline="@id/textView_voluntaryWork_time"
+        android:layout_centerVertical="true"
         android:scaleType="fitXY"
         android:src="@drawable/ic_access_time_black_18dp"/>
 

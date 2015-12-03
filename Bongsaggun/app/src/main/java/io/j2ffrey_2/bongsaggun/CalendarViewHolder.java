@@ -1,5 +1,6 @@
 package io.j2ffrey_2.bongsaggun;
 
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class CalendarViewHolder extends RecyclerView.ViewHolder {
     @Bind(R.id.textView_voluntaryWork_dDay)
     @Nullable
     TextView tvVoluntaryWorkDday;
+
     @Bind(R.id.textView_voluntaryWork_title)
     @Nullable
     TextView tvVoluntaryWorkTitle;
@@ -57,24 +59,31 @@ public class CalendarViewHolder extends RecyclerView.ViewHolder {
 
         if (isHeader) {
             //header
+            if ("일".equals(calendarItem.getDayOfWeek())) {
+                tvCalendarDay.setTextColor(Color.parseColor("#ff5252"));
+            } else {
+                tvCalendarDay.setTextColor(Color.parseColor("#444444"));
+            }
             tvCalendarDay.setText(String.valueOf(calendarItem.getDay()));
             tvCalendarDayOfWeek.setText(calendarItem.getDayOfWeek());
         } else {
             //line
             if (calendarItem.getType() == 1) {
                 ivVoluntaryWorkState.setImageResource(R.drawable.img_recruit_start);
-            } else if(calendarItem.getType() == 2) {
+            } else if (calendarItem.getType() == 2) {
                 ivVoluntaryWorkState.setImageResource(R.drawable.img_recruit_finish);
             }
-            if(calendarItem.getdDay() > 0){
+
+            if (calendarItem.getdDay() > 0) {
                 tvVoluntaryWorkDday.setText("D-" + calendarItem.getdDay());
-            }else{
+            } else {
                 tvVoluntaryWorkDday.setText("D-0");
             }
 
             tvVoluntaryWorkTitle.setText(calendarItem.getTitle());
+
             tvVoluntaryWorkLocation.setText(calendarItem.getRegion());
-//            tvVoluntaryWorkTime.setText(calendarItem.getTime());
+            tvVoluntaryWorkTime.setText(calendarItem.getVoluntaryTime() + "시간");
         }
     }
 }
