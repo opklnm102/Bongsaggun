@@ -1,15 +1,21 @@
 package io.j2ffrey_2.bongsaggun;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -181,6 +187,60 @@ public class InfoPageActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 //Todo: 다이얼로그 띄우기
+
+                final CharSequence[] items = {"E-mail주소 복사", "E-mail 보내기", "전화번호 복사", "전화걸기", "취소"};
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(InfoPageActivity.this);
+                builder.setTitle("연락처");
+                builder.setItems(items, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int position) {
+                        Intent intent;
+
+                        switch (position) {
+                            case 0:
+                                if (item.getClerkEmail() != null) {
+                                    ClipboardManager clipboardManager = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+                                    ClipData clipData = ClipData.newPlainText("email", item.getClerkEmail());
+                                    clipboardManager.setPrimaryClip(clipData);
+                                    Toast.makeText(InfoPageActivity.this, "클립보드에 복사하였습니다.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(InfoPageActivity.this, "담당자 E-mail이 없습니다.", Toast.LENGTH_SHORT).show();
+                                }
+                                break;
+                            case 1:
+                                if (item.getClerkEmail() != null) {
+                                    intent = new Intent(Intent.ACTION_SEND);
+                                    intent.setType("message/rfc822");
+                                    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{item.getClerkEmail()});
+                                    intent.putExtra(Intent.EXTRA_SUBJECT, "문의드려요~!");
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(InfoPageActivity.this, "담당자 E-mail이 없습니다.", Toast.LENGTH_SHORT).show();
+                                }
+                                break;
+                            case 2:
+                                if (item.getClerkCall() != null) {
+                                    ClipboardManager clipboardManager = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+                                    ClipData clipData = ClipData.newPlainText("call", item.getClerkCall());
+                                    clipboardManager.setPrimaryClip(clipData);
+                                    Toast.makeText(InfoPageActivity.this, "클립보드에 복사하였습니다.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(InfoPageActivity.this, "담당자 전화번호가 없습니다.", Toast.LENGTH_SHORT).show();
+                                }
+                                break;
+                            case 3:
+                                if (item.getClerkCall() != null) {
+                                    intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + item.getClerkCall()));
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(InfoPageActivity.this, "담당자 전화번호가 없습니다.", Toast.LENGTH_SHORT).show();
+                                }
+                                break;
+                        }
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
 
@@ -208,7 +268,7 @@ public class InfoPageActivity extends BaseActivity {
                     .placeholder(R.mipmap.ic_logo)
                     .crossFade()
                     .into(ivBackdrop);
-        }else{
+        } else {
             Glide.with(this).
                     load(R.mipmap.ic_logo)
                     .centerCrop()
@@ -223,7 +283,7 @@ public class InfoPageActivity extends BaseActivity {
                     .placeholder(R.mipmap.ic_logo)
                     .crossFade()
                     .into(ivPoster);
-        }else{
+        } else {
             Glide.with(this).
                     load(R.mipmap.ic_logo)
                     .centerCrop()
