@@ -68,8 +68,8 @@ public class InfoItem {
     @SerializedName("clerk_link")
     String clerkLink;
 
-//    @SerializedName("d_day")  //Todo: dDay요청 할것
-//    int dDay;
+    @SerializedName("dday")
+    int dDay;
 
     String status;
 
@@ -82,6 +82,15 @@ public class InfoItem {
     String region;
     String school;
     String category;
+
+    public int getdDay() {
+        return dDay;
+    }
+
+    public void setdDay(int dDay) {
+        this.dDay = dDay;
+    }
+
     String btime;
 
 

@@ -1,4 +1,4 @@
-package io.j2ffrey_2.bongsaggun;
+package io.j2ffrey_2.bongsaggun.sync;
 
 import android.accounts.Account;
 import android.content.AbstractThreadedSyncAdapter;

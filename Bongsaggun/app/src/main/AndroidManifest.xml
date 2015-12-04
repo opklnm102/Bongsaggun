@@ -17,8 +17,12 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".SplashScreen"
-            android:label="봉사꾼" >
+            android:name=".SplashActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Splash">
+
         </activity>
         <activity
             android:name=".MainActivity"
@@ -28,9 +32,9 @@
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".InfoPageActivity"
@@ -43,38 +47,38 @@
                 android:value="io.j2ffrey_2.bongsaggun.MainActivity" />
         </activity>
         <activity
-            android:name=".SearchMainActivity"
+            android:name=".SearchActivity"
             android:label="@string/title_activity_search_main"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.SEARCH" />-->
+            <!--</intent-filter>-->
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="io.j2ffrey_2.bongsaggun.MainActivity" />
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
+            <!--<meta-data-->
+                <!--android:name="android.app.searchable"-->
+                <!--android:resource="@xml/searchable" />-->
         </activity>
         <activity
             android:name=".SearchCategoryActivity"
             android:label="@string/title_activity_search_category"
             android:screenOrientation="portrait"
-            android:parentActivityName=".SearchMainActivity"
+            android:parentActivityName=".SearchActivity"
             android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.SEARCH" />-->
+            <!--</intent-filter>-->
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="io.j2ffrey_2.bongsaggun.SearchMainActivity" />
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
+                android:value=".SearchActivity" />
+            <!--<meta-data-->
+                <!--android:name="android.app.searchable"-->
+                <!--android:resource="@xml/searchable" />-->
         </activity>
 
         <provider
@@ -85,7 +89,7 @@
 
         <!-- The SyncAdapter service -->
         <service
-            android:name=".BongsaggunSyncService"
+            android:name=".sync.BongsaggunSyncService"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.content.SyncAdapter" />

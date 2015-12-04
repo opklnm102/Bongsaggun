@@ -10,7 +10,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
@@ -24,7 +23,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -43,8 +41,8 @@ public class MainActivity extends BaseActivity {
     TextView tvTitle;
     @Bind(R.id.drawer)
     DrawerLayout mDrawerLayout;
-    @Bind(R.id.nav_view)
-    NavigationView nV;
+//    @Bind(R.id.nav_view)
+//    NavigationView nV;
 
     ActionBarDrawerToggle toogle;
     @Bind(R.id.tabs)
@@ -57,25 +55,26 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.e(TAG, " onCreate");
         ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
 
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-//            ab.setDisplayShowTitleEnabled(false);
-            ab.setDisplayShowHomeEnabled(true);
+//            ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+            ab.setDisplayShowTitleEnabled(false);
+//            ab.setDisplayShowHomeEnabled(true);
         }
 
-        if (nV != null) {
-            setUpDrawerContent(nV);
-        }
+        tvTitle.setText("봉사꾼");
 
-        toogle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.app_name, R.string.app_name);
-        toogle.setDrawerIndicatorEnabled(true);
-        mDrawerLayout.setDrawerListener(toogle);
+//        if (nV != null) {
+//            setUpDrawerContent(nV);
+//        }
+
+//        toogle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.app_name, R.string.app_name);
+//        toogle.setDrawerIndicatorEnabled(true);
+//        mDrawerLayout.setDrawerListener(toogle);
 
         if (mViewPager != null) {
             setUpViewPager(mViewPager);
@@ -86,7 +85,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e(TAG, " onResume");
 
 //        try {
 //            NetworkManager.getInstance(this).getSchoolList();
@@ -113,47 +111,46 @@ public class MainActivity extends BaseActivity {
 //        }
     }
 
-    private Cursor getContactCursor() {
+//    private Cursor getContactCursor() {
+//
+//        //연락처 프로바이더에 접근하는 URI
+//        Uri contactUri = ContactsContract.Contacts.CONTENT_URI;
+//
+//        String[] projection = new String[]{
+//                ContactsContract.Contacts._ID,
+//                ContactsContract.Contacts.DISPLAY_NAME
+//        };
+//
+//        Cursor contactCursor = getContentResolver().query(contactUri, projection, null, null, ContactsContract.Contacts.DISPLAY_NAME + " asc");
+//
+//        if (contactCursor == null) {
+//            Log.e(TAG, "연결 실패");
+//            return null;
+//        }
+//        return contactCursor;
+//    }
 
-        //연락처 프로바이더에 접근하는 URI
-        Uri contactUri = ContactsContract.Contacts.CONTENT_URI;
-
-        String[] projection = new String[]{
-                ContactsContract.Contacts._ID,
-                ContactsContract.Contacts.DISPLAY_NAME
-        };
-
-        Cursor contactCursor = getContentResolver().query(contactUri, projection, null, null, ContactsContract.Contacts.DISPLAY_NAME + " asc");
-
-        if (contactCursor == null) {
-            Log.e(TAG, "연결 실패");
-            return null;
-        }
-        return contactCursor;
-
-    }
-
-    void printLogContactData(Cursor contactData) {
-        int idIdx;
-        int displayNameIdx;
-
-        if (contactData == null) {
-            Log.e(TAG, "연결 실페");
-            return;
-        } else if (contactData.getCount() < 1) {
-            Log.e(TAG, "매치되는 Provider 없음");
-        } else {
-            //idIdx와 displayNameIdx의 값을 구한다.
-            idIdx = contactData.getColumnIndex(ContactsContract.Contacts._ID);
-            displayNameIdx = contactData.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
-
-            //로그에 결과 출력
-            while (contactData.moveToNext()) {
-                Log.i(TAG, "ID: " + contactData.getLong(idIdx) +
-                        contactData.getString(displayNameIdx));
-            }
-        }
-    }
+//    void printLogContactData(Cursor contactData) {
+//        int idIdx;
+//        int displayNameIdx;
+//
+//        if (contactData == null) {
+//            Log.e(TAG, "연결 실페");
+//            return;
+//        } else if (contactData.getCount() < 1) {
+//            Log.e(TAG, "매치되는 Provider 없음");
+//        } else {
+//            //idIdx와 displayNameIdx의 값을 구한다.
+//            idIdx = contactData.getColumnIndex(ContactsContract.Contacts._ID);
+//            displayNameIdx = contactData.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
+//
+//            //로그에 결과 출력
+//            while (contactData.moveToNext()) {
+//                Log.i(TAG, "ID: " + contactData.getLong(idIdx) +
+//                        contactData.getString(displayNameIdx));
+//            }
+//        }
+//    }
 
     private void setUpDrawerContent(NavigationView navigationView) {
 
@@ -171,7 +168,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        toogle.syncState();
+//        toogle.syncState();
     }
 
     static class PagerAdapter extends FragmentPagerAdapter {
@@ -222,7 +219,7 @@ public class MainActivity extends BaseActivity {
         if (id == R.id.action_search) {
             Log.e(TAG, " search");
 
-            Intent intent = new Intent(MainActivity.this, SearchMainActivity.class);
+            Intent intent = new Intent(MainActivity.this, SearchActivity.class);
             startActivity(intent);
 
             return true;

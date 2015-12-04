@@ -55,11 +55,13 @@
     <string name="myPage_logout">로그아웃</string>
 
     <!-- SearchCategoryActivity-->
-    <string name="search_category_location">지역</string>
-    <string name="search_category_school">학교</string>
-    <string name="search_category_time">시간</string>
+    <string name="search_category">종류</string>
+    <string name="search_location">지역</string>
+    <string name="search_school">학교</string>
+    <string name="search_time">시간</string>
     <string name="search_start">검색 시작</string>
     <string name="search_category_init">조건 초기화</string>
+    <string name="search_empty">Empty</string>
 
     <string name="search_hint">검색어를 입력하세요</string>
 
@@ -74,5 +76,8 @@
     <string name="title_activity_signin">SigninActivity</string>
     <string name="title_activity_search_main">SearchMainActivity</string>
     <string name="title_activity_search_category">SearchCategoryActivity</string>
+
+
+
 
 </resources>

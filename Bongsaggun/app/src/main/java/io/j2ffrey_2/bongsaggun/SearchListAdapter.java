@@ -1,4 +1,4 @@
-package io.j2ffrey_2.bongsaggun.homelist;
+package io.j2ffrey_2.bongsaggun;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,48 +13,46 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import io.j2ffrey_2.bongsaggun.InfoPageActivity;
-import io.j2ffrey_2.bongsaggun.R;
+import io.j2ffrey_2.bongsaggun.homelist.HomeListItem;
 
 /**
- * Created by vantovan on 2015. 10. 6..
+ * Created by Dong on 2015-11-15.
  */
+public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.SearchListViewHolder> {
 
-public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeListViewHolder> {
-
-    public static final String TAG = HomeListAdapter.class.getSimpleName();
+    public static final String TAG = SearchListAdapter.class.getSimpleName();
 
     private Context mContext;
-    private final LayoutInflater mInflater;
-    private ArrayList<HomeListItem> mHomeListItems;
+    private ArrayList<SearchListItem> items;
+    private LayoutInflater mLayoutInflater;
 
-    public HomeListAdapter(Context context, ArrayList<HomeListItem> homeListItems) {
+    public SearchListAdapter(Context context, ArrayList<SearchListItem> data){
         mContext = context;
-        mInflater = LayoutInflater.from(mContext);
-        mHomeListItems = homeListItems;
+        mLayoutInflater = LayoutInflater.from(mContext);
+        items = data;
     }
 
     @Override
-    public HomeListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // create a new view
-        View itemView = mInflater.inflate(R.layout.item_homelist, parent, false);
+    public SearchListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = mLayoutInflater.inflate(R.layout.item_searchlist, parent, false);
 
-        return new HomeListViewHolder(itemView);
+        return new SearchListViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(HomeListViewHolder holder, int position) {
+    public void onBindViewHolder(SearchListViewHolder holder, int position) {
 
-        final HomeListItem item = mHomeListItems.get(position);
+        final SearchListItem item = items.get(position);
 
         holder.tvTitle.setText(item.getTitle());
 
         String imgMainUrl = item.getImgMainUrl();
 
-        Log.d(TAG, " imgMainUrl " +imgMainUrl);
+        Log.d(TAG, " imgMainUrl " + imgMainUrl);
 
         if(!"null".equals(imgMainUrl)){
             Glide.with(mContext).
@@ -82,7 +80,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeLi
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, InfoPageActivity.class);
                 intent.putExtra("voluntaryId", item.getVoluntaryId());
-                Log.e(TAG, " voluntaryId " +item.getVoluntaryId());
+                Log.e(TAG, " voluntaryId " + item.getVoluntaryId());
                 mContext.startActivity(intent);
             }
         });
@@ -90,10 +88,10 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeLi
 
     @Override
     public int getItemCount() {
-        return mHomeListItems.size();
+        return items.size();
     }
 
-    public static class HomeListViewHolder extends RecyclerView.ViewHolder {
+    public static class SearchListViewHolder extends RecyclerView.ViewHolder{
 
         @Bind(R.id.textVIew_title)
         TextView tvTitle;
@@ -112,7 +110,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeLi
 
         View mView;
 
-        public HomeListViewHolder(View itemView) {
+        public SearchListViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
 
@@ -120,10 +118,10 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeLi
         }
     }
 
-    public void setData(ArrayList<HomeListItem> list){
-        mHomeListItems.clear();
+    public void setData(ArrayList<SearchListItem> list){
+        items.clear();
 
-        mHomeListItems = list;
+        items = list;
 
         notifyDataSetChanged();
     }

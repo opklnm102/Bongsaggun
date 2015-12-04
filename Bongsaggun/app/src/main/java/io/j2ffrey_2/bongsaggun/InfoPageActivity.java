@@ -101,7 +101,6 @@ public class InfoPageActivity extends BaseActivity {
     @Bind(R.id.button_zzim_cancel)
     Button btnZzimCancel;
 
-
 //    @Bind(R.id.button_voluntary_application_top)
 //    Button btnVoluntaryApplicationTop;
 //
@@ -199,7 +198,7 @@ public class InfoPageActivity extends BaseActivity {
                         switch (position) {
                             case 0:
                                 if (item.getClerkEmail() != null) {
-                                    ClipboardManager clipboardManager = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+                                    ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
                                     ClipData clipData = ClipData.newPlainText("email", item.getClerkEmail());
                                     clipboardManager.setPrimaryClip(clipData);
                                     Toast.makeText(InfoPageActivity.this, "클립보드에 복사하였습니다.", Toast.LENGTH_SHORT).show();
@@ -220,7 +219,7 @@ public class InfoPageActivity extends BaseActivity {
                                 break;
                             case 2:
                                 if (item.getClerkCall() != null) {
-                                    ClipboardManager clipboardManager = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+                                    ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
                                     ClipData clipData = ClipData.newPlainText("call", item.getClerkCall());
                                     clipboardManager.setPrimaryClip(clipData);
                                     Toast.makeText(InfoPageActivity.this, "클립보드에 복사하였습니다.", Toast.LENGTH_SHORT).show();
@@ -298,7 +297,7 @@ public class InfoPageActivity extends BaseActivity {
         tvMainInfoRecruitmentPeriodStart.setText(item.getVoluntaryDateRecruitStart());
         tvMainInfoRecruitmentPeriodEnd.setText(item.getVoluntaryDateRecruitEnd());
         tvMainInfoVoluntaryTime.setText(item.getVoluntaryTime() + "시간");
-        tvMainInfoVoluntaryDday.setText("8");
+        tvMainInfoVoluntaryDday.setText(String.valueOf(item.getdDay()));
         tvMainInfoVoluntaryLocation.setText(item.getRegion());
 
         if (item.isApproval()) {

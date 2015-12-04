@@ -70,4 +70,15 @@ public class BackendHelper {
     public Call<JsonObject> getHomeList(int limit) {
         return service.getHomeList(limit);
     }
+
+    //검색
+    Call<JsonObject> getSearchList(int categoryId, int regionId, int schoolId, int timeId) {
+        return service.getSearchList(categoryId, regionId, schoolId, timeId);
+    }
+
+    //검색
+    Call<JsonObject> getSearchList(String strSearch, int categoryId, int regionId, int schoolId, int timeId) {
+        return service.getSearchList(strSearch, categoryId, regionId, schoolId, timeId);
+    }
+
 }

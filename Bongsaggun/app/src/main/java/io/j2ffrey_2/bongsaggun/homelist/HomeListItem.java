@@ -99,4 +99,8 @@ public class HomeListItem {
         this.region = region;
         this.voluntaryTime = voluntaryTime;
     }
+
+    public HomeListItem() {
+    }
+
 }

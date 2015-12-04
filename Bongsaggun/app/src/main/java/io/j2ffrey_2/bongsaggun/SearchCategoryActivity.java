@@ -46,8 +46,8 @@ public class SearchCategoryActivity extends AppCompatActivity implements View.On
 
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            ab.setHomeAsUpIndicator(R.drawable.ic_search_white_24dp);
-            //            ab.setDisplayShowTitleEnabled(false);
+            ab.setHomeAsUpIndicator(R.drawable.ic_detail_undo_24dp);
+            ab.setDisplayShowTitleEnabled(false);
             ab.setDisplayHomeAsUpEnabled(true);
         }
     }
@@ -56,6 +56,7 @@ public class SearchCategoryActivity extends AppCompatActivity implements View.On
     @Override
     public void onClick(View view) {
 
+        //Todo: 다이얼로그 열기
         switch (view.getId()) {
             case R.id.container_location:
                 Log.d(TAG, " container_location");
@@ -83,21 +84,17 @@ public class SearchCategoryActivity extends AppCompatActivity implements View.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        switch (id){
-            case android.R.id.home:
-
-                return true;
-            case R.id.action_category_undo:
+        switch (id) {
+//            case android.R.id.home:
+//
+//                return true;
+            case R.id.action_category_search:
                 Log.e(TAG, " category undo");
 
-                finish();
-                overridePendingTransition(0, 0);
+                //Todo: 검색api 날리기
+
                 return true;
         }
         return super.onOptionsItemSelected(item);

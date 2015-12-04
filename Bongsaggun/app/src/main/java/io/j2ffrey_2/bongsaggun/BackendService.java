@@ -1,7 +1,6 @@
 package io.j2ffrey_2.bongsaggun;
 
 
-
 import android.support.annotation.Nullable;
 
 import com.google.gson.JsonObject;
@@ -47,9 +46,20 @@ public interface BackendService {
     //http://dosomething-j2ffrey-2.c9.io/new_json/home?id=236&limit=5
     //현재 id 포함 5개 나온다.
 
+    //홈리스트
     @GET("/new_json/home")
     Call<JsonObject> getHomeList(@Query("limit") int limit);
     //http://dosomething-j2ffrey-2.c9.io/new_json/home?limit=5
+
+    //검색
+    @GET("/new_json/filter")
+    Call<JsonObject> getSearchList(@Query("s_word") String strSearch, @Query("category") int categoryId, @Query("region") int regionId, @Query("school") int schoolId, @Query("btime") int timeId);
+    //http://dosomething-j2ffrey-2.c9.io/new_json/filter?s_word=%EB%B3%B4%EC%A1%B0&region=1&school=1&btime=1&category=1
+
+    //검색
+    @GET("/new_json/filter")
+    Call<JsonObject> getSearchList(@Query("category") int categoryId, @Query("region") int regionId, @Query("school") int schoolId, @Query("btime") int timeId);
+    //http://dosomething-j2ffrey-2.c9.io/new_json/filter?s_word=%EB%B3%B4%EC%A1%B0&region=1&school=1&btime=1&category=1
 
 
 }

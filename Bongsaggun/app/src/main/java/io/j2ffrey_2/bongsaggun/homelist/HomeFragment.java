@@ -24,10 +24,11 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
+//Todo: 무한 스크롤
+//Todo: Pull to refresh
 public class HomeFragment extends BaseFragment {
 
     public static final String TAG = HomeFragment.class.getSimpleName();
-    //Todo: 레이아웃 조정
 
     @Bind(R.id.recyclerView_home)
     RecyclerView rvHomeList;
@@ -73,7 +74,7 @@ public class HomeFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
 
-        getHomeList(10);
+        getHomeList(30);
     }
 
     public void getHomeList(int voluntaryId, int limit) {

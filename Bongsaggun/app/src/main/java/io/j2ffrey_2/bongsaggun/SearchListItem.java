@@ -1,44 +1,42 @@
 package io.j2ffrey_2.bongsaggun;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Dong on 2015-11-15.
  */
 public class SearchListItem {
 
-    Integer imgSumnail;
+    @SerializedName("id")
+    private Integer voluntaryId;
+    @SerializedName("img_main")
+    String imgMainUrl;
+    @SerializedName("name")
     String title;
-    Integer dDay;
-    String voluntaryPeriodStart;
-    String voluntaryPeriodEnd;
-    String voluntaryLocation;
-    Integer voluntaryTime;
+    @SerializedName("dday")
+    int dDay;
+    @SerializedName("date_recruit_start")
+    String voluntaryDateRecruitStart;
+    @SerializedName("date_recruit_end")
+    String voluntaryDateRecruitEnd;
+    String region;
+    @SerializedName("time_expect_total")
+    int voluntaryTime;
 
-    public SearchListItem() {
-        this.imgSumnail = null;
-        this.title = "";
-        this.dDay = 0;
-        this.voluntaryPeriodStart = "";
-        this.voluntaryPeriodEnd = "";
-        this.voluntaryLocation = "";
-        this.voluntaryTime = 0;
+    public Integer getVoluntaryId() {
+        return voluntaryId;
     }
 
-    public SearchListItem(Integer imgSumnail, String title, Integer dDay, String voluntaryPeriodStart, String voluntaryPeriodEnd, String voluntaryLocation, Integer voluntaryTime) {
-        this.imgSumnail = imgSumnail;
-        this.title = title;
-        this.dDay = dDay;
-        this.voluntaryPeriodStart = voluntaryPeriodStart;
-        this.voluntaryPeriodEnd = voluntaryPeriodEnd;
-        this.voluntaryLocation = voluntaryLocation;
-        this.voluntaryTime = voluntaryTime;
+    public void setVoluntaryId(Integer voluntaryId) {
+        this.voluntaryId = voluntaryId;
     }
 
-    public Integer getImgSumnail() {
-        return imgSumnail;
+    public String getImgMainUrl() {
+        return imgMainUrl;
     }
 
-    public void setImgSumnail(Integer imgSumnail) {
-        this.imgSumnail = imgSumnail;
+    public void setImgMainUrl(String imgMainUrl) {
+        this.imgMainUrl = imgMainUrl;
     }
 
     public String getTitle() {
@@ -49,45 +47,57 @@ public class SearchListItem {
         this.title = title;
     }
 
-    public Integer getdDay() {
+    public int getdDay() {
         return dDay;
     }
 
-    public void setdDay(Integer dDay) {
+    public void setdDay(int dDay) {
         this.dDay = dDay;
     }
 
-    public String getVoluntaryPeriodStart() {
-        return voluntaryPeriodStart;
+    public String getVoluntaryDateRecruitStart() {
+        return voluntaryDateRecruitStart;
     }
 
-    public void setVoluntaryPeriodStart(String voluntaryPeriodStart) {
-        this.voluntaryPeriodStart = voluntaryPeriodStart;
+    public void setVoluntaryDateRecruitStart(String voluntaryDateRecruitStart) {
+        this.voluntaryDateRecruitStart = voluntaryDateRecruitStart;
     }
 
-    public String getVoluntaryPeriodEnd() {
-        return voluntaryPeriodEnd;
+    public String getVoluntaryDateRecruitEnd() {
+        return voluntaryDateRecruitEnd;
     }
 
-    public void setVoluntaryPeriodEnd(String voluntaryPeriodEnd) {
-        this.voluntaryPeriodEnd = voluntaryPeriodEnd;
+    public void setVoluntaryDateRecruitEnd(String voluntaryDateRecruitEnd) {
+        this.voluntaryDateRecruitEnd = voluntaryDateRecruitEnd;
     }
 
-    public String getVoluntaryLocation() {
-        return voluntaryLocation;
+    public String getRegion() {
+        return region;
     }
 
-    public void setVoluntaryLocation(String voluntaryLocation) {
-        this.voluntaryLocation = voluntaryLocation;
+    public void setRegion(String region) {
+        this.region = region;
     }
 
-    public Integer getVoluntaryTime() {
+    public int getVoluntaryTime() {
         return voluntaryTime;
     }
 
-    public void setVoluntaryTime(Integer voluntaryTime) {
+    public void setVoluntaryTime(int voluntaryTime) {
         this.voluntaryTime = voluntaryTime;
     }
 
+    public SearchListItem(Integer voluntaryId, String imgMainUrl, String title, int dDay, String voluntaryDateRecruitStart, String voluntaryDateRecruitEnd, String region, int voluntaryTime) {
+        this.voluntaryId = voluntaryId;
+        this.imgMainUrl = imgMainUrl;
+        this.title = title;
+        this.dDay = dDay;
+        this.voluntaryDateRecruitStart = voluntaryDateRecruitStart;
+        this.voluntaryDateRecruitEnd = voluntaryDateRecruitEnd;
+        this.region = region;
+        this.voluntaryTime = voluntaryTime;
+    }
 
+    public SearchListItem() {
+    }
 }
