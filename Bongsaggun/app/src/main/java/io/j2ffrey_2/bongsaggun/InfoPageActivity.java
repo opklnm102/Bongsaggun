@@ -80,14 +80,17 @@ public class InfoPageActivity extends BaseActivity {
     @Bind(R.id.textView_detailInfo_supportCondition_content)
     TextView tvDetailInfoSupportCondition;
 
-    @Bind(R.id.textView_detailInfo_supportGender_content)
-    TextView tvDetailInfoSupportGender;
+    @Bind(R.id.textView_detailInfo_contentEtc_content)
+    TextView tvDetailInfoContentEtc;
 
     @Bind(R.id.textView_detailInfo_contact_content)
     TextView tvDetailInfoContact;
 
+    @Bind(R.id.textView_detailInfo_email_content)
+    TextView tvDetailInfoEmail;
+
     @Bind(R.id.textView_detailInfo_location_content)
-    TextView tvDetailInfoLocation;
+    TextView tvDetailInfoAddress;
 
     @Bind(R.id.imageView_poster)
     ImageView ivPoster;
@@ -278,7 +281,7 @@ public class InfoPageActivity extends BaseActivity {
         if (!"null".equals(item.getImgPosterUrl())) {
             Glide.with(this).
                     load(item.getImgPosterUrl())
-                    .centerCrop()
+                    .fitCenter()
                     .placeholder(R.mipmap.ic_logo)
                     .crossFade()
                     .into(ivPoster);
@@ -310,10 +313,42 @@ public class InfoPageActivity extends BaseActivity {
 
         tvDetailInfoVoluntaryPeriodStart.setText(item.getVoluntaryDateRealStart());
         tvDetailInfoVoluntaryPeriodEnd.setText(item.getVoluntaryDateRealEnd());
-        tvDetailInfoSupportCondition.setText(item.getRequirement());
-        tvDetailInfoSupportGender.setText("남녀무관");
-        tvDetailInfoContact.setText(item.getClerkEmail());
-        tvDetailInfoLocation.setText(item.getAddress());
+
+        if(item.getRequirement() != null){
+            tvDetailInfoSupportCondition.setText(item.getRequirement());
+        }else{
+            tvDetailInfoSupportCondition.setText("없음");
+        }
+
+        if(item.getRequirement() != null){
+            tvDetailInfoAddress.setText(item.getAddress());
+        }else{
+            tvDetailInfoAddress.setText("없음");
+        }
+
+        if(item.getAddress() != null){
+            tvDetailInfoAddress.setText(item.getAddress());
+        }else{
+            tvDetailInfoAddress.setText("없음");
+        }
+
+        if(item.getContents() != null){
+            tvDetailInfoContentEtc.setText(item.getContents());
+        }else{
+            tvDetailInfoAddress.setText("없음");
+        }
+
+        if(item.getClerkCall() != null){
+            tvDetailInfoContact.setText(item.getClerkCall());
+        }else{
+            tvDetailInfoContact.setText("없음");
+        }
+
+        if(item.getClerkEmail() != null){
+            tvDetailInfoEmail.setText(item.getClerkEmail());
+        }else{
+            tvDetailInfoEmail.setText("없음");
+        }
     }
 
     private void init() {

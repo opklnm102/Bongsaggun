@@ -25,11 +25,12 @@
 
     <string name="detailInfo_title">세부 내용</string>
     <string name="detailInfo_details_title">상세내용</string>
-    <string name="detailInfo_voluntaryPeriod_title">봉사 기간</string>
+    <string name="detailInfo_voluntaryPeriod_title">활동 기간</string>
     <string name="detailInfo_supportCondition_title">지원 가능 조건</string>
-    <string name="detailInfo_supportGender_title">지원 가능 성별</string>
     <string name="detailInfo_contact_title">담장자 연락처</string>
-    <string name="detailInfo_location_title">지역</string>
+    <string name="detailInfo_email_title">담장자 이메일</string>
+    <string name="detailInfo_address_title">활동지역</string>
+    <string name="detailInfo_contentEtc_title">기타사항</string>
 
     <string name="poster_title">포스터</string>
 
