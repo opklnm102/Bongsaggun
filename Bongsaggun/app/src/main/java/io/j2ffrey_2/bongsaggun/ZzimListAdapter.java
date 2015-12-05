@@ -12,11 +12,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.j2ffrey_2.bongsaggun.homelist.HomeListItem;
 
 /**
  * Created by andasom on 2015-10-15.
@@ -37,21 +39,21 @@ public class ZzimListAdapter extends RecyclerView.Adapter<ZzimListAdapter.ZzimLi
 
     ZzimListViewHolder zzimListViewHolder;
 
-    List<ZzimListItem> mDataset = Collections.emptyList();
+    ArrayList<ZzimListItem> mZzimListItems;
 
     private ListItemSelectedAllCallback mListItemSelectedAllCallback;
     private ListItemDeletedCallback mListItemDeletedCallback;
 
-    public ZzimListAdapter(Context context, Fragment fragment, List<ZzimListItem> data) {
+    public ZzimListAdapter(Context context, Fragment fragment, ArrayList<ZzimListItem> data) {
         mContext = context;
-        mDataset = data;
+        mZzimListItems = data;
         mListItemSelectedAllCallback = (ListItemSelectedAllCallback)fragment;
         mListItemDeletedCallback = (ListItemDeletedCallback)fragment;
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     public int getItemCount() {
-        return mDataset.size();
+        return mZzimListItems.size();
     }
 
     // Create new views (invoked by the layout manager)
@@ -66,7 +68,7 @@ public class ZzimListAdapter extends RecyclerView.Adapter<ZzimListAdapter.ZzimLi
 
     public void onBindViewHolder(ZzimListViewHolder holder, final int position) {
 
-        final ZzimListItem current = mDataset.get(position);  //get current item
+        final ZzimListItem current = mZzimListItems.get(position);  //get current item
 
         holder.ivSumnail.setImageResource(current.getImgSumnail());
         holder.tvTitle.setText(current.getTitle());
@@ -88,7 +90,7 @@ public class ZzimListAdapter extends RecyclerView.Adapter<ZzimListAdapter.ZzimLi
             public void onClick(View view) {
                 //Todo: Zzim remove api 연결
 
-                mDataset.remove(position);
+                mZzimListItems.remove(position);
                 mListItemDeletedCallback.onListItemDeleted();
                 notifyDataSetChanged();
             }
@@ -109,16 +111,16 @@ public class ZzimListAdapter extends RecyclerView.Adapter<ZzimListAdapter.ZzimLi
     }
 
     boolean isAllSelected() {
-        for (int i = 0; i < mDataset.size(); i++) {
-            if (mDataset.get(i).isSelected() == false)
+        for (int i = 0; i < mZzimListItems.size(); i++) {
+            if (mZzimListItems.get(i).isSelected() == false)
                 return false;
         }
         return true;
     }
 
     void allSelectedZzim(boolean selected) {
-        for (int i = 0; i < mDataset.size(); i++) {
-            mDataset.get(i).setSelected(selected);
+        for (int i = 0; i < mZzimListItems.size(); i++) {
+            mZzimListItems.get(i).setSelected(selected);
         }
         notifyDataSetChanged();
     }
@@ -155,5 +157,13 @@ public class ZzimListAdapter extends RecyclerView.Adapter<ZzimListAdapter.ZzimLi
             mView = itemView;
             ButterKnife.bind(this, mView);
         }
+    }
+
+    public void setData(ArrayList<ZzimListItem> list){
+        mZzimListItems.clear();
+
+        mZzimListItems = list;
+
+        notifyDataSetChanged();
     }
 }

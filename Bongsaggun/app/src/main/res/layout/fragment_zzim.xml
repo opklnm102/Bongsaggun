@@ -32,18 +32,18 @@
             android:textColor="#ed1e79"
             android:textSize="24sp"/>
 
-        <Button
-            android:id="@+id/button_zzim_application"
-            android:layout_width="112dp"
-            android:layout_height="36dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:background="#ed1e79"
-            android:gravity="center"
-            android:text="@string/voluntary_application"
-            android:textColor="#ffffff"
-            android:textSize="14dp"/>
+        <!--<Button-->
+            <!--android:id="@+id/button_zzim_application"-->
+            <!--android:layout_width="112dp"-->
+            <!--android:layout_height="36dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:background="#ed1e79"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/voluntary_application"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:textSize="14dp"/>-->
     </RelativeLayout>
 
     <CheckBox
@@ -64,11 +64,18 @@
     <!--android:textColor="#757575"-->
     <!--android:textSize="16dp"/>-->
 
-    <android.support.v7.widget.RecyclerView
+    <io.j2ffrey_2.bongsaggun.view.RecyclerViewEmptySupport
         android:id="@+id/recyclerView_zzim"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/checkbox_zzim_all"/>
+
+    <TextView
+        android:id="@+id/textView_empty_zzim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/search_empty"/>
 
 </RelativeLayout>
 

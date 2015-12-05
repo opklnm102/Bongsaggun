@@ -317,13 +317,7 @@ public class InfoPageActivity extends BaseActivity {
         if(item.getRequirement() != null){
             tvDetailInfoSupportCondition.setText(item.getRequirement());
         }else{
-            tvDetailInfoSupportCondition.setText("없음");
-        }
-
-        if(item.getRequirement() != null){
-            tvDetailInfoAddress.setText(item.getAddress());
-        }else{
-            tvDetailInfoAddress.setText("없음");
+            tvDetailInfoSupportCondition.setText("누구나");
         }
 
         if(item.getAddress() != null){
