@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="io.j2ffrey_2.bongsaggun.SearchActivity">
+    tools:context=".activities.SearchActivity">
 
     <include layout="@layout/toolbar_search"/>
 

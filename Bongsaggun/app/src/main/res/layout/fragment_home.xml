@@ -3,7 +3,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="io.j2ffrey_2.bongsaggun.homelist.HomeFragment">
+              tools:context=".fragments.HomeFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView_home"

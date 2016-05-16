@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="io.j2ffrey_2.bongsaggun.SearchCategoryFragment">
+    tools:context=".fragments.SearchCategoryFragment">
 
     <LinearLayout
         android:id="@+id/container_search_category_menu"

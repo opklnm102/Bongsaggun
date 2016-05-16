@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="io.j2ffrey_2.bongsaggun.MyPageFragment">
+              tools:context=".fragments.MyPageFragment">
 
     <RelativeLayout
         android:id="@+id/my_page_profile_container"

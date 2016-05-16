@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="8dp"
     android:orientation="vertical"
-    tools:context="io.j2ffrey_2.bongsaggun.InfoPageActivity"
+    tools:context=".activities.InfoPageActivity"
     tools:showIn="@layout/activity_info_page">
 
     <RelativeLayout

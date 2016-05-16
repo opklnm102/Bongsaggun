@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     android:gravity="center_horizontal"
-    tools:context="io.j2ffrey_2.bongsaggun.SearchCategoryActivity">
+    tools:context=".activities.SearchCategoryActivity">
 
   <include layout="@layout/toolbar_search"/>
 

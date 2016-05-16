@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/img_login_bg"
     android:fitsSystemWindows="true"
-    tools:context="io.j2ffrey_2.bongsaggun.SplashActivity">
+    tools:context=".activities.SplashActivity">
 
     <LinearLayout
         android:id="@+id/container_login"

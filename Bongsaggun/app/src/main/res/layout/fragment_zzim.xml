@@ -2,7 +2,7 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context="io.j2ffrey_2.bongsaggun.ZzimFragment">
+                tools:context=".fragments.ZzimFragment">
 
     <RelativeLayout
         android:id="@+id/zzim_header"
@@ -64,7 +64,7 @@
     <!--android:textColor="#757575"-->
     <!--android:textSize="16dp"/>-->
 
-    <io.j2ffrey_2.bongsaggun.view.RecyclerViewEmptySupport
+    <io.j2ffrey_2.bongsaggun.views.RecyclerViewEmptySupport
         android:id="@+id/recyclerView_zzim"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
